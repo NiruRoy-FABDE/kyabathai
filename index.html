@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kya Baat Hai — Cool Finds, Daily Wow, &amp; A Bunch of Things I Built</title>
+<meta name="description" content="A daily dose of internet wow — funny reels, weird tech, useful life hacks — plus a tour of the apps and platforms I've actually built. Kya baat hai, right?">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Kya Baat Hai — Cool Finds & Things I Built">
+<meta property="og:description" content="Funny, useful, occasionally life-changing internet finds — plus my actual projects, all in one place.">
+<meta property="og:type" content="website">
+
+<style>
+  :root {
+    --cream: #FFF9F2;
+    --cream-2: #FFF2E3;
+    --ink: #1A1625;
+    --ink-soft: #4A4458;
+    --marigold: #FF8C42;
+    --marigold-deep: #E8702A;
+    --gulal: #FF4D8D;
+    --gulal-soft: #FFD6E8;
+    --jade: #00B894;
+    --jade-deep: #00876А;
+    --tint-orange: #FFE5D4;
+    --tint-pink: #FFD6E8;
+    --tint-jade: #D4F5EA;
+    --card-shadow: 0 4px 0 rgba(26,22,37,0.9);
+    --radius: 18px;
+    --serif-stamp: Georgia, 'Times New Roman', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  :focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ===== MARQUEE TICKER ===== */
+  .ticker-wrap {
+    background: var(--ink);
+    color: var(--cream);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px 0;
+    border-bottom: 3px solid var(--ink);
+  }
+  .ticker {
+    display: inline-flex;
+    animation: scroll-left 32s linear infinite;
+  }
+  .ticker span {
+    padding: 0 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ticker span.pink { color: var(--gulal); }
+  .ticker span.marigold-c { color: var(--marigold); }
+  .ticker span.jade-c { color: var(--jade); }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 3px solid var(--ink);
+    padding: 14px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: var(--serif-stamp);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+  }
+  .logo .dot { color: var(--gulal); }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .nav-links a {
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .nav-links a:hover { border-color: var(--marigold); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 70px 6% 50px;
+    position: relative;
+    text-align: center;
+    background:
+      radial-gradient(circle at 15% 20%, var(--tint-pink) 0%, transparent 38%),
+      radial-gradient(circle at 85% 15%, var(--tint-orange) 0%, transparent 42%),
+      var(--cream);
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .blink {
+    width: 7px; height: 7px;
+    background: var(--jade);
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .hero h1 {
+    font-family: var(--serif-stamp);
+    font-size: clamp(2.4rem, 7vw, 4.6rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -1px;
+    max-width: 900px;
+    margin: 0 auto 22px;
+  }
+  .hero h1 .highlight {
+    color: var(--gulal);
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 .highlight2 { color: var(--marigold-deep); }
+
+  .hero p.sub {
+    max-width: 580px;
+    margin: 0 auto 36px;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 3px solid var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: var(--card-shadow);
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(1px); box-shadow: 0 1px 0 rgba(26,22,37,0.9); }
+  .btn-primary { background: var(--gulal); color: var(--cream); }
+  .btn-secondary { background: var(--cream); color: var(--ink); }
+
+  /* floating stickers in hero */
+  .sticker {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.9;
+    animation: float 5s ease-in-out infinite;
+  }
+  .sticker.s1 { top: 18%; left: 6%; animation-delay: 0s; }
+  .sticker.s2 { top: 65%; left: 10%; animation-delay: 1.2s; font-size: 1.6rem; }
+  .sticker.s3 { top: 25%; right: 7%; animation-delay: 0.6s; }
+  .sticker.s4 { top: 70%; right: 10%; animation-delay: 1.8s; font-size: 1.7rem; }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-14px) rotate(4deg); }
+  }
+  @media (max-width: 700px) {
+    .sticker { display: none; }
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section { padding: 80px 6%; }
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--tint-orange);
+    color: var(--marigold-deep);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-tag.pink { background: var(--tint-pink); color: var(--gulal); }
+  .section-tag.jade { background: var(--tint-jade); color: var(--jade-deep); }
+  .section-head h2 {
+    font-family: var(--serif-stamp);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+  .section-head p {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    font-weight: 500;
+  }
+
+  /* ===== REELS / STORIES STRIP ===== */
+  .reels-section { background: var(--ink); color: var(--cream); }
+  .reels-section .section-head h2 { color: var(--cream); }
+  .reels-section .section-head p { color: #C9C2D6; }
+
+  .reels-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0 22px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .reels-scroll::-webkit-scrollbar { height: 8px; }
+  .reels-scroll::-webkit-scrollbar-thumb { background: var(--gulal); border-radius: 8px; }
+  .reels-scroll::-webkit-scrollbar-track { background: #2A2436; }
+
+  .reel-card {
+    scroll-snap-align: start;
+    flex: 0 0 260px;
+    background: #241F31;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 3px solid #3A3349;
+  }
+  .reel-card .embed-slot {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(145deg, #2E2740, #1F1A2B);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #8A819C;
+    text-align: center;
+    padding: 20px;
+  }
+  .reel-card .embed-slot iframe {
+    width: 100%; height: 100%; border: 0;
+  }
+  .reel-card .embed-slot .icon { font-size: 2.2rem; }
+  .reel-card .embed-slot small { font-size: 0.75rem; line-height: 1.4; }
+  .reel-card .reel-caption {
+    padding: 14px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  .reel-card .reel-caption .src-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--marigold);
+    margin-bottom: 4px;
+  }
+
+  /* a wide "story" card for landscape/article style finds */
+  .reel-card.wide {
+    flex: 0 0 320px;
+  }
+  .reel-card.wide .embed-slot { aspect-ratio: 16/10; }
+
+  /* ===== PROJECT SHOWCASE ===== */
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .proj-card {
+    background: var(--cream);
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .proj-card:hover {
+    transform: translate(-2px, -4px) rotate(-0.4deg);
+    box-shadow: 7px 8px 0 rgba(26,22,37,0.9);
+  }
+
+  .proj-card-top {
+    padding: 22px 22px 16px;
+    border-bottom: 3px dashed var(--ink);
+    position: relative;
+  }
+  .proj-id {
+    position: absolute;
+    top: 18px; right: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.5px;
+  }
+  .proj-icon {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+    border: 2.5px solid var(--ink);
+  }
+  .proj-card-top h3 {
+    font-family: var(--serif-stamp);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .proj-card-top .domain {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .proj-tagline {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gulal);
+    margin-top: 10px;
+  }
+
+  .proj-card-body { padding: 18px 22px; flex: 1; }
+  .proj-block { margin-bottom: 16px; }
+  .proj-block:last-child { margin-bottom: 0; }
+  .proj-block .label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+    display: block;
+  }
+  .proj-block p {
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+  .proj-block .who-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
+  }
+  .proj-block .who-tags span {
+    background: var(--tint-orange);
+    color: var(--marigold-deep);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .beta-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 5px 11px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .beta-flag .blink { width: 6px; height: 6px; background: var(--marigold); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+
+  .proj-card-cta {
+    padding: 18px 22px;
+    border-top: 3px dashed var(--ink);
+  }
+  .proj-visit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .proj-visit-btn:hover { background: var(--gulal); }
+  .proj-visit-btn.beta-btn { background: var(--marigold-deep); }
+  .proj-visit-btn.beta-btn:hover { background: var(--ink); }
+
+  /* icon background tints rotate per card for variety, set inline via class */
+  .tint-1 { background: var(--tint-orange); }
+  .tint-2 { background: var(--tint-pink); }
+  .tint-3 { background: var(--tint-jade); }
+
+  /* ===== AD SLOTS ===== */
+  .ad-section { background: var(--tint-pink); }
+  .ad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .ad-slot {
+    background: var(--cream);
+    border: 3px dashed var(--ink);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ad-slot .ad-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ink-soft);
+    background: var(--cream-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+    position: relative;
+    top: -4px;
+  }
+  .ad-slot .icon { font-size: 1.8rem; }
+  .ad-slot p { font-size: 0.88rem; color: var(--ink-soft); font-weight: 600; max-width: 220px; }
+  .ad-slot.featured { border-style: solid; background: var(--ink); color: var(--cream); }
+  .ad-slot.featured p { color: #C9C2D6; }
+  .ad-slot.featured .ad-label { background: #2A2436; color: var(--marigold); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 6% 36px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+  }
+  .footer-brand .logo { color: var(--cream); }
+  .footer-brand p {
+    color: #9D94B0;
+    font-size: 0.9rem;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .footer-col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--marigold);
+    margin-bottom: 12px;
+  }
+  .footer-col a, .footer-col span {
+    display: block;
+    font-size: 0.88rem;
+    color: #C9C2D6;
+    margin-bottom: 8px;
+  }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid #3A3349;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #7A7190;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-bottom .sign-off {
+    color: var(--cream);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .section { padding: 56px 6%; }
+    .hero { padding: 56px 6% 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== MARQUEE TICKER ===== -->
+<div class="ticker-wrap" role="presentation" aria-hidden="true">
+  <div class="ticker">
+    <span class="pink">✨ wow kya baat hai</span>
+    <span class="marigold-c">👀 bhai yeh dekh</span>
+    <span class="jade-c">🔥 yeh toh mast hai</span>
+    <span class="pink">🤯 itna useful tha yeh?!</span>
+    <span class="marigold-c">😭 why did nobody tell me this sooner</span>
+    <span class="jade-c">💡 saving this forever</span>
+    <span class="pink">✨ wow kya baat hai</span>
+    <span class="marigold-c">👀 bhai yeh dekh</span>
+    <span class="jade-c">🔥 yeh toh mast hai</span>
+    <span class="pink">🤯 itna useful tha yeh?!</span>
+    <span class="marigold-c">😭 why did nobody tell me this sooner</span>
+    <span class="jade-c">💡 saving this forever</span>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="logo">kyabat<span class="dot">.</span>hai</div>
+  <div class="nav-links">
+    <a href="#reels">Reels &amp; Finds</a>
+    <a href="#showcase">My Projects</a>
+    <a href="#ads">Promote</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <span class="sticker s1" aria-hidden="true">🔥</span>
+  <span class="sticker s2" aria-hidden="true">👀</span>
+  <span class="sticker s3" aria-hidden="true">✨</span>
+  <span class="sticker s4" aria-hidden="true">💡</span>
+
+  <div class="hero-eyebrow"><span class="blink"></span> updated whenever I find something worth your time</div>
+
+  <h1>Internet ka sabse <span class="highlight">bawaal</span> stuff, <br> aur kuch <span class="highlight2">apps jo maine banaye</span> hain.</h1>
+
+  <p class="sub">I spend way too much time scrolling reels, testing new tech, and saving things that make me go "wow kya baat hai." This is where I dump it all — and where I show off the actual platforms I'm building.</p>
+
+  <div class="hero-ctas">
+    <a href="#reels" class="btn btn-primary">See What I Found 👇</a>
+    <a href="#showcase" class="btn btn-secondary">Check My Projects</a>
+  </div>
+</header>
+
+<!-- ===== REELS / STORIES SECTION ===== -->
+<section class="section reels-section" id="reels">
+  <div class="section-head">
+    <span class="section-tag jade" style="background:#2A2436; color:var(--jade);">Daily Wow</span>
+    <h2>Stuff I found that made me say it out loud</h2>
+    <p>Reels, clips, weird tech demos, and life-hack-y things — the actual "kya baat hai" content. Swipe through.</p>
+  </div>
+
+  <div class="reels-scroll" id="reelsScroll">
+    <!-- 
+      ============================================================
+      EMBED SLOTS — paste your real links here.
+      Each .reel-card has an .embed-slot div. To add a real video:
+      
+      For YouTube:
+        <div class="embed-slot">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+                  title="caption" allowfullscreen></iframe>
+        </div>
+
+      For Instagram Reels, use their official embed <blockquote> 
+      script (Instagram requires their embed.js to render it) — 
+      or simplest: link out with a thumbnail + "Watch on Instagram" button,
+      since Instagram embeds need their JS SDK loaded (see bottom of page).
+      ============================================================
+    -->
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-1">
+        <span class="icon">🎬</span>
+        <small>Paste YouTube/Reel embed here<br>(slot: reel-1)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        Add your caption — what's the "wow" moment here?
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-2">
+        <span class="icon">📱</span>
+        <small>Paste Instagram Reel link here<br>(slot: reel-2)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Instagram</span>
+        Add your caption here.
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-3">
+        <span class="icon">🎬</span>
+        <small>Paste YouTube/Reel embed here<br>(slot: reel-3)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        Add your caption here.
+      </div>
+    </div>
+
+    <div class="reel-card wide">
+      <div class="embed-slot" data-slot="story-1">
+        <span class="icon">📰</span>
+        <small>Paste an article link / story embed here<br>(slot: story-1)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Story</span>
+        A longer find — news, article, deep-dive.
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-4">
+        <span class="icon">🎬</span>
+        <small>Paste YouTube/Reel embed here<br>(slot: reel-4)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        Add your caption here.
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-5">
+        <span class="icon">📱</span>
+        <small>Paste Instagram Reel link here<br>(slot: reel-5)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Instagram</span>
+        Add your caption here.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECT SHOWCASE ===== -->
+<section class="section" id="showcase">
+  <div class="section-head">
+    <span class="section-tag">My Universe</span>
+    <h2>Apps and platforms I've actually built</h2>
+    <p>Not just memes — I build real things too. Trading engines, AI tools, fintech, legal tech. Here's the full lineup, what each one solves, and who it's for.</p>
+  </div>
+
+  <div class="showcase-grid">
+
+    <!-- MADAIX -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 01</span>
+        <div class="proj-icon tint-2">🎯</div>
+        <h3>MADAIX</h3>
+        <div class="domain">madaix.com</div>
+        <p class="proj-tagline">Run Meta ad campaigns by just describing what you want.</p>
+      </div>
+      <div class="proj-card-body">
+        <span class="beta-flag"><span class="blink"></span>Private Beta</span>
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Running ad campaigns on Meta means juggling targeting, copy, budgets, and creative testing — most small brands either overpay an agency or do it badly themselves.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Type a plain-English brief like "₹30K retargeting campaign for cart abandoners, 25–40, home decor" — AI builds the audience, writes ad copy, and publishes straight to Meta. It keeps learning from what you approve or reject.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Agencies</span><span>D2C brands</span><span>Solo marketers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-visit-btn beta-btn">Request Access →</a>
+      </div>
+    </article>
+
+    <!-- LIVE-SETUP -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 02</span>
+        <div class="proj-icon tint-3">⚡</div>
+        <h3>Live Setup</h3>
+        <div class="domain">live-setup.com</div>
+        <p class="proj-tagline">One TradingView signal, fired out to every connected trader's account.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Traders following the same strategy usually have to manually copy signals into their own broker accounts — slow, error-prone, and impossible to scale past a handful of people.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A multi-user algo trading platform: a TradingView webhook fires once, and the engine pushes it out to every subscribed user's account automatically, with per-user licensing and controls.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Strategy creators</span><span>Algo traders</span><span>Trading communities</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- DHANTRON -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 03</span>
+        <div class="proj-icon tint-1">📈</div>
+        <h3>Dhantron</h3>
+        <div class="domain">dhantron.com</div>
+        <p class="proj-tagline">Trade like a market maker — without sitting at a trading desk all day.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Market-maker-style strategies (spreads, hedges, premium decay plays) are powerful but need constant monitoring most retail traders simply don't have time for.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Automates the kind of disciplined, spread-based options trading that desks run professionally — entries, hedges, and exits handled systematically, so you're not glued to a screen.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Options traders</span><span>Busy professionals</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- AIVERSECAMPUS -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 04</span>
+        <div class="proj-icon tint-2">🎓</div>
+        <h3>AIverse Campus</h3>
+        <div class="domain">www.aiversecampus.com</div>
+        <p class="proj-tagline">Stop using AI the wrong way — learn how it's actually meant to be used.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most people use AI tools like a search bar and walk away unimpressed, when the real value comes from learning prompting, agentic workflows, and how to apply AI to actual work.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A learning hub for AI and agentic AI skills — built for people who want to go from "I tried ChatGPT once" to actually using AI professionally.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Students</span><span>Professionals</span><span>Career switchers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- AIRUNLY -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 05</span>
+        <div class="proj-icon tint-3">🤖</div>
+        <h3>Airunly</h3>
+        <div class="domain">www.airunly.com</div>
+        <p class="proj-tagline">Tell it what to do. Watch AI do the rest.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most "AI tools" still need you to babysit every step — copy this output, paste it there, repeat. That's not automation, that's just typing with extra steps.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>An agentic AI tool built to take a task description and actually carry it out end-to-end, instead of just generating a draft and handing the rest back to you.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Busy operators</span><span>Solo founders</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- TUFTUB -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 06</span>
+        <div class="proj-icon tint-1">🧰</div>
+        <h3>Tuftub</h3>
+        <div class="domain">tuftub.com</div>
+        <p class="proj-tagline">The right AI tool for every task — picked for you, automatically.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>There are hundreds of AI tools now, and figuring out which one actually fits your task is its own research project.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Describe your task, and it routes you to the AI tool actually built for it — instead of you guessing between a dozen tabs.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Anyone overwhelmed by AI tool choice</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- JURISSETU -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 07</span>
+        <div class="proj-icon tint-2">⚖️</div>
+        <h3>Jurissetu</h3>
+        <div class="domain">jurissetu.com</div>
+        <p class="proj-tagline">Your legal questions, answered with authority.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Basic legal questions often mean an expensive consultation just to get a starting point, which stops a lot of people from even asking.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>An AI-powered legal Q&amp;A platform that gives clear, grounded answers to common legal questions, so you walk into any real consultation already informed.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Individuals</span><span>Small business owners</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- BOARDSOL -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 08</span>
+        <div class="proj-icon tint-3">🗂️</div>
+        <h3>BoardSol</h3>
+        <div class="domain">boardsol.com</div>
+        <p class="proj-tagline">Secure board management for modern India.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Board meetings still run on email threads and shared folders for documents that are often confidential and compliance-sensitive.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A board management platform — meeting scheduling, secure document sharing, minutes, and approvals — built around how Indian companies actually run governance.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Company boards</span><span>Compliance teams</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- FINGOALINVESTO -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 09</span>
+        <div class="proj-icon tint-1">💰</div>
+        <h3>FinGoalInvesto</h3>
+        <div class="domain">fingoalinvesto.com</div>
+        <p class="proj-tagline">Put a name and a number on your money goals — then actually hit them.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most people save and invest without a clear goal attached, which makes it easy to dip into funds or lose motivation halfway.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A goal-based investing tool that helps you map savings and investments to specific life goals — a house, a trip, an emergency fund — and tracks progress toward each.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>First-time investors</span><span>Goal-based savers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- BITOPINE -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 10</span>
+        <div class="proj-icon tint-2">💻</div>
+        <h3>Bitopine</h3>
+        <div class="domain">bitopine.com</div>
+        <p class="proj-tagline">Digital excellence, delivered to you.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Businesses needing web and digital work often bounce between freelancers with inconsistent quality and big agencies that overcharge for simple builds.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A digital services brand — websites, web apps, and digital builds delivered with a consistent, professional standard.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Small businesses</span><span>Founders needing a site built fast</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- EFUNDLY -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 11</span>
+        <div class="proj-icon tint-3">✅</div>
+        <h3>Efundly</h3>
+        <div class="domain">efundly.com</div>
+        <p class="proj-tagline">Funding and finance, made simple to access.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Finding the right funding option — whether for a business or a personal need — usually means wading through confusing eligibility criteria across multiple lenders.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A funding-focused platform designed to simplify how individuals and small businesses find and access financial support.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Small businesses</span><span>Individuals seeking funding</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- EAIIN -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 12</span>
+        <div class="proj-icon tint-1">🌐</div>
+        <h3>Eaiin</h3>
+        <div class="domain">eaiin.com · eaiin.store</div>
+        <p class="proj-tagline">Your domain is your most powerful asset — own it properly.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>A brand's domain is often an afterthought, picked in a rush — when actually it's one of the most valuable, permanent assets a business owns.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A domain-focused platform helping people understand, acquire, and make the most of strong domain names for their brand.</p>
+          <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:6px; font-style:italic;">(best-guess description — confirming exact details soon)</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Brand owners</span><span>Founders</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://eaiin.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- DRAPYFY -->
+    <article class="proj-card">
+      <div class="proj-card-top">
+        <span class="proj-id">№ 13</span>
+        <div class="proj-icon tint-2">🧵</div>
+        <h3>Drapyfy</h3>
+        <div class="domain">drapyfy.com</div>
+        <p class="proj-tagline">Fashion and style, draped the way you actually want it.</p>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Finding fashion or styling that matches a specific look or occasion usually means scrolling endlessly across scattered sources.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A fashion and styling-focused platform — built around discovering and curating drapes, outfits, and style choices.</p>
+          <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:6px; font-style:italic;">(best-guess description — confirming exact details soon)</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Fashion-conscious shoppers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===== AD SLOTS ===== -->
+<section class="section ad-section" id="ads">
+  <div class="section-head">
+    <span class="section-tag pink" style="background:var(--cream);">Sponsored Corner</span>
+    <h2>Ads I'm running (made with my own AI ad tool)</h2>
+    <p>These slots are powered by MADAIX — my own AI ad platform. Currently placeholders, ready to go live once campaigns are published.</p>
+  </div>
+
+  <div class="ad-grid">
+    <div class="ad-slot featured">
+      <span class="ad-label">Ad Slot 01 — Featured</span>
+      <span class="icon">🎯</span>
+      <p>Your biggest promo goes here — generated and managed via MADAIX.</p>
+    </div>
+    <div class="ad-slot">
+      <span class="ad-label">Ad Slot 02</span>
+      <span class="icon">📢</span>
+      <p>Smaller promo / cross-link to one of your other projects.</p>
+    </div>
+    <div class="ad-slot">
+      <span class="ad-label">Ad Slot 03</span>
+      <span class="icon">🪧</span>
+      <p>Reserved for a rotating banner — swap creatives anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">kyabat<span class="dot" style="color:var(--gulal);">.</span>hai</div>
+      <p>A daily dump of internet finds that made me say "wow kya baat hai" — plus a tour of every app, platform, and tool I've actually built.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#reels">Reels &amp; Finds</a>
+        <a href="#showcase">My Projects</a>
+        <a href="#ads">Promote</a>
+      </div>
+      <div class="footer-col">
+        <h4>My Sites</h4>
+        <a href="https://madaix.com" target="_blank" rel="noopener">Madaix</a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener">Live Setup</a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener">Dhantron</a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener">AIverse Campus</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="sign-off">Made with way too much scrolling and a little too much chai. ☕</p>
+    <p>© <span id="year"></span> Kya Baat Hai. All the wow, none of the spam.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Pause ticker on hover/focus for accessibility / readability
+  const tickerWrap = document.querySelector('.ticker-wrap');
+  const ticker = document.querySelector('.ticker');
+  if (tickerWrap && ticker) {
+    tickerWrap.addEventListener('mouseenter', () => ticker.style.animationPlayState = 'paused');
+    tickerWrap.addEventListener('mouseleave', () => ticker.style.animationPlayState = 'running');
+  }
+</script>
+
+</body>
+</html>
