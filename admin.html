@@ -642,15 +642,20 @@ function addNewSlot(existingId, existingData) {
         <select id="${slotId}-type" style="background:#0f0e17;border:1px solid #2a2a4a;border-radius:8px;color:#fffffe;padding:3px 8px;font-size:0.75rem;cursor:pointer;">
           <option value="youtube">YouTube</option>
           <option value="instagram">Instagram</option>
+          <option value="ownvideo">Own Video</option>
+          <option value="article">Article / News</option>
+          <option value="document">Document (PDF / DOC)</option>
         </select>
         <button class="btn-delete-slot" onclick="deleteSlot('${slotId}')">✕ Remove</button>
       </div>
     </div>
-    <div class="field-row">
+
+    <!-- YOUTUBE / INSTAGRAM fields -->
+    <div class="field-row" data-types="youtube,instagram" id="${slotId}-urlfield">
       <label id="${slotId}-url-label">YouTube Short / Video URL</label>
       <input type="url" id="${slotId}-url" placeholder="https://youtube.com/shorts/XXXXXXX">
     </div>
-    <div class="field-row">
+    <div class="field-row" data-types="youtube,instagram" id="${slotId}-thumbfield">
       <label>Thumbnail</label>
       <div class="mode-toggle" id="${slotId}-thumb-toggle">
         <button type="button" class="mode-btn active" onclick="setMode('${slotId}','thumb','auto')">Auto</button>
@@ -659,7 +664,7 @@ function addNewSlot(existingId, existingData) {
       <input type="text" id="${slotId}-thumb" placeholder="e.g. thumb.jpg" style="display:none;margin-top:0.5rem;">
       <div class="mode-hint" id="${slotId}-thumb-hint">YouTube: uses the video's own thumbnail. Instagram: shows a branded placeholder.</div>
     </div>
-    <div class="field-row">
+    <div class="field-row" data-types="youtube,instagram" id="${slotId}-captionfield">
       <label>Caption</label>
       <div class="mode-toggle" id="${slotId}-caption-toggle">
         <button type="button" class="mode-btn active" onclick="setMode('${slotId}','caption','auto')">Auto (from video title)</button>
@@ -668,59 +673,152 @@ function addNewSlot(existingId, existingData) {
       <input type="text" id="${slotId}-caption" placeholder="Add your caption here" style="display:none;margin-top:0.5rem;">
       <div class="mode-hint" id="${slotId}-caption-hint">Will fetch the video's title from YouTube when you click Save.</div>
     </div>
+
+    <!-- OWN VIDEO fields -->
+    <div class="field-row" data-types="ownvideo" id="${slotId}-videofield" style="display:none;">
+      <label>Video filename (upload .mp4 to GitHub)</label>
+      <input type="text" id="${slotId}-video" placeholder="e.g. success-story.mp4">
+    </div>
+    <div class="field-row" data-types="ownvideo" id="${slotId}-ytlinkfield" style="display:none;">
+      <label>YouTube link (optional — for "Watch on YouTube" badge)</label>
+      <input type="url" id="${slotId}-ytlink" placeholder="https://youtube.com/shorts/XXXXXXX">
+    </div>
+    <div class="field-row" data-types="ownvideo" id="${slotId}-owncaptionfield" style="display:none;">
+      <label>Caption</label>
+      <input type="text" id="${slotId}-owncaption" placeholder="Add your caption here">
+    </div>
+
+    <!-- ARTICLE / NEWS fields -->
+    <div class="field-row" data-types="article" id="${slotId}-articleurlfield" style="display:none;">
+      <label>Article / News URL</label>
+      <input type="url" id="${slotId}-articleurl" placeholder="https://www.somesite.com/article">
+    </div>
+    <div class="field-row" data-types="article" id="${slotId}-titlefield" style="display:none;">
+      <label>Article Title</label>
+      <input type="text" id="${slotId}-title" placeholder="Headline">
+    </div>
+    <div class="field-row" data-types="article" id="${slotId}-descfield" style="display:none;">
+      <label>Short Description</label>
+      <input type="text" id="${slotId}-desc" placeholder="1-2 line summary">
+    </div>
+    <div class="field-row" data-types="article" id="${slotId}-sourcefield" style="display:none;">
+      <label>Source name</label>
+      <input type="text" id="${slotId}-source" placeholder="e.g. The Times of India">
+    </div>
+
+    <!-- DOCUMENT (PDF/DOC) fields -->
+    <div class="field-row" data-types="document" id="${slotId}-docurlfield" style="display:none;">
+      <label>File link (upload PDF/DOC to GitHub, or any hosted URL)</label>
+      <input type="url" id="${slotId}-docurl" placeholder="https://.../file.pdf">
+    </div>
+    <div class="field-row" data-types="document" id="${slotId}-doclabelfield" style="display:none;">
+      <label>Button label</label>
+      <input type="text" id="${slotId}-doclabel" placeholder="e.g. Download Brochure">
+    </div>
+    <div class="field-row" data-types="document" id="${slotId}-docsourcefield" style="display:none;">
+      <label>Source / Category tag</label>
+      <input type="text" id="${slotId}-docsource" placeholder="e.g. Press Release">
+    </div>
+    <div class="field-row" data-types="document" id="${slotId}-doccaptionfield" style="display:none;">
+      <label>Caption / Details</label>
+      <input type="text" id="${slotId}-doccaption" placeholder="Add details about this document">
+    </div>
+
     <div class="preview-box" id="${slotId}-preview">Preview will appear here after saving.</div>
   `;
   container.appendChild(card);
 
   modeState[slotId] = { thumb: 'auto', caption: 'auto' };
 
+  // Show/hide field groups based on the selected type
+  function showFieldsForType(type) {
+    card.querySelectorAll('[data-types]').forEach(row => {
+      const types = row.getAttribute('data-types').split(',');
+      row.style.display = types.includes(type) ? '' : 'none';
+    });
+  }
+  showFieldsForType('youtube');
+
   // Update URL label + caption-auto availability when type changes
   document.getElementById(slotId + '-type').addEventListener('change', function() {
-    const label = document.getElementById(slotId + '-url-label');
-    const isIG = this.value === 'instagram';
-    label.textContent = isIG ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
-    document.getElementById(slotId + '-url').placeholder =
-      isIG ? 'https://www.instagram.com/reel/XXXXXXX/' : 'https://youtube.com/shorts/XXXXXXX';
-    const capToggle = document.getElementById(slotId + '-caption-toggle');
-    const capHint = document.getElementById(slotId + '-caption-hint');
-    const capAutoBtn = capToggle.querySelector('.mode-btn');
-    if (isIG) {
-      // Instagram can't be auto-captioned — force custom mode
-      capAutoBtn.disabled = true;
-      capAutoBtn.style.opacity = '0.4';
-      capAutoBtn.style.cursor = 'not-allowed';
-      capHint.textContent = 'Instagram blocks auto-caption extraction — type your own.';
-      setMode(slotId, 'caption', 'custom');
-    } else {
-      capAutoBtn.disabled = false;
-      capAutoBtn.style.opacity = '1';
-      capAutoBtn.style.cursor = 'pointer';
-      capHint.textContent = "Will fetch the video's title from YouTube when you click Save.";
+    const type = this.value;
+    showFieldsForType(type);
+    if (type === 'youtube' || type === 'instagram') {
+      const label = document.getElementById(slotId + '-url-label');
+      const isIG = type === 'instagram';
+      label.textContent = isIG ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+      document.getElementById(slotId + '-url').placeholder =
+        isIG ? 'https://www.instagram.com/reel/XXXXXXX/' : 'https://youtube.com/shorts/XXXXXXX';
+      const capToggle = document.getElementById(slotId + '-caption-toggle');
+      const capHint = document.getElementById(slotId + '-caption-hint');
+      const capAutoBtn = capToggle.querySelector('.mode-btn');
+      if (isIG) {
+        // Instagram can't be auto-captioned — force custom mode
+        capAutoBtn.disabled = true;
+        capAutoBtn.style.opacity = '0.4';
+        capAutoBtn.style.cursor = 'not-allowed';
+        capHint.textContent = 'Instagram blocks auto-caption extraction — type your own.';
+        setMode(slotId, 'caption', 'custom');
+      } else {
+        capAutoBtn.disabled = false;
+        capAutoBtn.style.opacity = '1';
+        capAutoBtn.style.cursor = 'pointer';
+        capHint.textContent = "Will fetch the video's title from YouTube when you click Save.";
+      }
     }
   });
 
   // Pre-fill if loading from Supabase
   if (existingData) {
-    document.getElementById(slotId + '-url').value     = existingData.url     || '';
-    document.getElementById(slotId + '-thumb').value   = existingData.thumb   || '';
-    document.getElementById(slotId + '-caption').value = existingData.caption || '';
-    document.getElementById(slotId + '-type').value    = existingData.type    || 'youtube';
-    if (existingData.url) {
-      document.getElementById(slotId + '-preview').innerHTML =
-        `🔗 <a href="${existingData.url}" target="_blank">${existingData.url}</a><br>📝 ${existingData.caption || 'No caption'}`;
-    }
-    // Fix label
-    const label = document.getElementById(slotId + '-url-label');
-    label.textContent = existingData.type === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
-    // Restore saved mode (default custom if value already present, for old data)
-    const thumbMode = existingData.thumbMode || (existingData.thumb ? 'custom' : 'auto');
-    const captionMode = existingData.captionMode || (existingData.caption ? 'custom' : 'auto');
-    setMode(slotId, 'thumb', thumbMode);
-    if (existingData.type === 'instagram') {
-      document.getElementById(slotId + '-type').dispatchEvent(new Event('change'));
-      setMode(slotId, 'caption', 'custom');
-    } else {
-      setMode(slotId, 'caption', captionMode);
+    const type = existingData.type || 'youtube';
+    document.getElementById(slotId + '-type').value = type;
+    showFieldsForType(type);
+
+    if (type === 'youtube' || type === 'instagram') {
+      document.getElementById(slotId + '-url').value     = existingData.url     || '';
+      document.getElementById(slotId + '-thumb').value   = existingData.thumb   || '';
+      document.getElementById(slotId + '-caption').value = existingData.caption || '';
+      const label = document.getElementById(slotId + '-url-label');
+      label.textContent = type === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+      const thumbMode = existingData.thumbMode || (existingData.thumb ? 'custom' : 'auto');
+      setMode(slotId, 'thumb', thumbMode);
+      if (type === 'instagram') {
+        document.getElementById(slotId + '-type').dispatchEvent(new Event('change'));
+        setMode(slotId, 'caption', 'custom');
+      } else {
+        const captionMode = existingData.captionMode || (existingData.caption ? 'custom' : 'auto');
+        setMode(slotId, 'caption', captionMode);
+      }
+      if (existingData.url) {
+        document.getElementById(slotId + '-preview').innerHTML =
+          `🔗 <a href="${existingData.url}" target="_blank">${existingData.url}</a><br>📝 ${existingData.caption || 'No caption'}`;
+      }
+    } else if (type === 'ownvideo') {
+      document.getElementById(slotId + '-video').value      = existingData.video   || '';
+      document.getElementById(slotId + '-ytlink').value     = existingData.ytlink  || '';
+      document.getElementById(slotId + '-owncaption').value = existingData.caption || '';
+      if (existingData.video) {
+        document.getElementById(slotId + '-preview').innerHTML =
+          `🎥 Video: <strong>${existingData.video}</strong><br>📝 ${existingData.caption || 'No caption'}`;
+      }
+    } else if (type === 'article') {
+      document.getElementById(slotId + '-articleurl').value = existingData.url    || '';
+      document.getElementById(slotId + '-title').value      = existingData.title  || '';
+      document.getElementById(slotId + '-desc').value       = existingData.desc   || '';
+      document.getElementById(slotId + '-source').value     = existingData.source || '';
+      if (existingData.url) {
+        document.getElementById(slotId + '-preview').innerHTML =
+          `🔗 <a href="${existingData.url}" target="_blank">${existingData.url}</a><br>📰 <strong>${existingData.title || ''}</strong> — ${existingData.source || ''}`;
+      }
+    } else if (type === 'document') {
+      document.getElementById(slotId + '-docurl').value     = existingData.url     || '';
+      document.getElementById(slotId + '-doclabel').value   = existingData.label   || '';
+      document.getElementById(slotId + '-docsource').value  = existingData.source  || '';
+      document.getElementById(slotId + '-doccaption').value = existingData.caption || '';
+      if (existingData.url) {
+        document.getElementById(slotId + '-preview').innerHTML =
+          `📄 <a href="${existingData.url}" target="_blank">${existingData.url}</a><br>📝 ${existingData.caption || 'No caption'}`;
+      }
     }
   }
 
@@ -847,8 +945,15 @@ async function loadData() {
 function updatePreview(slot, data) {
   const el = document.getElementById(slot+'-preview');
   if (!el || !data) return;
-  if (data.url)   el.innerHTML = `🔗 <a href="${data.url}" target="_blank">${data.url}</a><br>📝 ${data.caption||'No caption'}`;
-  if (data.video) el.innerHTML = `🎥 Video: <strong>${data.video}</strong><br>📝 ${data.caption||'No caption'}`;
+  if (data.type === 'article') {
+    el.innerHTML = `🔗 <a href="${data.url}" target="_blank">${data.url}</a><br>📰 <strong>${data.title||''}</strong> — ${data.source||''}`;
+  } else if (data.type === 'document') {
+    el.innerHTML = `📄 <a href="${data.url}" target="_blank">${data.url}</a><br>📝 ${data.caption||'No caption'} ${data.source ? '· ' + data.source : ''}`;
+  } else if (data.video) {
+    el.innerHTML = `🎥 Video: <strong>${data.video}</strong><br>📝 ${data.caption||'No caption'}`;
+  } else if (data.url) {
+    el.innerHTML = `🔗 <a href="${data.url}" target="_blank">${data.url}</a><br>📝 ${data.caption||'No caption'}`;
+  }
 }
 
 function updateStoryPreview(data) {
@@ -888,14 +993,49 @@ async function saveAll() {
 
   // Save extra slots data
   for (const slotId of extraSlots) {
-    const urlEl  = document.getElementById(slotId + '-url');
     const typeEl = document.getElementById(slotId + '-type');
-    if (!urlEl) continue;
     const type = typeEl ? typeEl.value : 'youtube';
-    const d = await resolveSlotData(slotId, type);
-    content[slotId] = { ...d, type };
-    const capEl = document.getElementById(slotId + '-caption');
-    if (capEl) capEl.value = d.caption;
+
+    if (type === 'youtube' || type === 'instagram') {
+      const urlEl = document.getElementById(slotId + '-url');
+      if (!urlEl) continue;
+      const d = await resolveSlotData(slotId, type);
+      content[slotId] = { ...d, type };
+      const capEl = document.getElementById(slotId + '-caption');
+      if (capEl) capEl.value = d.caption;
+    } else if (type === 'ownvideo') {
+      const videoEl = document.getElementById(slotId + '-video');
+      if (!videoEl) continue;
+      content[slotId] = {
+        type,
+        video:   videoEl.value.trim(),
+        ytlink:  (document.getElementById(slotId + '-ytlink')      || {}).value?.trim() || '',
+        caption: (document.getElementById(slotId + '-owncaption')  || {}).value?.trim() || '',
+      };
+    } else if (type === 'article') {
+      const urlEl = document.getElementById(slotId + '-articleurl');
+      if (!urlEl) continue;
+      content[slotId] = {
+        type,
+        url:    urlEl.value.trim(),
+        title:  (document.getElementById(slotId + '-title')  || {}).value?.trim() || '',
+        desc:   (document.getElementById(slotId + '-desc')   || {}).value?.trim() || '',
+        source: (document.getElementById(slotId + '-source') || {}).value?.trim() || '',
+      };
+    } else if (type === 'document') {
+      const urlEl = document.getElementById(slotId + '-docurl');
+      if (!urlEl) continue;
+      content[slotId] = {
+        type,
+        url:     urlEl.value.trim(),
+        label:   (document.getElementById(slotId + '-doclabel')   || {}).value?.trim() || '',
+        source:  (document.getElementById(slotId + '-docsource')  || {}).value?.trim() || '',
+        caption: (document.getElementById(slotId + '-doccaption') || {}).value?.trim() || '',
+      };
+    } else {
+      continue;
+    }
+
     updatePreview(slotId, content[slotId]);
   }
 

@@ -1336,6 +1336,19 @@
     setCaption(card, d.source || 'Story', d.title);
   }
 
+  function renderDoc(card, slot, d) {
+    if (!d || !d.url || d.url.trim() === '') return;
+    prep(slot);
+    const ext = (d.url.split('.').pop() || '').toLowerCase().slice(0,4);
+    const icon = ext === 'pdf' ? '📕' : (ext === 'doc' || ext === 'docx') ? '📘' : '📄';
+    slot.innerHTML =
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#2a2a4a,#1a1625);text-decoration:none;color:inherit;gap:0.6rem;">' +
+        '<span style="font-size:2.6rem;">' + icon + '</span>' +
+        '<span style="font-size:0.75rem;font-weight:700;color:#FF8C42;background:rgba(0,0,0,0.4);padding:4px 12px;border-radius:999px;">' + (d.label || 'View Document') + '</span>' +
+      '</a>';
+    setCaption(card, d.source || 'Document', d.caption);
+  }
+
   MAP.forEach((m, i) => {
     const card = cards[i];
     if (!card) return;
@@ -1358,7 +1371,8 @@
     // Reverse so the last added slot stays at position 1
     [...c.extraSlots].reverse().forEach(slotId => {
       const d = c[slotId];
-      if (!d || !d.url || !d.url.trim()) return;
+      const hasContent = d && (d.url?.trim() || d.video?.trim());
+      if (!hasContent) return;
 
       const newCard = document.createElement('div');
       newCard.className = 'reel-card';
@@ -1366,7 +1380,10 @@
       scroll.insertBefore(newCard, firstCard);
 
       const newSlot = newCard.querySelector('.embed-slot');
-      if (d.type === 'instagram') renderIG(newCard, newSlot, d);
+      if (d.type === 'instagram')      renderIG(newCard, newSlot, d);
+      else if (d.type === 'ownvideo')  renderOwn(newCard, newSlot, d);
+      else if (d.type === 'article')   renderStory(newCard, newSlot, d);
+      else if (d.type === 'document')  renderDoc(newCard, newSlot, d);
       else renderYT(newCard, newSlot, d);
     });
   }
