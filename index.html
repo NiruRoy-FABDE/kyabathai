@@ -710,16 +710,34 @@
       </div>
     </div>
     <div class="reel-card">
-      <div class="embed-slot" data-slot="reel-3">
-        <span class="icon">🎬</span>
-        <small>Paste YouTube/Reel embed here<br>(slot: reel-3)</small>
+      <div class="embed-slot" style="padding:0; position:relative;">
+    
+        <!-- Video plays on your site -->
+        <video
+          controls
+          playsinline
+          poster="success-story-thumb.jpg"
+          style="width:100%; height:100%; object-fit:cover; display:block;">
+          <source src="success-story.mp4" type="video/mp4">
+        </video>
+    
+        <!-- YouTube link badge at bottom -->
+        <a href="https://www.youtube.com/shorts/pe_uPrYPCVI"
+           target="_blank" rel="noopener"
+           style="position:absolute; bottom:10px; left:10px;
+                  background:rgba(0,0,0,0.6); color:#fff;
+                  font-size:0.72rem; font-weight:700;
+                  padding:4px 10px; border-radius:999px;
+                  text-decoration:none;">
+          ▶ Watch on YouTube
+        </a>
+    
       </div>
       <div class="reel-caption">
         <span class="src-tag">YouTube</span>
         Add your caption here.
       </div>
     </div>
-
     <div class="reel-card wide">
       <div class="embed-slot" data-slot="story-1">
         <span class="icon">📰</span>
