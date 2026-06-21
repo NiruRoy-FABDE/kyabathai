@@ -279,6 +279,10 @@
   }
 
   /* TOGGLE */
+  .mode-toggle { display:flex; gap:0.4rem; margin-top:0.3rem; }
+  .mode-btn { flex:1; padding:0.45rem 0.6rem; font-size:0.78rem; font-weight:600; border-radius:8px; border:1px solid #2a2a4a; background:#0f0e17; color:#a7a9be; cursor:pointer; transition:all .15s; }
+  .mode-btn.active { background:#6c63ff22; border-color:#6c63ff; color:#6c63ff; }
+  .mode-hint { font-size:0.74rem; color:#6c6c84; margin-top:0.35rem; }
   .toggle-row {
     display: flex;
     align-items: center;
@@ -362,12 +366,22 @@
           <input type="url" id="r1-url" placeholder="https://youtube.com/shorts/XXXXXXX or https://youtu.be/XXXXXXX">
         </div>
         <div class="field-row">
-          <label>Thumbnail Image filename (upload to GitHub)</label>
-          <input type="text" id="r1-thumb" placeholder="e.g. World-Leaders.jpg">
+          <label>Thumbnail</label>
+          <div class="mode-toggle" id="r1-thumb-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r1','thumb','auto')">Auto (from YouTube)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r1','thumb','custom')">Custom</button>
+          </div>
+          <input type="text" id="r1-thumb" placeholder="e.g. World-Leaders.jpg" style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r1-thumb-hint">Will use the YouTube video's own thumbnail automatically.</div>
         </div>
         <div class="field-row">
-          <label>Caption shown below card</label>
-          <input type="text" id="r1-caption" placeholder="e.g. The CEO of Alphabet — World Leaders.">
+          <label>Caption</label>
+          <div class="mode-toggle" id="r1-caption-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r1','caption','auto')">Auto (from video title)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r1','caption','custom')">Custom</button>
+          </div>
+          <input type="text" id="r1-caption" placeholder="e.g. The CEO of Alphabet — World Leaders." style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r1-caption-hint">Will fetch the video's title from YouTube when you click Save.</div>
         </div>
         <div class="preview-box" id="r1-preview">Preview will appear here after saving.</div>
       </div>
@@ -383,12 +397,18 @@
           <input type="url" id="r2-url" placeholder="https://www.instagram.com/reel/XXXXXXX/">
         </div>
         <div class="field-row">
-          <label>Thumbnail Image filename (upload to GitHub)</label>
-          <input type="text" id="r2-thumb" placeholder="e.g. reel-thumb.jpg">
+          <label>Thumbnail</label>
+          <div class="mode-toggle" id="r2-thumb-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r2','thumb','auto')">Auto (placeholder)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r2','thumb','custom')">Custom</button>
+          </div>
+          <input type="text" id="r2-thumb" placeholder="e.g. reel-thumb.jpg" style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r2-thumb-hint">Instagram blocks auto-thumbnails — shows a branded placeholder unless you upload one.</div>
         </div>
         <div class="field-row">
           <label>Caption shown below card</label>
           <input type="text" id="r2-caption" placeholder="e.g. Very emotional video.">
+          <div class="mode-hint">Instagram blocks auto-caption extraction — type your own.</div>
         </div>
         <div class="preview-box" id="r2-preview">Preview will appear here after saving.</div>
       </div>
@@ -404,12 +424,22 @@
           <input type="url" id="r3-url" placeholder="https://youtube.com/shorts/XXXXXXX">
         </div>
         <div class="field-row">
-          <label>Thumbnail Image filename</label>
-          <input type="text" id="r3-thumb" placeholder="e.g. slot3-thumb.jpg">
+          <label>Thumbnail</label>
+          <div class="mode-toggle" id="r3-thumb-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r3','thumb','auto')">Auto (from YouTube)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r3','thumb','custom')">Custom</button>
+          </div>
+          <input type="text" id="r3-thumb" placeholder="e.g. slot3-thumb.jpg" style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r3-thumb-hint">Will use the YouTube video's own thumbnail automatically.</div>
         </div>
         <div class="field-row">
           <label>Caption</label>
-          <input type="text" id="r3-caption" placeholder="Add your caption here">
+          <div class="mode-toggle" id="r3-caption-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r3','caption','auto')">Auto (from video title)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r3','caption','custom')">Custom</button>
+          </div>
+          <input type="text" id="r3-caption" placeholder="Add your caption here" style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r3-caption-hint">Will fetch the video's title from YouTube when you click Save.</div>
         </div>
         <div class="preview-box" id="r3-preview">Preview will appear here after saving.</div>
       </div>
@@ -446,12 +476,18 @@
           <input type="url" id="r5-url" placeholder="https://www.instagram.com/reel/XXXXXXX/">
         </div>
         <div class="field-row">
-          <label>Thumbnail Image filename</label>
-          <input type="text" id="r5-thumb" placeholder="e.g. reel5-thumb.jpg">
+          <label>Thumbnail</label>
+          <div class="mode-toggle" id="r5-thumb-toggle">
+            <button type="button" class="mode-btn active" onclick="setMode('r5','thumb','auto')">Auto (placeholder)</button>
+            <button type="button" class="mode-btn" onclick="setMode('r5','thumb','custom')">Custom</button>
+          </div>
+          <input type="text" id="r5-thumb" placeholder="e.g. reel5-thumb.jpg" style="display:none;margin-top:0.5rem;">
+          <div class="mode-hint" id="r5-thumb-hint">Instagram blocks auto-thumbnails — shows a branded placeholder unless you upload one.</div>
         </div>
         <div class="field-row">
           <label>Caption</label>
           <input type="text" id="r5-caption" placeholder="Add your caption here">
+          <div class="mode-hint">Instagram blocks auto-caption extraction — type your own.</div>
         </div>
         <div class="preview-box" id="r5-preview">Preview will appear here after saving.</div>
       </div>
@@ -502,6 +538,67 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Tracks extra slot IDs like ['extra_1', 'extra_2', ...]
 let extraSlots = [];
 let extraSlotCounter = 0;
+
+// ── AUTO/CUSTOM TOGGLE STATE ──
+let modeState = {
+  r1: { thumb: 'auto', caption: 'auto' },
+  r2: { thumb: 'auto', caption: 'custom' },
+  r3: { thumb: 'auto', caption: 'auto' },
+  r5: { thumb: 'auto', caption: 'custom' },
+};
+
+function setMode(prefix, field, mode) {
+  modeState[prefix] = modeState[prefix] || {};
+  modeState[prefix][field] = mode;
+  const toggle = document.getElementById(prefix + '-' + field + '-toggle');
+  if (toggle) {
+    const btns = toggle.querySelectorAll('.mode-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    if (mode === 'auto' && btns[0]) btns[0].classList.add('active');
+    if (mode === 'custom' && btns[1]) btns[1].classList.add('active');
+  }
+  const input = document.getElementById(prefix + '-' + field);
+  const hint  = document.getElementById(prefix + '-' + field + '-hint');
+  if (input) input.style.display = mode === 'custom' ? 'block' : 'none';
+  if (hint)  hint.style.display  = mode === 'custom' ? 'none'  : 'block';
+}
+
+// Fetch a YouTube video's title via the public oEmbed endpoint (no API key needed)
+async function fetchYTTitle(url) {
+  try {
+    const res = await fetch('https://www.youtube.com/oembed?url=' + encodeURIComponent(url) + '&format=json');
+    if (!res.ok) return '';
+    const data = await res.json();
+    return data.title || '';
+  } catch (e) {
+    return '';
+  }
+}
+
+// Resolve a slot's final url/thumb/caption, applying Auto/Custom modes.
+// type: 'youtube' | 'instagram' | 'ownvideo'
+async function resolveSlotData(prefix, type) {
+  const urlEl = document.getElementById(prefix + '-url');
+  const thumbEl = document.getElementById(prefix + '-thumb');
+  const captionEl = document.getElementById(prefix + '-caption');
+  const url = urlEl ? urlEl.value.trim() : '';
+  let thumb = thumbEl ? thumbEl.value.trim() : '';
+  let caption = captionEl ? captionEl.value.trim() : '';
+  const mode = modeState[prefix] || {};
+
+  if (mode.thumb === 'auto') thumb = '';
+
+  if (mode.caption === 'auto' && type === 'youtube' && url) {
+    const title = await fetchYTTitle(url);
+    if (title) caption = title;
+  }
+
+  return {
+    url, thumb, caption,
+    thumbMode: mode.thumb || 'auto',
+    captionMode: mode.caption || 'auto',
+  };
+}
 
 const APP_CARDS = [
   { id:'madaix',         icon:'🎯', name:'MADAIX',         domain:'madaix.com' },
@@ -554,25 +651,52 @@ function addNewSlot(existingId, existingData) {
       <input type="url" id="${slotId}-url" placeholder="https://youtube.com/shorts/XXXXXXX">
     </div>
     <div class="field-row">
-      <label>Thumbnail Image filename (upload to GitHub)</label>
-      <input type="text" id="${slotId}-thumb" placeholder="e.g. thumb.jpg">
+      <label>Thumbnail</label>
+      <div class="mode-toggle" id="${slotId}-thumb-toggle">
+        <button type="button" class="mode-btn active" onclick="setMode('${slotId}','thumb','auto')">Auto</button>
+        <button type="button" class="mode-btn" onclick="setMode('${slotId}','thumb','custom')">Custom</button>
+      </div>
+      <input type="text" id="${slotId}-thumb" placeholder="e.g. thumb.jpg" style="display:none;margin-top:0.5rem;">
+      <div class="mode-hint" id="${slotId}-thumb-hint">YouTube: uses the video's own thumbnail. Instagram: shows a branded placeholder.</div>
     </div>
     <div class="field-row">
-      <label>Caption shown below card</label>
-      <input type="text" id="${slotId}-caption" placeholder="Add your caption here">
+      <label>Caption</label>
+      <div class="mode-toggle" id="${slotId}-caption-toggle">
+        <button type="button" class="mode-btn active" onclick="setMode('${slotId}','caption','auto')">Auto (from video title)</button>
+        <button type="button" class="mode-btn" onclick="setMode('${slotId}','caption','custom')">Custom</button>
+      </div>
+      <input type="text" id="${slotId}-caption" placeholder="Add your caption here" style="display:none;margin-top:0.5rem;">
+      <div class="mode-hint" id="${slotId}-caption-hint">Will fetch the video's title from YouTube when you click Save.</div>
     </div>
     <div class="preview-box" id="${slotId}-preview">Preview will appear here after saving.</div>
   `;
   container.appendChild(card);
 
-  // Update URL label when type changes
+  modeState[slotId] = { thumb: 'auto', caption: 'auto' };
+
+  // Update URL label + caption-auto availability when type changes
   document.getElementById(slotId + '-type').addEventListener('change', function() {
     const label = document.getElementById(slotId + '-url-label');
-    label.textContent = this.value === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+    const isIG = this.value === 'instagram';
+    label.textContent = isIG ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
     document.getElementById(slotId + '-url').placeholder =
-      this.value === 'instagram'
-        ? 'https://www.instagram.com/reel/XXXXXXX/'
-        : 'https://youtube.com/shorts/XXXXXXX';
+      isIG ? 'https://www.instagram.com/reel/XXXXXXX/' : 'https://youtube.com/shorts/XXXXXXX';
+    const capToggle = document.getElementById(slotId + '-caption-toggle');
+    const capHint = document.getElementById(slotId + '-caption-hint');
+    const capAutoBtn = capToggle.querySelector('.mode-btn');
+    if (isIG) {
+      // Instagram can't be auto-captioned — force custom mode
+      capAutoBtn.disabled = true;
+      capAutoBtn.style.opacity = '0.4';
+      capAutoBtn.style.cursor = 'not-allowed';
+      capHint.textContent = 'Instagram blocks auto-caption extraction — type your own.';
+      setMode(slotId, 'caption', 'custom');
+    } else {
+      capAutoBtn.disabled = false;
+      capAutoBtn.style.opacity = '1';
+      capAutoBtn.style.cursor = 'pointer';
+      capHint.textContent = "Will fetch the video's title from YouTube when you click Save.";
+    }
   });
 
   // Pre-fill if loading from Supabase
@@ -588,6 +712,16 @@ function addNewSlot(existingId, existingData) {
     // Fix label
     const label = document.getElementById(slotId + '-url-label');
     label.textContent = existingData.type === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+    // Restore saved mode (default custom if value already present, for old data)
+    const thumbMode = existingData.thumbMode || (existingData.thumb ? 'custom' : 'auto');
+    const captionMode = existingData.captionMode || (existingData.caption ? 'custom' : 'auto');
+    setMode(slotId, 'thumb', thumbMode);
+    if (existingData.type === 'instagram') {
+      document.getElementById(slotId + '-type').dispatchEvent(new Event('change'));
+      setMode(slotId, 'caption', 'custom');
+    } else {
+      setMode(slotId, 'caption', captionMode);
+    }
   }
 
   return slotId;
@@ -668,6 +802,17 @@ async function loadData() {
     updatePreview(s, c[s]);
   });
 
+  // Restore Auto/Custom toggle state for YouTube/Instagram slots
+  ['r1','r2','r3','r5'].forEach(s => {
+    const d = c[s] || {};
+    const thumbMode = d.thumbMode || (d.thumb ? 'custom' : 'auto');
+    setMode(s, 'thumb', thumbMode);
+    if (modeState[s] && 'caption' in modeState[s]) {
+      const captionMode = (s === 'r2' || s === 'r5') ? 'custom' : (d.captionMode || (d.caption ? 'custom' : 'auto'));
+      setMode(s, 'caption', captionMode);
+    }
+  });
+
   // Story
   if (c.story) {
     document.getElementById('story-url').value    = c.story.url    || '';
@@ -719,32 +864,40 @@ async function saveAll() {
   btn.textContent = '⏳ Saving...';
   status.textContent = '';
 
+  const [r1d, r2d, r3d, r5d] = await Promise.all([
+    resolveSlotData('r1', 'youtube'),
+    resolveSlotData('r2', 'instagram'),
+    resolveSlotData('r3', 'youtube'),
+    resolveSlotData('r5', 'instagram'),
+  ]);
+
   const content = {
-    r1: { url: document.getElementById('r1-url').value.trim(), thumb: document.getElementById('r1-thumb').value.trim(), caption: document.getElementById('r1-caption').value.trim(), type: 'youtube' },
-    r2: { url: document.getElementById('r2-url').value.trim(), thumb: document.getElementById('r2-thumb').value.trim(), caption: document.getElementById('r2-caption').value.trim(), type: 'instagram' },
-    r3: { url: document.getElementById('r3-url').value.trim(), thumb: document.getElementById('r3-thumb').value.trim(), caption: document.getElementById('r3-caption').value.trim(), type: 'youtube' },
+    r1: { ...r1d, type: 'youtube' },
+    r2: { ...r2d, type: 'instagram' },
+    r3: { ...r3d, type: 'youtube' },
     r4: { video: document.getElementById('r4-video').value.trim(), ytlink: document.getElementById('r4-ytlink').value.trim(), caption: document.getElementById('r4-caption').value.trim(), type: 'ownvideo' },
-    r5: { url: document.getElementById('r5-url').value.trim(), thumb: document.getElementById('r5-thumb').value.trim(), caption: document.getElementById('r5-caption').value.trim(), type: 'instagram' },
+    r5: { ...r5d, type: 'instagram' },
     story: { url: document.getElementById('story-url').value.trim(), title: document.getElementById('story-title').value.trim(), desc: document.getElementById('story-desc').value.trim(), source: document.getElementById('story-source').value.trim() },
     extraSlots: [...extraSlots],
     apps: {}
   };
 
+  // Reflect any auto-fetched captions back into the visible fields
+  if (document.getElementById('r1-caption')) document.getElementById('r1-caption').value = r1d.caption;
+  if (document.getElementById('r3-caption')) document.getElementById('r3-caption').value = r3d.caption;
+
   // Save extra slots data
-  extraSlots.forEach(slotId => {
-    const urlEl     = document.getElementById(slotId + '-url');
-    const thumbEl   = document.getElementById(slotId + '-thumb');
-    const captionEl = document.getElementById(slotId + '-caption');
-    const typeEl    = document.getElementById(slotId + '-type');
-    if (!urlEl) return;
-    content[slotId] = {
-      url:     urlEl.value.trim(),
-      thumb:   thumbEl ? thumbEl.value.trim() : '',
-      caption: captionEl ? captionEl.value.trim() : '',
-      type:    typeEl ? typeEl.value : 'youtube',
-    };
+  for (const slotId of extraSlots) {
+    const urlEl  = document.getElementById(slotId + '-url');
+    const typeEl = document.getElementById(slotId + '-type');
+    if (!urlEl) continue;
+    const type = typeEl ? typeEl.value : 'youtube';
+    const d = await resolveSlotData(slotId, type);
+    content[slotId] = { ...d, type };
+    const capEl = document.getElementById(slotId + '-caption');
+    if (capEl) capEl.value = d.caption;
     updatePreview(slotId, content[slotId]);
-  });
+  }
 
   // Fixed slot previews
   ['r1','r2','r3','r4','r5'].forEach(s => updatePreview(s, content[s]));
