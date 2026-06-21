@@ -1340,18 +1340,19 @@
     if (m.fn === 'story') renderStory(card, slot, d);
   });
 
-  // ── Render extra dynamic slots ──
+  // ── Render extra dynamic slots at the START ──
   if (c.extraSlots && Array.isArray(c.extraSlots)) {
     const scroll = document.getElementById('reelsScroll');
-    c.extraSlots.forEach(slotId => {
+    const firstCard = scroll.querySelector('.reel-card');
+    // Reverse so the last added slot stays at position 1
+    [...c.extraSlots].reverse().forEach(slotId => {
       const d = c[slotId];
       if (!d || !d.url || !d.url.trim()) return;
 
-      // Build a new card
       const newCard = document.createElement('div');
       newCard.className = 'reel-card';
       newCard.innerHTML = '<div class="embed-slot" style="padding:0;position:relative;"></div><div class="reel-caption"></div>';
-      scroll.appendChild(newCard);
+      scroll.insertBefore(newCard, firstCard);
 
       const newSlot = newCard.querySelector('.embed-slot');
       if (d.type === 'instagram') renderIG(newCard, newSlot, d);
