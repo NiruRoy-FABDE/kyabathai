@@ -1272,7 +1272,7 @@
   function prep(slot) { slot.style.padding = '0'; slot.style.position = 'relative'; }
 
   function renderYT(card, slot, d) {
-    if (!d || !d.url) return;
+    if (!d || !d.url || d.url.trim() === '') return;
     prep(slot);
     const thumb = d.thumb
       ? '<img src="' + d.thumb + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;">'
@@ -1287,7 +1287,7 @@
   }
 
   function renderIG(card, slot, d) {
-    if (!d || !d.url) return;
+    if (!d || !d.url || d.url.trim() === '') return;
     prep(slot);
     const thumb = d.thumb
       ? '<img src="' + d.thumb + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
@@ -1302,7 +1302,7 @@
   }
 
   function renderOwn(card, slot, d) {
-    if (!d || !d.video) return;
+    if (!d || !d.video || d.video.trim() === '') return;
     prep(slot);
     const link = d.ytlink
       ? '<a href="' + d.ytlink + '" target="_blank" rel="noopener" style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;text-decoration:none;">&#9654; Watch on YouTube</a>'
@@ -1314,7 +1314,7 @@
   }
 
   function renderStory(card, slot, d) {
-    if (!d || !d.url) return;
+    if (!d || !d.url || d.url.trim() === '') return;
     slot.innerHTML =
       '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:100%;height:100%;padding:1.5rem;text-decoration:none;color:inherit;">' +
         '<span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;color:#FF8C42;letter-spacing:0.5px;margin-bottom:0.5rem;">&#128240; ' + (d.source || 'Article') + '</span>' +
@@ -1331,6 +1331,9 @@
     const slot = card.querySelector('.embed-slot');
     if (!slot) return;
     const d = c[m.key];
+    // Only update caption if there's a real URL/video to show
+    const hasContent = d && (d.url?.trim() || d.video?.trim());
+    if (!hasContent) return;
     if (m.fn === 'yt')    renderYT(card, slot, d);
     if (m.fn === 'ig')    renderIG(card, slot, d);
     if (m.fn === 'own')   renderOwn(card, slot, d);
