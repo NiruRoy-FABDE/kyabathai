@@ -1271,14 +1271,24 @@
   }
   function prep(slot) { slot.style.padding = '0'; slot.style.position = 'relative'; }
 
+  function getYTId(url) {
+    // Extracts YouTube video ID from shorts, youtu.be, or regular URLs
+    const m = url.match(/(?:shorts\/|youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
   function renderYT(card, slot, d) {
     if (!d || !d.url || d.url.trim() === '') return;
     prep(slot);
-    const thumb = d.thumb
-      ? '<img src="' + d.thumb + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;">'
+    // Auto-get YouTube thumbnail if no manual one provided
+    const ytId = getYTId(d.url);
+    const autoThumb = ytId ? 'https://i.ytimg.com/vi/' + ytId + '/hqdefault.jpg' : '';
+    const thumbSrc = d.thumb ? d.thumb : autoThumb;
+    const thumb = thumbSrc
+      ? '<img src="' + thumbSrc + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
       : '';
     slot.innerHTML =
-      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;">' +
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;background:#1a1625;">' +
         thumb +
         '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">&#9654;</div>' +
         '<div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;">&#9654; Watch on YouTube</div>' +
@@ -1289,9 +1299,10 @@
   function renderIG(card, slot, d) {
     if (!d || !d.url || d.url.trim() === '') return;
     prep(slot);
+    // Manual thumb if provided, otherwise Instagram gradient placeholder
     const thumb = d.thumb
       ? '<img src="' + d.thumb + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
-      : '';
+      : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;font-size:3rem;">📸</div>';
     slot.innerHTML =
       '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;background:#1A1625;">' +
         thumb +
