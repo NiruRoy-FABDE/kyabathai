@@ -343,6 +343,14 @@
     <div class="section-panel active" id="tab-reels">
       <p class="section-title">Reels, Videos & Articles</p>
 
+      <!-- + ADD NEW SLOT BUTTON - TOP -->
+      <button class="btn-add-slot" onclick="addNewSlot()">
+        ➕ Add New Slot
+      </button>
+
+      <!-- ── DYNAMIC EXTRA SLOTS ── -->
+      <div id="extra-slots-container"></div>
+
       <!-- REEL 1 - YouTube -->
       <div class="content-card">
         <div class="card-header">
@@ -472,14 +480,6 @@
         </div>
         <div class="preview-box" id="story-preview">Preview will appear here after saving.</div>
       </div>
-
-      <!-- + ADD NEW SLOT BUTTON -->
-      <button class="btn-add-slot" onclick="addNewSlot()">
-        ➕ Add New Slot
-      </button>
-
-      <!-- ── DYNAMIC EXTRA SLOTS (added by + button) ── -->
-      <div id="extra-slots-container"></div>
 
     </div><!-- end tab-reels -->
 
