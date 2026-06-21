@@ -228,6 +228,39 @@
   }
   .preview-box a { color: #ff8c42; word-break: break-all; }
 
+  /* ── ADD NEW SLOT BUTTON ── */
+  .btn-add-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background: transparent;
+    border: 2px dashed #ff8c42;
+    border-radius: 14px;
+    color: #ff8c42;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+  }
+  .btn-add-slot:hover { background: #ff8c4211; }
+
+  /* DELETE button for dynamic slots */
+  .btn-delete-slot {
+    background: transparent;
+    border: 1px solid #ff4d8d44;
+    color: #ff4d8d;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .btn-delete-slot:hover { background: #ff4d8d22; }
+
   /* APP CARDS */
   .app-card {
     background: #1a1a2e;
@@ -270,9 +303,7 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════
-     LOGIN SCREEN
-══════════════════════════════════════ -->
+<!-- LOGIN SCREEN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="logo">kyabat<span>.</span>hai</div>
@@ -284,9 +315,7 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     ADMIN PANEL
-══════════════════════════════════════ -->
+<!-- ADMIN PANEL -->
 <div id="admin-panel">
 
   <div class="top-bar">
@@ -306,15 +335,15 @@
 
     <!-- TABS -->
     <div class="tabs">
-      <button class="tab active" onclick="switchTab('reels')">🎬 Reels & Videos</button>
-      <button class="tab" onclick="switchTab('apps')">🚀 App Cards</button>
+      <button class="tab active" onclick="switchTab('reels', event)">🎬 Reels & Videos</button>
+      <button class="tab" onclick="switchTab('apps', event)">🚀 App Cards</button>
     </div>
 
     <!-- ══ REELS TAB ══ -->
     <div class="section-panel active" id="tab-reels">
       <p class="section-title">Reels, Videos & Articles</p>
 
-      <!-- REEL 1 - YouTube (World Leaders already set) -->
+      <!-- REEL 1 - YouTube -->
       <div class="content-card">
         <div class="card-header">
           <span class="slot-label">Slot 1</span>
@@ -377,7 +406,7 @@
         <div class="preview-box" id="r3-preview">Preview will appear here after saving.</div>
       </div>
 
-      <!-- REEL 4 - Own Video (mp4) -->
+      <!-- REEL 4 - Own Video -->
       <div class="content-card">
         <div class="card-header">
           <span class="slot-label">Slot 4 — My Video</span>
@@ -444,33 +473,36 @@
         <div class="preview-box" id="story-preview">Preview will appear here after saving.</div>
       </div>
 
+      <!-- ── DYNAMIC EXTRA SLOTS (added by + button) ── -->
+      <div id="extra-slots-container"></div>
+
+      <!-- + ADD NEW SLOT BUTTON -->
+      <button class="btn-add-slot" onclick="addNewSlot()">
+        ➕ Add New Slot
+      </button>
+
     </div><!-- end tab-reels -->
 
     <!-- ══ APPS TAB ══ -->
     <div class="section-panel" id="tab-apps">
       <p class="section-title">App Cards — Update links and descriptions</p>
-
-      <div id="app-cards-container">
-        <!-- Populated by JS -->
-      </div>
-
+      <div id="app-cards-container"></div>
     </div>
 
-  </div><!-- end admin-body -->
-</div><!-- end admin-panel -->
+  </div>
+</div>
 
 <script>
-// ══════════════════════════════════════
-// SUPABASE CONFIG — PASTE YOUR KEYS HERE
-// ══════════════════════════════════════
 const SUPABASE_URL = 'https://lnbwqctcdwthpggrxukp.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuYndxY3RjZHd0aHBnZ3J4dWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNTQ4ODgsImV4cCI6MjA5NzYzMDg4OH0.JX7gTfcCsDrDFFr7HzYrJUuXnZAzXygnXY0MaH-Khds';
-const ADMIN_PASSWORD = 'YOUR_ADMIN_PASSWORD'; // simple password for admin page
 
 const { createClient } = supabase;
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ── APP CARDS DATA ──
+// Tracks extra slot IDs like ['extra_1', 'extra_2', ...]
+let extraSlots = [];
+let extraSlotCounter = 0;
+
 const APP_CARDS = [
   { id:'madaix',         icon:'🎯', name:'MADAIX',         domain:'madaix.com' },
   { id:'livesetup',      icon:'⚡', name:'Live Setup',     domain:'live-setup.com' },
@@ -487,12 +519,84 @@ const APP_CARDS = [
   { id:'drapyfy',        icon:'👗', name:'Drapyfy',        domain:'drapyfy.com' },
 ];
 
-// ── TAB SWITCHING ──
-function switchTab(name) {
+function switchTab(name, e) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
+  e.target.classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ── ADD NEW SLOT ──
+function addNewSlot(existingId, existingData) {
+  extraSlotCounter++;
+  const slotId = existingId || ('extra_' + Date.now());
+  if (!existingId) extraSlots.push(slotId);
+
+  const slotNum = extraSlots.indexOf(slotId) + 1;
+  const container = document.getElementById('extra-slots-container');
+
+  const card = document.createElement('div');
+  card.className = 'content-card';
+  card.id = 'card-' + slotId;
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="slot-label">New Slot ${slotNum}</span>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <select id="${slotId}-type" style="background:#0f0e17;border:1px solid #2a2a4a;border-radius:8px;color:#fffffe;padding:3px 8px;font-size:0.75rem;cursor:pointer;">
+          <option value="youtube">YouTube</option>
+          <option value="instagram">Instagram</option>
+        </select>
+        <button class="btn-delete-slot" onclick="deleteSlot('${slotId}')">✕ Remove</button>
+      </div>
+    </div>
+    <div class="field-row">
+      <label id="${slotId}-url-label">YouTube Short / Video URL</label>
+      <input type="url" id="${slotId}-url" placeholder="https://youtube.com/shorts/XXXXXXX">
+    </div>
+    <div class="field-row">
+      <label>Thumbnail Image filename (upload to GitHub)</label>
+      <input type="text" id="${slotId}-thumb" placeholder="e.g. thumb.jpg">
+    </div>
+    <div class="field-row">
+      <label>Caption shown below card</label>
+      <input type="text" id="${slotId}-caption" placeholder="Add your caption here">
+    </div>
+    <div class="preview-box" id="${slotId}-preview">Preview will appear here after saving.</div>
+  `;
+  container.appendChild(card);
+
+  // Update URL label when type changes
+  document.getElementById(slotId + '-type').addEventListener('change', function() {
+    const label = document.getElementById(slotId + '-url-label');
+    label.textContent = this.value === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+    document.getElementById(slotId + '-url').placeholder =
+      this.value === 'instagram'
+        ? 'https://www.instagram.com/reel/XXXXXXX/'
+        : 'https://youtube.com/shorts/XXXXXXX';
+  });
+
+  // Pre-fill if loading from Supabase
+  if (existingData) {
+    document.getElementById(slotId + '-url').value     = existingData.url     || '';
+    document.getElementById(slotId + '-thumb').value   = existingData.thumb   || '';
+    document.getElementById(slotId + '-caption').value = existingData.caption || '';
+    document.getElementById(slotId + '-type').value    = existingData.type    || 'youtube';
+    if (existingData.url) {
+      document.getElementById(slotId + '-preview').innerHTML =
+        `🔗 <a href="${existingData.url}" target="_blank">${existingData.url}</a><br>📝 ${existingData.caption || 'No caption'}`;
+    }
+    // Fix label
+    const label = document.getElementById(slotId + '-url-label');
+    label.textContent = existingData.type === 'instagram' ? 'Instagram Reel URL' : 'YouTube Short / Video URL';
+  }
+
+  return slotId;
+}
+
+function deleteSlot(slotId) {
+  extraSlots = extraSlots.filter(s => s !== slotId);
+  const card = document.getElementById('card-' + slotId);
+  if (card) card.remove();
 }
 
 // ── LOGIN ──
@@ -501,12 +605,8 @@ async function doLogin() {
   const pass  = document.getElementById('password-input').value;
   const errEl = document.getElementById('login-error');
   errEl.textContent = '';
-
   const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-  if (error) {
-    errEl.textContent = '❌ ' + error.message;
-    return;
-  }
+  if (error) { errEl.textContent = '❌ ' + error.message; return; }
   showAdmin();
 }
 
@@ -523,7 +623,6 @@ function showAdmin() {
   loadData();
 }
 
-// ── BUILD APP CARDS UI ──
 function buildAppCards() {
   const container = document.getElementById('app-cards-container');
   container.innerHTML = APP_CARDS.map(app => `
@@ -553,16 +652,13 @@ function buildAppCards() {
   `).join('');
 }
 
-// ── LOAD DATA FROM SUPABASE ──
 async function loadData() {
   const { data, error } = await sb.from('kyabathai_content').select('*').eq('id', 'main').single();
   if (error || !data) return;
-
   const c = data.content;
 
-  // Reels
-  const slots = ['r1','r2','r3','r4','r5'];
-  slots.forEach(s => {
+  // Fixed slots
+  ['r1','r2','r3','r4','r5'].forEach(s => {
     if (!c[s]) return;
     if (document.getElementById(s+'-url'))     document.getElementById(s+'-url').value     = c[s].url     || '';
     if (document.getElementById(s+'-thumb'))   document.getElementById(s+'-thumb').value   = c[s].thumb   || '';
@@ -581,6 +677,15 @@ async function loadData() {
     updateStoryPreview(c.story);
   }
 
+  // Extra slots — load them back in order
+  if (c.extraSlots && Array.isArray(c.extraSlots)) {
+    extraSlots = []; // reset before loading
+    c.extraSlots.forEach(slotId => {
+      extraSlots.push(slotId);
+      addNewSlot(slotId, c[slotId]);
+    });
+  }
+
   // Apps
   if (c.apps) {
     APP_CARDS.forEach(app => {
@@ -594,7 +699,6 @@ async function loadData() {
   }
 }
 
-// ── PREVIEW HELPERS ──
 function updatePreview(slot, data) {
   const el = document.getElementById(slot+'-preview');
   if (!el || !data) return;
@@ -608,7 +712,6 @@ function updateStoryPreview(data) {
   el.innerHTML = `🔗 <a href="${data.url}" target="_blank">${data.url}</a><br>📰 <strong>${data.title||''}</strong> — ${data.source||''}`;
 }
 
-// ── SAVE ALL DATA ──
 async function saveAll() {
   const btn = document.getElementById('save-btn');
   const status = document.getElementById('save-status');
@@ -617,46 +720,37 @@ async function saveAll() {
   status.textContent = '';
 
   const content = {
-    r1: {
-      url:     document.getElementById('r1-url').value.trim(),
-      thumb:   document.getElementById('r1-thumb').value.trim(),
-      caption: document.getElementById('r1-caption').value.trim(),
-      type:    'youtube'
-    },
-    r2: {
-      url:     document.getElementById('r2-url').value.trim(),
-      thumb:   document.getElementById('r2-thumb').value.trim(),
-      caption: document.getElementById('r2-caption').value.trim(),
-      type:    'instagram'
-    },
-    r3: {
-      url:     document.getElementById('r3-url').value.trim(),
-      thumb:   document.getElementById('r3-thumb').value.trim(),
-      caption: document.getElementById('r3-caption').value.trim(),
-      type:    'youtube'
-    },
-    r4: {
-      video:   document.getElementById('r4-video').value.trim(),
-      ytlink:  document.getElementById('r4-ytlink').value.trim(),
-      caption: document.getElementById('r4-caption').value.trim(),
-      type:    'ownvideo'
-    },
-    r5: {
-      url:     document.getElementById('r5-url').value.trim(),
-      thumb:   document.getElementById('r5-thumb').value.trim(),
-      caption: document.getElementById('r5-caption').value.trim(),
-      type:    'instagram'
-    },
-    story: {
-      url:    document.getElementById('story-url').value.trim(),
-      title:  document.getElementById('story-title').value.trim(),
-      desc:   document.getElementById('story-desc').value.trim(),
-      source: document.getElementById('story-source').value.trim(),
-    },
+    r1: { url: document.getElementById('r1-url').value.trim(), thumb: document.getElementById('r1-thumb').value.trim(), caption: document.getElementById('r1-caption').value.trim(), type: 'youtube' },
+    r2: { url: document.getElementById('r2-url').value.trim(), thumb: document.getElementById('r2-thumb').value.trim(), caption: document.getElementById('r2-caption').value.trim(), type: 'instagram' },
+    r3: { url: document.getElementById('r3-url').value.trim(), thumb: document.getElementById('r3-thumb').value.trim(), caption: document.getElementById('r3-caption').value.trim(), type: 'youtube' },
+    r4: { video: document.getElementById('r4-video').value.trim(), ytlink: document.getElementById('r4-ytlink').value.trim(), caption: document.getElementById('r4-caption').value.trim(), type: 'ownvideo' },
+    r5: { url: document.getElementById('r5-url').value.trim(), thumb: document.getElementById('r5-thumb').value.trim(), caption: document.getElementById('r5-caption').value.trim(), type: 'instagram' },
+    story: { url: document.getElementById('story-url').value.trim(), title: document.getElementById('story-title').value.trim(), desc: document.getElementById('story-desc').value.trim(), source: document.getElementById('story-source').value.trim() },
+    extraSlots: [...extraSlots],
     apps: {}
   };
 
-  // Collect app cards
+  // Save extra slots data
+  extraSlots.forEach(slotId => {
+    const urlEl     = document.getElementById(slotId + '-url');
+    const thumbEl   = document.getElementById(slotId + '-thumb');
+    const captionEl = document.getElementById(slotId + '-caption');
+    const typeEl    = document.getElementById(slotId + '-type');
+    if (!urlEl) return;
+    content[slotId] = {
+      url:     urlEl.value.trim(),
+      thumb:   thumbEl ? thumbEl.value.trim() : '',
+      caption: captionEl ? captionEl.value.trim() : '',
+      type:    typeEl ? typeEl.value : 'youtube',
+    };
+    updatePreview(slotId, content[slotId]);
+  });
+
+  // Fixed slot previews
+  ['r1','r2','r3','r4','r5'].forEach(s => updatePreview(s, content[s]));
+  updateStoryPreview(content.story);
+
+  // Apps
   APP_CARDS.forEach(app => {
     content.apps[app.id] = {
       url:     (document.getElementById('app-'+app.id+'-url')     || {}).value || '',
@@ -666,11 +760,6 @@ async function saveAll() {
     };
   });
 
-  // Update previews
-  ['r1','r2','r3','r4','r5'].forEach(s => updatePreview(s, content[s]));
-  updateStoryPreview(content.story);
-
-  // Save to Supabase
   const { error } = await sb.from('kyabathai_content').upsert({ id: 'main', content, updated_at: new Date().toISOString() });
 
   btn.disabled = false;

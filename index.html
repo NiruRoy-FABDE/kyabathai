@@ -1331,7 +1331,7 @@
     const slot = card.querySelector('.embed-slot');
     if (!slot) return;
     const d = c[m.key];
-    // Only update caption if there's a real URL/video to show
+    // Only update if there's a real URL/video to show
     const hasContent = d && (d.url?.trim() || d.video?.trim());
     if (!hasContent) return;
     if (m.fn === 'yt')    renderYT(card, slot, d);
@@ -1339,6 +1339,25 @@
     if (m.fn === 'own')   renderOwn(card, slot, d);
     if (m.fn === 'story') renderStory(card, slot, d);
   });
+
+  // ── Render extra dynamic slots ──
+  if (c.extraSlots && Array.isArray(c.extraSlots)) {
+    const scroll = document.getElementById('reelsScroll');
+    c.extraSlots.forEach(slotId => {
+      const d = c[slotId];
+      if (!d || !d.url || !d.url.trim()) return;
+
+      // Build a new card
+      const newCard = document.createElement('div');
+      newCard.className = 'reel-card';
+      newCard.innerHTML = '<div class="embed-slot" style="padding:0;position:relative;"></div><div class="reel-caption"></div>';
+      scroll.appendChild(newCard);
+
+      const newSlot = newCard.querySelector('.embed-slot');
+      if (d.type === 'instagram') renderIG(newCard, newSlot, d);
+      else renderYT(newCard, newSlot, d);
+    });
+  }
 })();
 </script>
 
