@@ -522,6 +522,15 @@
     <!-- ══ APPS TAB ══ -->
     <div class="section-panel" id="tab-apps">
       <p class="section-title">App Cards — Update links and descriptions</p>
+
+      <!-- + ADD NEW APP CARD BUTTON - TOP -->
+      <button class="btn-add-slot" onclick="addNewAppCard()">
+        ➕ Add New App Card
+      </button>
+
+      <!-- ── DYNAMIC EXTRA APP CARDS ── -->
+      <div id="extra-apps-container"></div>
+
       <div id="app-cards-container"></div>
     </div>
 
@@ -538,6 +547,8 @@ const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // Tracks extra slot IDs like ['extra_1', 'extra_2', ...]
 let extraSlots = [];
 let extraSlotCounter = 0;
+let extraApps = [];
+let extraAppCounter = 0;
 
 // ── AUTO/CUSTOM TOGGLE STATE ──
 let modeState = {
@@ -831,6 +842,71 @@ function deleteSlot(slotId) {
   if (card) card.remove();
 }
 
+// ── ADD NEW APP CARD ──
+function addNewAppCard(existingId, existingData) {
+  extraAppCounter++;
+  const appId = existingId || ('app_extra_' + Date.now());
+  if (!existingId) extraApps.push(appId);
+
+  const container = document.getElementById('extra-apps-container');
+
+  const card = document.createElement('div');
+  card.className = 'app-card';
+  card.id = 'appcard-' + appId;
+  card.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <h4>
+        <input type="text" id="${appId}-icon" value="🚀" maxlength="2" style="width:2.2rem;background:#0f0e17;border:1px solid #2a2a4a;border-radius:6px;color:#fffffe;text-align:center;padding:3px;font-size:1rem;margin-right:0.4rem;">
+        <input type="text" id="${appId}-name" placeholder="App Name" style="background:#0f0e17;border:1px solid #2a2a4a;border-radius:6px;color:#fffffe;padding:3px 8px;font-size:0.9rem;font-weight:700;width:160px;">
+      </h4>
+      <button class="btn-delete-slot" onclick="deleteAppCard('${appId}')">✕ Remove</button>
+    </div>
+    <div class="field-row">
+      <label>Domain (shown next to name)</label>
+      <input type="text" id="${appId}-domain" placeholder="e.g. myapp.com">
+    </div>
+    <div class="field-row">
+      <label>Site URL</label>
+      <input type="url" id="${appId}-url" placeholder="https://myapp.com">
+    </div>
+    <div class="field-row">
+      <label>Tagline (shown in red on site)</label>
+      <input type="text" id="${appId}-tagline" placeholder="One line that explains what it does">
+    </div>
+    <div class="field-row">
+      <label>Status</label>
+      <select id="${appId}-status">
+        <option value="live">Live — Visit Site</option>
+        <option value="beta">Private Beta — Request Access</option>
+        <option value="coming">Coming Soon</option>
+      </select>
+    </div>
+    <div class="toggle-row">
+      <input type="checkbox" id="${appId}-visible" checked>
+      <label for="${appId}-visible">Visible on site</label>
+    </div>
+  `;
+  container.appendChild(card);
+
+  if (existingData) {
+    document.getElementById(appId + '-icon').value    = existingData.icon    || '🚀';
+    document.getElementById(appId + '-name').value    = existingData.name    || '';
+    document.getElementById(appId + '-domain').value  = existingData.domain  || '';
+    document.getElementById(appId + '-url').value     = existingData.url     || '';
+    document.getElementById(appId + '-tagline').value = existingData.tagline || '';
+    document.getElementById(appId + '-status').value  = existingData.status  || 'live';
+    document.getElementById(appId + '-visible').checked = existingData.visible !== false;
+  }
+
+  return appId;
+}
+
+function deleteAppCard(appId) {
+  extraApps = extraApps.filter(a => a !== appId);
+  const card = document.getElementById('appcard-' + appId);
+  if (card) card.remove();
+}
+
 // ── LOGIN ──
 async function doLogin() {
   const email = document.getElementById('email-input').value.trim();
@@ -939,6 +1015,15 @@ async function loadData() {
       if (document.getElementById('app-'+app.id+'-status'))  document.getElementById('app-'+app.id+'-status').value  = a.status  || 'live';
       if (document.getElementById('app-'+app.id+'-visible')) document.getElementById('app-'+app.id+'-visible').checked = a.visible !== false;
     });
+
+    // Extra app cards — load them back in order
+    if (c.apps.extraApps && Array.isArray(c.apps.extraApps)) {
+      extraApps = [];
+      c.apps.extraApps.forEach(appId => {
+        extraApps.push(appId);
+        addNewAppCard(appId, c.apps[appId]);
+      });
+    }
   }
 }
 
@@ -1050,6 +1135,22 @@ async function saveAll() {
       tagline: (document.getElementById('app-'+app.id+'-tagline') || {}).value || '',
       status:  (document.getElementById('app-'+app.id+'-status')  || {}).value || 'live',
       visible: (document.getElementById('app-'+app.id+'-visible') || {}).checked !== false,
+    };
+  });
+
+  // Extra (dynamically added) app cards
+  content.apps.extraApps = [...extraApps];
+  extraApps.forEach(appId => {
+    const nameEl = document.getElementById(appId + '-name');
+    if (!nameEl) return;
+    content.apps[appId] = {
+      icon:    (document.getElementById(appId + '-icon')    || {}).value || '🚀',
+      name:    nameEl.value || '',
+      domain:  (document.getElementById(appId + '-domain')  || {}).value || '',
+      url:     (document.getElementById(appId + '-url')     || {}).value || '',
+      tagline: (document.getElementById(appId + '-tagline') || {}).value || '',
+      status:  (document.getElementById(appId + '-status')  || {}).value || 'live',
+      visible: (document.getElementById(appId + '-visible') || {}).checked !== false,
     };
   });
 
