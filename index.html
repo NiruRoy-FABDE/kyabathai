@@ -1371,6 +1371,7 @@
     const firstCard = scroll.querySelector('.reel-card');
     // Reverse so the last added slot stays at position 1
     [...c.extraSlots].reverse().forEach(slotId => {
+    document.getElementById('reelsScroll').scrollLeft = 0;  
       const d = c[slotId];
       const hasContent = d && (d.url?.trim() || d.video?.trim());
       if (!hasContent) return;
