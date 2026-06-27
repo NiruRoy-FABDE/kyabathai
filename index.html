@@ -330,6 +330,7 @@
     gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
+    align-items: start;
   }
 
   .proj-card {
@@ -340,6 +341,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .proj-card:hover {
@@ -390,7 +392,7 @@
     margin-top: 10px;
   }
 
-  .proj-card-body { padding: 18px 22px; flex: 1; }
+  .proj-card-body { padding: 18px 22px; flex: 1; display: flex; flex-direction: column; justify-content: flex-start; }
   .proj-block { margin-bottom: 16px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
