@@ -325,13 +325,18 @@
 
   /* ===== PROJECT SHOWCASE ===== */
   .showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 28px;
+    columns: 3;
+    column-gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
-    align-items: start;
   }
+  .showcase-grid .proj-card {
+    break-inside: avoid;
+    margin-bottom: 28px;
+    display: block;
+  }
+  @media (max-width: 900px) { .showcase-grid { columns: 2; } }
+  @media (max-width: 560px) { .showcase-grid { columns: 1; } }
 
   .proj-card {
     background: var(--cream);
