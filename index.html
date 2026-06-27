@@ -160,7 +160,7 @@
 
   .hero h1 {
     font-family: var(--serif-stamp);
-    font-size: clamp(1.2rem, 7vw, 2.2rem);
+    font-size: clamp(2.4rem, 7vw, 4.6rem);
     line-height: 1.05;
     font-weight: 700;
     letter-spacing: -1px;
@@ -176,7 +176,7 @@
 
   .hero p.sub {
     max-width: 580px;
-    margin: 0 auto 20px;
+    margin: 0 auto 36px;
     font-size: 1.15rem;
     color: var(--ink-soft);
     font-weight: 500;
@@ -226,11 +226,11 @@
   }
 
   /* ===== SECTION HEADERS ===== */
-  .section { padding: 20px 6%; }
+  .section { padding: 80px 6%; }
   .section-head {
     text-align: center;
     max-width: 640px;
-    margin: 0 auto 14px;
+    margin: 0 auto 48px;
   }
   .section-tag {
     display: inline-block;
@@ -242,13 +242,13 @@
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
   }
   .section-tag.pink { background: var(--tint-pink); color: var(--gulal); }
   .section-tag.jade { background: var(--tint-jade); color: var(--jade-deep); }
   .section-head h2 {
     font-family: var(--serif-stamp);
-    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 14px;
@@ -278,7 +278,7 @@
 
   .reel-card {
     scroll-snap-align: start;
-    flex: 0 0 190px;
+    flex: 0 0 260px;
     background: #241F31;
     border-radius: var(--radius);
     overflow: hidden;
@@ -286,8 +286,7 @@
   }
   .reel-card .embed-slot {
     width: 100%;
-    aspect-ratio: 9 / 14;
-    max-height: 260px;
+    aspect-ratio: 9 / 16;
     background: linear-gradient(145deg, #2E2740, #1F1A2B);
     display: flex;
     align-items: center;
@@ -304,8 +303,8 @@
   .reel-card .embed-slot .icon { font-size: 2.2rem; }
   .reel-card .embed-slot small { font-size: 0.75rem; line-height: 1.4; }
   .reel-card .reel-caption {
-    padding: 6px 10px 8px;
-    font-size: 0.57rem;
+    padding: 14px 16px;
+    font-size: 0.88rem;
     font-weight: 600;
   }
   .reel-card .reel-caption .src-tag {
@@ -320,9 +319,9 @@
 
   /* a wide "story" card for landscape/article style finds */
   .reel-card.wide {
-    flex: 0 0 190px;
+    flex: 0 0 320px;
   }
-  .reel-card.wide .embed-slot { aspect-ratio: 9/16; }
+  .reel-card.wide .embed-slot { aspect-ratio: 16/10; }
 
   /* ===== PROJECT SHOWCASE ===== */
   .showcase-grid {
@@ -458,6 +457,7 @@
   .proj-visit-btn:hover { background: var(--gulal); }
   .proj-visit-btn.beta-btn { background: var(--marigold-deep); }
   .proj-visit-btn.beta-btn:hover { background: var(--ink); }
+  .proj-visit-btn.coming-btn { background: #2a2a4a; color: #a7a9be; pointer-events: none; opacity: 0.7; }
 
   /* icon background tints rotate per card for variety, set inline via class */
   .tint-1 { background: var(--tint-orange); }
@@ -1151,10 +1151,11 @@
       </div>
     </article>
 
+    <!-- ── Dynamic app cards injected from admin ── -->
+    <div id="dynamic-app-cards"></div>
+
   </div>
 </section>
-
-<!-- ===== AD SLOTS ===== -->
 <section class="section ad-section" id="ads">
   <div class="section-head">
     <span class="section-tag pink" style="background:var(--cream);">Sponsored Corner</span>
@@ -1371,7 +1372,6 @@
     const firstCard = scroll.querySelector('.reel-card');
     // Reverse so the last added slot stays at position 1
     [...c.extraSlots].reverse().forEach(slotId => {
-    document.getElementById('reelsScroll').scrollLeft = 0;  
       const d = c[slotId];
       const hasContent = d && (d.url?.trim() || d.video?.trim());
       if (!hasContent) return;
@@ -1387,6 +1387,48 @@
       else if (d.type === 'article')   renderStory(newCard, newSlot, d);
       else if (d.type === 'document')  renderDoc(newCard, newSlot, d);
       else renderYT(newCard, newSlot, d);
+    });
+  }
+
+  // ── DYNAMIC APP CARDS from admin ──
+  if (c.apps && c.apps.extraApps && Array.isArray(c.apps.extraApps)) {
+    const grid = document.getElementById('dynamic-app-cards');
+    const tints = ['tint-1','tint-2','tint-3'];
+    const staticCount = document.querySelectorAll('#showcase .proj-card').length;
+
+    c.apps.extraApps.forEach((appId, i) => {
+      const a = c.apps[appId];
+      if (!a || !a.name || a.visible === false) return;
+
+      const num = staticCount + i + 1;
+      const tint = tints[i % tints.length];
+
+      const statusMap = {
+        live:   { cls: '',          label: 'Visit Site →' },
+        beta:   { cls: ' beta-btn', label: 'Request Access →' },
+        coming: { cls: ' coming-btn', label: 'Coming Soon' },
+      };
+      const st = statusMap[a.status] || statusMap.live;
+
+      const article = document.createElement('article');
+      article.className = 'proj-card';
+      article.innerHTML = `
+        <div class="proj-card-top">
+          <span class="proj-id">№ ${String(num).padStart(2,'0')}</span>
+          <div class="proj-icon ${tint}">${a.icon || '🚀'}</div>
+          <h3>${a.name}</h3>
+          <div class="domain">${a.domain || ''}</div>
+          <p class="proj-tagline">${a.tagline || ''}</p>
+        </div>
+        <div class="proj-card-body">
+          ${a.status === 'beta' ? '<span class="beta-flag"><span class="blink"></span>Private Beta</span>' : ''}
+          ${a.status === 'coming' ? '<span class="beta-flag" style="background:#2a2a4a;color:#a7a9be;"><span class="blink" style="background:#a7a9be;"></span>Coming Soon</span>' : ''}
+        </div>
+        <div class="proj-card-cta">
+          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-visit-btn${st.cls}">${st.label}</a>` : `<span class="proj-visit-btn coming-btn" style="opacity:0.5;cursor:default;">Coming Soon</span>`}
+        </div>
+      `;
+      grid.appendChild(article);
     });
   }
 })();
