@@ -326,11 +326,14 @@
   /* ===== PROJECT SHOWCASE ===== */
   .showcase-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
     align-items: start;
+  }
+  @media (max-width: 720px) {
+    .showcase-grid { grid-template-columns: 1fr; }
   }
 
   .proj-card {
