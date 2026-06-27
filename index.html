@@ -330,7 +330,6 @@
     gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
-    align-items: start;
   }
   @media (max-width: 720px) {
     .showcase-grid { grid-template-columns: 1fr; }
@@ -395,7 +394,7 @@
     margin-top: 10px;
   }
 
-  .proj-card-body { padding: 18px 22px; flex: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+  .proj-card-body { padding: 18px 22px; flex: 1; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; max-height: 260px; }
   .proj-block { margin-bottom: 16px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
