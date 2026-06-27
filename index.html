@@ -1412,6 +1412,16 @@
 
       const article = document.createElement('article');
       article.className = 'proj-card';
+
+      const whoTags = (a.whofor || '').split(',').map(t => t.trim()).filter(Boolean)
+        .map(t => `<span>${t}</span>`).join('');
+
+      const bodyBlocks = [
+        a.problem    ? `<div class="proj-block"><span class="label">The problem</span><p>${a.problem}</p></div>` : '',
+        a.whatitdoes ? `<div class="proj-block"><span class="label">What it does</span><p>${a.whatitdoes}</p></div>` : '',
+        whoTags      ? `<div class="proj-block"><span class="label">Who it's for</span><div class="who-tags">${whoTags}</div></div>` : '',
+      ].join('');
+
       article.innerHTML = `
         <div class="proj-card-top">
           <span class="proj-id">№ ${String(num).padStart(2,'0')}</span>
@@ -1423,9 +1433,10 @@
         <div class="proj-card-body">
           ${a.status === 'beta' ? '<span class="beta-flag"><span class="blink"></span>Private Beta</span>' : ''}
           ${a.status === 'coming' ? '<span class="beta-flag" style="background:#2a2a4a;color:#a7a9be;"><span class="blink" style="background:#a7a9be;"></span>Coming Soon</span>' : ''}
+          ${bodyBlocks}
         </div>
         <div class="proj-card-cta">
-          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-visit-btn${st.cls}">${st.label}</a>` : `<span class="proj-visit-btn coming-btn" style="opacity:0.5;cursor:default;">Coming Soon</span>`}
+          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-visit-btn${st.cls}">${st.label}</a>` : `<span class="proj-visit-btn coming-btn">Coming Soon</span>`}
         </div>
       `;
       grid.appendChild(article);

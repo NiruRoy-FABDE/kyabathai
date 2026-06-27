@@ -885,6 +885,21 @@ function addNewAppCard(existingId, existingData) {
       <input type="checkbox" id="${appId}-visible" checked>
       <label for="${appId}-visible">Visible on site</label>
     </div>
+    <div style="border-top:1px solid #2a2a4a;margin:1rem 0 0.75rem;padding-top:0.75rem;">
+      <p style="font-size:0.78rem;color:#6c63ff;font-weight:700;margin-bottom:0.6rem;letter-spacing:0.05em;">BODY SECTIONS (shown in the card middle)</p>
+      <div class="field-row">
+        <label>The Problem <span style="color:#6c6c84;font-weight:400;">(what pain it solves)</span></label>
+        <textarea id="${appId}-problem" rows="2" placeholder="e.g. Most people can't do X without Y..." style="width:100%;background:#0f0e17;border:1px solid #2a2a4a;border-radius:8px;color:#fffffe;padding:0.5rem 0.75rem;font-size:0.85rem;resize:vertical;font-family:inherit;"></textarea>
+      </div>
+      <div class="field-row">
+        <label>What It Does <span style="color:#6c6c84;font-weight:400;">(the solution)</span></label>
+        <textarea id="${appId}-whatitdoes" rows="2" placeholder="e.g. It automatically does X by doing Y..." style="width:100%;background:#0f0e17;border:1px solid #2a2a4a;border-radius:8px;color:#fffffe;padding:0.5rem 0.75rem;font-size:0.85rem;resize:vertical;font-family:inherit;"></textarea>
+      </div>
+      <div class="field-row">
+        <label>Who It's For <span style="color:#6c6c84;font-weight:400;">(comma-separated tags)</span></label>
+        <input type="text" id="${appId}-whofor" placeholder="e.g. Agencies, D2C brands, Solo marketers">
+      </div>
+    </div>
   `;
   container.appendChild(card);
 
@@ -896,6 +911,9 @@ function addNewAppCard(existingId, existingData) {
     document.getElementById(appId + '-tagline').value = existingData.tagline || '';
     document.getElementById(appId + '-status').value  = existingData.status  || 'live';
     document.getElementById(appId + '-visible').checked = existingData.visible !== false;
+    if (document.getElementById(appId + '-problem'))    document.getElementById(appId + '-problem').value    = existingData.problem    || '';
+    if (document.getElementById(appId + '-whatitdoes')) document.getElementById(appId + '-whatitdoes').value = existingData.whatitdoes || '';
+    if (document.getElementById(appId + '-whofor'))     document.getElementById(appId + '-whofor').value     = existingData.whofor     || '';
   }
 
   return appId;
@@ -1151,6 +1169,9 @@ async function saveAll() {
       tagline: (document.getElementById(appId + '-tagline') || {}).value || '',
       status:  (document.getElementById(appId + '-status')  || {}).value || 'live',
       visible: (document.getElementById(appId + '-visible') || {}).checked !== false,
+      problem:    (document.getElementById(appId + '-problem')    || {}).value || '',
+      whatitdoes: (document.getElementById(appId + '-whatitdoes') || {}).value || '',
+      whofor:     (document.getElementById(appId + '-whofor')     || {}).value || '',
     };
   });
 
