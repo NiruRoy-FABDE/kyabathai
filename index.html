@@ -326,13 +326,11 @@
   /* ===== PROJECT SHOWCASE ===== */
   .showcase-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
-  }
-  @media (max-width: 720px) {
-    .showcase-grid { grid-template-columns: 1fr; }
+    align-items: start;
   }
 
   .proj-card {
@@ -343,7 +341,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .proj-card:hover {
@@ -394,7 +391,7 @@
     margin-top: 10px;
   }
 
-  .proj-card-body { padding: 18px 22px; flex: 1; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; max-height: 260px; }
+  .proj-card-body { padding: 18px 22px; flex: 1; }
   .proj-block { margin-bottom: 16px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
