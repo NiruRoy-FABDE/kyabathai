@@ -299,6 +299,7 @@
     padding: 10px 0 22px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    direction: ltr;
   }
   .reels-scroll::-webkit-scrollbar { height: 8px; }
   .reels-scroll::-webkit-scrollbar-thumb { background: var(--gulal); border-radius: 8px; }
@@ -997,34 +998,34 @@
     letter-spacing: 0.5px;
   }
   .proj-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
+    width: 26px; height: 26px;
+    border-radius: 7px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
-    margin-bottom: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
     border: 2px solid var(--ink);
   }
   .proj-card-top h3 {
     font-family: var(--serif-stamp);
-    font-size: 1.05rem;
+    font-size: 0.84rem;
     font-weight: 700;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     color: var(--ink);
   }
   /* When inside a card that has an app background, text is overridden via .proj-card-top overrides above */
   .proj-card-top .domain {
     font-family: 'Courier New', monospace;
-    font-size: 0.82rem;
+    font-size: 0.62rem;
     color: var(--ink-soft);
     font-weight: 700;
   }
   .proj-tagline {
-    font-size: 0.80rem;
+    font-size: 0.64rem;
     font-weight: 700;
     color: var(--gulal);
-    margin-top: 5px;
+    margin-top: 3px;
   }
   /* alternate tagline colours per card */
   .proj-card:nth-child(3n+2) .proj-tagline { color: #7B00FF; }
@@ -1033,13 +1034,13 @@
   .proj-top-visit {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    margin-top: 5px;
-    padding: 4px 11px;
+    gap: 4px;
+    margin-top: 3px;
+    padding: 3px 9px;
     background: var(--ink);
     color: var(--cream);
     border-radius: 999px;
-    font-size: 0.70rem;
+    font-size: 0.58rem;
     font-weight: 700;
     text-decoration: none;
     transition: background 0.2s;
@@ -1048,7 +1049,7 @@
   .proj-top-visit.beta { background: var(--marigold-deep); }
 
   .proj-card-body {
-    padding: 10px 13px;
+    padding: 8px 10px;
     flex: 1;
     /* card 1 (3n+1): deep pink/magenta theme */
     background: linear-gradient(160deg, #1a0520 0%, #2d0a2e 100%);
@@ -1065,20 +1066,20 @@
   /* Body text: bright white */
   .proj-card-body .proj-block p {
     color: rgba(255,255,255,0.92) !important;
-    font-size: 0.75rem;
+    font-size: 0.60rem;
     font-weight: 500;
     line-height: 1.5;
   }
 
-  .proj-block { margin-bottom: 7px; }
+  .proj-block { margin-bottom: 5px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
-    font-size: 0.62rem;
+    font-size: 0.50rem;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     color: #FF6EB0;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     display: block;
   }
   .proj-card:nth-child(3n+2) .proj-block .label { color: #A78BFA; }
@@ -1094,9 +1095,9 @@
   .proj-block .who-tags span {
     background: rgba(255,255,255,0.12);
     color: #fff;
-    font-size: 0.68rem;
+    font-size: 0.54rem;
     font-weight: 700;
-    padding: 3px 9px;
+    padding: 2px 7px;
     border-radius: 999px;
     border: 1px solid rgba(255,255,255,0.25);
   }
@@ -1114,22 +1115,22 @@
   .beta-flag {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     background: rgba(255,140,66,0.2);
     border: 1px solid rgba(255,140,66,0.5);
     color: #FFD080;
-    font-size: 0.64rem;
+    font-size: 0.51rem;
     font-weight: 800;
-    padding: 3px 8px;
+    padding: 2px 6px;
     border-radius: 999px;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: 0.4px;
   }
   .beta-flag .blink { width: 6px; height: 6px; background: var(--marigold); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
 
   .proj-card-cta {
-    padding: 10px 14px;
+    padding: 8px 11px;
     border-top: 1px solid rgba(255,255,255,0.1);
     background: rgba(0,0,0,0.35);
   }
@@ -1137,14 +1138,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 5px;
     width: 100%;
-    padding: 9px;
+    padding: 7px;
     background: linear-gradient(135deg, #FF4D8D, #FF8C42);
     color: #fff;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 800;
-    font-size: 0.80rem;
+    font-size: 0.64rem;
     border: none;
     cursor: pointer;
     transition: all 0.2s;
@@ -1633,14 +1634,14 @@
     overflow-y: visible;
   }
   .proj-card-top {
-    min-height: 143px; /* was 260px → 45% reduction */
+    min-height: 114px; /* was 143px → further 20% reduction */
     padding-top: 0;
     padding-bottom: 0;
   }
   .app-bg-mockup {
     position: relative;
     width: 100%;
-    min-height: 110px; /* was 200px → 45% reduction */
+    min-height: 88px; /* was 110px → further 20% reduction */
     overflow: hidden;
   }
   .app-bg-mockup::after { display: none !important; }
@@ -1660,7 +1661,7 @@
     z-index: 2;
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(6px);
-    padding: 7px 12px 8px; /* was 12px 18px 14px */
+    padding: 5px 10px 6px; /* was 7px 12px 8px → further 20% reduction */
     border-top: 1px solid rgba(255,255,255,0.1);
     margin-top: -4px;
   }
@@ -1676,7 +1677,7 @@
   .mockup-bitopine,
   .mockup-efundly {
     width: 100%;
-    min-height: 110px; /* was 200px */
+    min-height: 88px; /* was 110px → further 20% reduction */
     filter: brightness(1.15) saturate(1.2);
   }
   /* section-ad-strip is always single-line nowrap scroll */</style>
@@ -3173,9 +3174,21 @@
     });
   }
   // ── RESET reels scroll to far left on every page load ──
+  // Use setTimeout to ensure dynamic cards are fully injected before resetting
+  setTimeout(function() {
+    var rs = document.getElementById('reelsScroll');
+    if (rs) {
+      rs.style.direction = 'ltr';
+      rs.scrollLeft = 0;
+      rs.scrollTo({ left: 0, behavior: 'instant' });
+    }
+  }, 0);
   window.addEventListener('load', function() {
     var rs = document.getElementById('reelsScroll');
-    if (rs) { rs.scrollLeft = 0; }
+    if (rs) {
+      rs.scrollLeft = 0;
+      rs.scrollTo({ left: 0, behavior: 'instant' });
+    }
   });
 })();
 </script>
