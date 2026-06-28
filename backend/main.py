@@ -1,0 +1,125 @@
+"""
+main.py — the FastAPI app the React site talks to.
+
+Endpoints
+  GET  /api/health              quick liveness check
+  GET  /api/feed                newest-first live feed (paginated, ?kind=video|news)
+  GET  /api/archive             everything ever ingested (?q= search, ?kind=, paginated)
+  GET  /api/stats               counts for your own monitoring
+  POST /api/explain             Claude explainer for one item ({ "id": "..."} or raw text)
+  POST /api/ingest              trigger a pull now (needs X-Ingest-Secret header)
+"""
+import os
+from contextlib import asynccontextmanager
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, Header, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+load_dotenv()
+
+import claude_ai  # noqa: E402
+import db          # noqa: E402
+import ingest      # noqa: E402
+
+INGEST_SECRET = os.environ.get("INGEST_SECRET", "")
+CORS_ORIGINS = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
+ENABLE_INPROCESS_SCHEDULER = os.environ.get("ENABLE_INPROCESS_SCHEDULER", "false").lower() == "true"
+
+_scheduler = None
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db.init_pool()
+    global _scheduler
+    if ENABLE_INPROCESS_SCHEDULER:
+        # Optional: run the pull inside the web process every 3 hours.
+        # On Render, the cleaner option is a separate Cron Job (see render.yaml).
+        from apscheduler.schedulers.background import BackgroundScheduler
+        _scheduler = BackgroundScheduler(timezone="UTC")
+        _scheduler.add_job(ingest.run, "interval", hours=3, id="ingest")
+        _scheduler.start()
+    yield
+    if _scheduler:
+        _scheduler.shutdown(wait=False)
+    db.close_pool()
+
+
+app = FastAPI(title="kyabathai API", version="2.0.0", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS or ["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
+
+# ---- security headers on every response (defence in depth) -----------------
+@app.middleware("http")
+async def security_headers(request, call_next):
+    resp = await call_next(request)
+    resp.headers["X-Content-Type-Options"] = "nosniff"
+    resp.headers["X-Frame-Options"] = "DENY"
+    resp.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return resp
+
+
+@app.get("/api/health")
+def health():
+    return {"ok": True, "ai": claude_ai.is_enabled()}
+
+
+@app.get("/api/feed")
+def feed(
+    limit: int = Query(30, ge=1, le=60),
+    offset: int = Query(0, ge=0),
+    kind: str | None = Query(None),
+):
+    return {"items": db.fetch_feed(limit=limit, offset=offset, kind=kind)}
+
+
+@app.get("/api/archive")
+def archive(
+    limit: int = Query(40, ge=1, le=60),
+    offset: int = Query(0, ge=0),
+    q: str | None = Query(None, max_length=120),
+    kind: str | None = Query(None),
+):
+    return {"items": db.fetch_archive(limit=limit, offset=offset, q=q, kind=kind)}
+
+
+@app.get("/api/stats")
+def get_stats():
+    return db.stats()
+
+
+class ExplainBody(BaseModel):
+    id: str | None = None
+    title: str | None = None
+    description: str | None = None
+    kind: str | None = "video"
+
+
+@app.post("/api/explain")
+def explain(body: ExplainBody):
+    if body.id:
+        item = db.fetch_one(body.id)
+        if not item:
+            raise HTTPException(404, "Item not found")
+        text = claude_ai.explain(
+            item.get("title", ""), item.get("description", ""), item.get("kind", "video")
+        )
+        return {"explanation": text}
+    if body.title:
+        return {"explanation": claude_ai.explain(body.title, body.description or "", body.kind or "video")}
+    raise HTTPException(400, "Provide an item id or a title.")
+
+
+@app.post("/api/ingest")
+def trigger_ingest(x_ingest_secret: str | None = Header(None)):
+    if not INGEST_SECRET or x_ingest_secret != INGEST_SECRET:
+        raise HTTPException(401, "Unauthorized")
+    return ingest.run()
