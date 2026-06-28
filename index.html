@@ -547,72 +547,307 @@
   .ad-slot.featured p { color: #C9C2D6; }
   .ad-slot.featured .ad-label { background: #2A2436; color: var(--marigold); }
 
-  /* ===== FLOATING SPARKLE AD PATCHES ===== */
+  /* ===== AD SECTION ===== */
+  .ad-section {
+    padding: 80px 6%;
+    background: linear-gradient(135deg, #0D0B14 0%, #1A0D2E 40%, #0D1A2E 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .ad-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255,77,141,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255,140,66,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .ad-section .section-head h2 { color: #fff; }
+  .ad-section .section-head p { color: #a7a9be; }
+  .ad-section .section-tag { background: rgba(255,140,66,0.15); color: var(--marigold); }
+
+  .ad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── GLOWING AD SLOT CARDS ── */
+  .ad-slot {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1.5px dashed rgba(255,140,66,0.5);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--cream);
+  }
+  .ad-slot::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,140,66,0.0), rgba(255,77,141,0.0));
+    transition: background 0.25s ease;
+    border-radius: 20px;
+  }
+  .ad-slot:hover {
+    border-color: var(--gulal);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(255,77,141,0.25), 0 0 0 1px rgba(255,77,141,0.3);
+  }
+  .ad-slot:hover::before {
+    background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,77,141,0.08));
+  }
+  .ad-slot .ad-icon {
+    font-size: 2.4rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  .ad-slot .ad-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--marigold);
+    background: rgba(255,140,66,0.12);
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .ad-slot .ad-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .ad-slot .ad-desc {
+    font-size: 0.72rem;
+    color: #a7a9be;
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 200px;
+  }
+  .ad-slot .ad-cta {
+    margin-top: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gulal);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  /* Placeholder empty slot */
+  .ad-slot.placeholder {
+    border-color: rgba(255,255,255,0.12);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .ad-slot.placeholder .ad-icon { font-size: 1.8rem; opacity: 0.4; }
+  .ad-slot.placeholder .ad-title { color: #6B6384; font-size: 0.8rem; }
+
+  /* Featured wide slot */
+  .ad-slot.featured {
+    grid-column: span 2;
+    flex-direction: row;
+    gap: 20px;
+    text-align: left;
+    border-style: solid;
+    border-color: rgba(255,140,66,0.6);
+    background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,77,141,0.06));
+  }
+  .ad-slot.featured .ad-icon { font-size: 3rem; flex-shrink: 0; }
+  .ad-slot.featured .ad-title { font-size: 1.2rem; }
+  @media (max-width: 640px) { .ad-slot.featured { grid-column: span 1; flex-direction: column; text-align: center; } }
+
+  /* ── SPARKLE AD STRIP (the floating pill bar) ── */
   .sparkle-ad-strip {
     position: relative;
-    padding: 20px 6%;
-    background: linear-gradient(135deg, #1A1625 0%, #2A1635 50%, #1A2535 100%);
+    padding: 36px 6%;
+    background: linear-gradient(135deg, #12001F 0%, #1A0B35 30%, #001220 60%, #0D001A 100%);
     overflow: hidden;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid rgba(255,140,66,0.2);
+    border-bottom: 1px solid rgba(255,77,141,0.2);
   }
+  /* animated glow sweep */
   .sparkle-ad-strip::before {
-    content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';
-    position: absolute; top: 6px; left: 0; right: 0;
-    text-align: center; font-size: 0.5rem; color: rgba(255,140,66,0.4);
-    letter-spacing: 6px; pointer-events: none;
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(255,77,141,0.07) 0%, transparent 70%);
+    animation: strip-pulse 4s ease-in-out infinite;
+    pointer-events: none;
   }
-  .sparkle-ad-strip::after {
-    content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';
-    position: absolute; bottom: 6px; left: 0; right: 0;
-    text-align: center; font-size: 0.5rem; color: rgba(255,77,141,0.4);
-    letter-spacing: 6px; pointer-events: none;
+  @keyframes strip-pulse {
+    0%,100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  .strip-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,140,66,0.6);
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
   }
   .sparkle-ad-patch {
     position: relative;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, rgba(255,140,66,0.12), rgba(255,77,141,0.12));
-    border: 1.5px solid rgba(255,140,66,0.35);
+    background: linear-gradient(135deg, rgba(255,140,66,0.15), rgba(255,77,141,0.15));
+    border: 1.5px solid rgba(255,140,66,0.5);
     border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 0.72rem;
+    padding: 10px 22px;
+    font-size: 0.78rem;
     font-weight: 700;
-    color: var(--cream);
+    color: #fff;
     text-decoration: none;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(4px);
+    transition: all 0.22s ease;
     animation: patch-float 3s ease-in-out infinite;
+    white-space: nowrap;
   }
-  .sparkle-ad-patch:nth-child(2) { animation-delay: 0.5s; }
-  .sparkle-ad-patch:nth-child(3) { animation-delay: 1s; }
-  .sparkle-ad-patch:nth-child(4) { animation-delay: 1.5s; }
-  .sparkle-ad-patch:nth-child(5) { animation-delay: 2s; }
-  .sparkle-ad-patch:nth-child(6) { animation-delay: 2.5s; }
+  .sparkle-ad-patch:nth-child(2) { animation-delay: 0.4s; }
+  .sparkle-ad-patch:nth-child(3) { animation-delay: 0.8s; }
+  .sparkle-ad-patch:nth-child(4) { animation-delay: 1.2s; }
+  .sparkle-ad-patch:nth-child(5) { animation-delay: 1.6s; }
+  .sparkle-ad-patch:nth-child(6) { animation-delay: 2.0s; }
+  .sparkle-ad-patch:nth-child(7) { animation-delay: 2.4s; }
+  .sparkle-ad-patch:nth-child(8) { animation-delay: 2.8s; }
   @keyframes patch-float {
-    0%,100% { transform: translateY(0); box-shadow: 0 0 8px rgba(255,140,66,0.2); }
-    50% { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(255,77,141,0.35); }
+    0%,100% { transform: translateY(0px); box-shadow: 0 0 10px rgba(255,140,66,0.25); }
+    50% { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(255,77,141,0.45); }
   }
   .sparkle-ad-patch:hover {
-    background: linear-gradient(135deg, rgba(255,140,66,0.3), rgba(255,77,141,0.3));
-    border-color: var(--gulal);
-    transform: translateY(-4px) scale(1.04);
+    background: linear-gradient(135deg, rgba(255,77,141,0.5), rgba(255,140,66,0.4));
+    border-color: #FF4D8D;
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 8px 28px rgba(255,77,141,0.5);
     color: #fff;
   }
   .sparkle-ad-patch .patch-spark {
-    font-size: 0.9rem;
+    font-size: 1rem;
     animation: sparkle-spin 2s ease-in-out infinite;
   }
   .sparkle-ad-patch.empty {
     border-style: dashed;
-    opacity: 0.45;
+    opacity: 0.35;
     pointer-events: none;
     font-size: 0.65rem;
-    color: #9D94B0;
+    color: #6B6384;
+  }
+
+  /* ===== SIDE SPARKLE AD PANELS (hero + reels) ===== */
+  .hero {
+    /* override to allow side panels */
+    overflow: visible;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Left and right floating column panels inside hero */
+  .hero-side-ads {
+    position: absolute;
+    top: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .hero-side-ads.left  { left: 1.5%; align-items: flex-start; }
+  .hero-side-ads.right { right: 1.5%; align-items: flex-end; }
+
+  .side-ad-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(135deg, rgba(255,140,66,0.18), rgba(255,77,141,0.18));
+    border: 1.5px solid rgba(255,140,66,0.55);
+    border-radius: 999px;
+    padding: 8px 16px 8px 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    transition: all 0.22s ease;
+    pointer-events: all;
+    box-shadow: 0 2px 12px rgba(255,77,141,0.15);
+    animation: side-float 4s ease-in-out infinite;
+  }
+  .side-ad-pill:nth-child(2) { animation-delay: 0.7s; }
+  .side-ad-pill:nth-child(3) { animation-delay: 1.4s; }
+  .side-ad-pill:nth-child(4) { animation-delay: 2.1s; }
+  @keyframes side-float {
+    0%,100% { transform: translateY(0px); box-shadow: 0 2px 12px rgba(255,77,141,0.15); }
+    50%      { transform: translateY(-6px); box-shadow: 0 8px 22px rgba(255,77,141,0.35); }
+  }
+  .side-ad-pill:hover {
+    background: linear-gradient(135deg, rgba(255,77,141,0.45), rgba(255,140,66,0.35));
+    border-color: var(--gulal);
+    color: #fff;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(255,77,141,0.4);
+  }
+  .side-ad-pill .pill-icon {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF8C42, #FF4D8D);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+  .side-ad-pill .pill-text { line-height: 1.2; }
+  .side-ad-pill .pill-text strong { display: block; font-size: 0.66rem; }
+  .side-ad-pill .pill-text span { font-size: 0.56rem; opacity: 0.7; font-weight: 500; }
+
+  /* Reels section side ad panels */
+  .reels-section {
+    position: relative;
+  }
+  .reels-side-ads {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 5;
+  }
+  .reels-side-ads.left  { left: 0.8%; align-items: flex-start; }
+  .reels-side-ads.right { right: 0.8%; align-items: flex-end; }
+
+  /* dark variant for the dark reels bg */
+  .side-ad-pill.dark {
+    background: linear-gradient(135deg, rgba(255,140,66,0.15), rgba(255,77,141,0.15));
+    border-color: rgba(255,140,66,0.5);
+    color: #fff;
+  }
+  .side-ad-pill.dark:hover {
+    background: linear-gradient(135deg, rgba(255,77,141,0.5), rgba(255,140,66,0.4));
+    color: #fff;
+  }
+
+  @media (max-width: 1100px) {
+    .hero-side-ads, .reels-side-ads { display: none; }
   }
 
   /* ===== FOOTER ===== */
@@ -714,20 +949,95 @@
   <span class="sticker s3" aria-hidden="true">✨</span>
   <span class="sticker s4" aria-hidden="true">💡</span>
 
-  <div class="hero-eyebrow"><span class="blink"></span> Smart hacks something worth your time</div>
+  <!-- LEFT SIDE AD PILLS -->
+  <div class="hero-side-ads left" id="heroAdsLeft">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚡</div>
+      <div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
 
-  <h1>Internet ka sabse <span class="highlight">bawaal</span> stuff, <br> AI Tools & Apps <span class="highlight2"> life hacks</span> for all.</h1>
+  <!-- RIGHT SIDE AD PILLS -->
+  <div class="hero-side-ads right" id="heroAdsRight">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎓</div>
+      <div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
 
-  <p class="sub">Useful finds, new techs, "wow kya baat hai." daily hacks, useful platforms, AI Tools, Learning, Business ideas.</p>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="blink"></span> Smart hacks something worth your time</div>
 
-  <div class="hero-ctas">
-    <a href="#reels" class="btn btn-primary">wow kya baat hai 👇</a>
-    <a href="#showcase" class="btn btn-secondary">life hacks and full entertainment</a>
+    <h1>Internet ka sabse <span class="highlight">bawaal</span> stuff, <br> AI Tools & Apps <span class="highlight2"> life hacks</span> for all.</h1>
+
+    <p class="sub">Useful finds, new techs, "wow kya baat hai." daily hacks, useful platforms, AI Tools, Learning, Business ideas.</p>
+
+    <div class="hero-ctas">
+      <a href="#reels" class="btn btn-primary">wow kya baat hai 👇</a>
+      <a href="#showcase" class="btn btn-secondary">life hacks and full entertainment</a>
+    </div>
   </div>
 </header>
 
 <!-- ===== REELS / STORIES SECTION ===== -->
 <section class="section reels-section" id="reels">
+
+  <!-- LEFT SIDE ADS (dark variant) -->
+  <div class="reels-side-ads left">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
+
+  <!-- RIGHT SIDE ADS (dark variant) -->
+  <div class="reels-side-ads right">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
+
   <div class="section-head">
     <span class="section-tag jade" style="background:#2A2436; color:var(--jade);">Daily Wow</span>
     <h2>Stuff you won't stop seeing and make you say it loud kya bat hai</h2>
@@ -1304,11 +1614,11 @@
   </div>
 </section>
 
-<!-- ===== SPARKLE AD STRIP ===== -->
+<!-- ===== SPARKLE FLOATING AD STRIP ===== -->
 <div class="sparkle-ad-strip" id="sparkleAdStrip">
-  <!-- Static placeholders — replaced by admin-saved ads via Supabase -->
+  <div class="strip-label">✦ Explore More Awesome Sites ✦</div>
   <a href="https://madaix.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-1">
-    <span class="patch-spark">✦</span> <span>MADAIX — AI Ad Campaigns</span>
+    <span class="patch-spark">🎯</span> <span>MADAIX — AI Ad Campaigns</span>
   </a>
   <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-2">
     <span class="patch-spark">⚡</span> <span>Live Setup — Algo Trading</span>
@@ -1325,7 +1635,75 @@
   <a href="https://efundly.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-6">
     <span class="patch-spark">✅</span> <span>Efundly — Find Funding Fast</span>
   </a>
+  <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-7">
+    <span class="patch-spark">🎓</span> <span>AIverse Campus — Learn AI</span>
+  </a>
+  <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-8">
+    <span class="patch-spark">📈</span> <span>Dhantron — Options Trading</span>
+  </a>
 </div>
+
+<!-- ===== AD / PROMOTE SECTION ===== -->
+<section class="section ad-section" id="ads">
+  <div class="section-head">
+    <span class="section-tag">✦ Promote</span>
+    <h2>Advertise Here — Reach the Right People</h2>
+    <p>Place your brand, product, or website right in front of curious, tech-savvy visitors. Add slots from your admin panel.</p>
+  </div>
+
+  <div class="ad-grid" id="adGrid">
+
+    <a href="https://kyabathai.com" class="ad-slot featured" id="ad-feat-1">
+      <div class="ad-icon">✦</div>
+      <div>
+        <div class="ad-label">Featured Sponsor</div>
+        <div class="ad-title">Your Brand Here — Premium Spot</div>
+        <div class="ad-desc">This premium wide slot is yours. Add your site link, icon, title and description from the admin panel.</div>
+        <div class="ad-cta">Get this spot →</div>
+      </div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-1">
+      <div class="ad-icon">🚀</div>
+      <div class="ad-label">Ad Slot 1</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Short description of your product or service — editable from /admin panel.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-2">
+      <div class="ad-icon">💡</div>
+      <div class="ad-label">Ad Slot 2</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Add your link and description from the kyabathai.com/admin panel in seconds.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-3">
+      <div class="ad-icon">⚡</div>
+      <div class="ad-label">Ad Slot 3</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Update this slot any time using the Promote tab in your admin dashboard.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-4">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-5">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-6">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+  </div>
+</section>
 
 <!-- ===== FOOTER ===== -->
 <footer>
@@ -1557,6 +1935,79 @@
         newPatch.innerHTML = '<span class="patch-spark">' + (ad.icon || '✦') + '</span> <span>' + (ad.label || ad.url) + '</span>';
         strip.appendChild(newPatch);
       }
+    });
+  }
+
+  // ── AD SLOTS from admin ──
+  if (c.adSlots && Array.isArray(c.adSlots)) {
+    c.adSlots.forEach((ad, i) => {
+      if (!ad || !ad.url) return;
+      const el = i === 0
+        ? document.getElementById('ad-feat-1')
+        : document.getElementById('ad-slot-' + i);
+      if (!el) return;
+      el.href = ad.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      const icon = el.querySelector('.ad-icon');
+      const title = el.querySelector('.ad-title');
+      const desc = el.querySelector('.ad-desc');
+      const label = el.querySelector('.ad-label');
+      if (icon && ad.icon) icon.textContent = ad.icon;
+      if (title && ad.title) title.textContent = ad.title;
+      if (desc && ad.desc) desc.textContent = ad.desc;
+      if (label && ad.label) label.textContent = ad.label;
+      el.classList.remove('placeholder');
+    });
+  }
+
+  // ── AD SLOTS from admin ──
+  if (c.adSlots && Array.isArray(c.adSlots)) {
+    c.adSlots.forEach((ad, i) => {
+      if (!ad || !ad.url) return;
+      const el = i === 0
+        ? document.getElementById('ad-feat-1')
+        : document.getElementById('ad-slot-' + i);
+      if (!el) return;
+      el.href = ad.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      const icon = el.querySelector('.ad-icon');
+      const title = el.querySelector('.ad-title');
+      const desc = el.querySelector('.ad-desc');
+      const label = el.querySelector('.ad-label');
+      if (icon && ad.icon) icon.textContent = ad.icon;
+      if (title && ad.title) title.textContent = ad.title;
+      if (desc && ad.desc) desc.textContent = ad.desc;
+      if (label && ad.label) label.textContent = ad.label;
+      el.classList.remove('placeholder');
+    });
+  }
+
+  // ── SIDE AD PILLS from admin (hero + reels) ──
+  if (c.sideAds && Array.isArray(c.sideAds)) {
+    const containers = [
+      document.getElementById('heroAdsLeft'),
+      document.getElementById('heroAdsRight'),
+    ];
+    // Split sideAds: first half → left, second half → right
+    const half = Math.ceil(c.sideAds.length / 2);
+    [c.sideAds.slice(0, half), c.sideAds.slice(half)].forEach((group, ci) => {
+      const container = containers[ci];
+      if (!container) return;
+      const existing = container.querySelectorAll('.side-ad-pill');
+      group.forEach((ad, i) => {
+        if (!ad || !ad.url) return;
+        const el = existing[i];
+        if (!el) return;
+        el.href = ad.url;
+        const iconEl = el.querySelector('.pill-icon');
+        const nameEl = el.querySelector('.pill-text strong');
+        const subEl  = el.querySelector('.pill-text span');
+        if (iconEl && ad.icon) iconEl.textContent = ad.icon;
+        if (nameEl && ad.name) nameEl.textContent = ad.name;
+        if (subEl  && ad.sub)  subEl.textContent  = ad.sub;
+      });
     });
   }
 
