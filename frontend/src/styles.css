@@ -1905,3 +1905,36 @@
 .back-home {
   display: inline-block; margin-bottom: 20px; font-weight: 800; color: var(--marigold-deep);
 }
+
+/* ===== MANUAL BLOCK CARDS ===== */
+.manual-block {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  background: #111827;
+  border: 2px solid rgba(255,140,66,0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.manual-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(255,140,66,0.25);
+  border-color: var(--marigold);
+}
+.fc-doc-placeholder,
+.fc-ig-placeholder,
+.fc-app-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #1a1a2e, #0d1117);
+}
+.fc-ig-placeholder {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+}
