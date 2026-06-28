@@ -123,3 +123,41 @@ def trigger_ingest(x_ingest_secret: str | None = Header(None)):
     if not INGEST_SECRET or x_ingest_secret != INGEST_SECRET:
         raise HTTPException(401, "Unauthorized")
     return ingest.run()
+
+
+# ── Manual blocks (admin panel) ──────────────────────────────────────────────
+
+class BlockBody(BaseModel):
+    block_type: str
+    title: str
+    url: str
+    thumbnail: str | None = None
+    caption: str | None = None
+    description: str | None = None
+    source_label: str | None = None
+    sort_order: int = 0
+    visible: bool = True
+
+
+@app.get("/api/blocks")
+def get_blocks():
+    return {"items": db.fetch_blocks()}
+
+
+@app.post("/api/blocks")
+def create_block(body: BlockBody, x_ingest_secret: str | None = Header(None)):
+    if not INGEST_SECRET or x_ingest_secret != INGEST_SECRET:
+        raise HTTPException(401, "Unauthorized")
+    valid_types = {"youtube", "instagram", "news", "document", "app"}
+    if body.block_type not in valid_types:
+        raise HTTPException(400, f"block_type must be one of {valid_types}")
+    block_id = db.insert_block(body.model_dump())
+    return {"id": block_id, "ok": True}
+
+
+@app.delete("/api/blocks/{block_id}")
+def delete_block(block_id: str, x_ingest_secret: str | None = Header(None)):
+    if not INGEST_SECRET or x_ingest_secret != INGEST_SECRET:
+        raise HTTPException(401, "Unauthorized")
+    db.delete_block(block_id)
+    return {"ok": True}

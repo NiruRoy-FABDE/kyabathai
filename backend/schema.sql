@@ -55,3 +55,31 @@ create policy "public can read feed"
 
 -- NOTE: no insert/update/delete policy for anon → the public can never write.
 -- The backend connects with the service role and is exempt from RLS.
+
+-- ---------------------------------------------------------------------------
+--  manual_blocks  —  content added manually via /admin panel
+--  block_type: 'youtube' | 'instagram' | 'news' | 'document' | 'app'
+-- ---------------------------------------------------------------------------
+create table if not exists manual_blocks (
+  id           uuid primary key default gen_random_uuid(),
+  block_type   text not null check (block_type in ('youtube','instagram','news','document','app')),
+  title        text not null,
+  url          text not null,
+  thumbnail    text,
+  caption      text,
+  description  text,
+  source_label text,
+  sort_order   int not null default 0,
+  visible      boolean not null default true,
+  created_at   timestamptz not null default now()
+);
+
+create index if not exists manual_blocks_visible_idx on manual_blocks (visible, sort_order);
+
+alter table manual_blocks enable row level security;
+
+drop policy if exists "public can read blocks" on manual_blocks;
+create policy "public can read blocks"
+  on manual_blocks for select
+  to anon, authenticated
+  using (visible = true);

@@ -166,3 +166,42 @@ def archive_old(keep_live: int = 60) -> int:
     with get_conn() as conn:
         cur = conn.execute(sql, [keep_live])
         return cur.rowcount
+
+
+# ── Manual blocks ─────────────────────────────────────────────────────────────
+
+def fetch_blocks() -> list[dict]:
+    with get_conn() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("""
+                SELECT id, block_type, title, url, thumbnail, caption,
+                       description, source_label, sort_order, visible, created_at
+                FROM manual_blocks
+                WHERE visible = true
+                ORDER BY sort_order ASC, created_at DESC
+            """)
+            rows = cur.fetchall()
+    return [dict(r) for r in rows]
+
+
+def insert_block(data: dict) -> str:
+    with get_conn() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute("""
+                INSERT INTO manual_blocks
+                  (block_type, title, url, thumbnail, caption, description, source_label, sort_order, visible)
+                VALUES
+                  (%(block_type)s, %(title)s, %(url)s, %(thumbnail)s, %(caption)s,
+                   %(description)s, %(source_label)s, %(sort_order)s, %(visible)s)
+                RETURNING id
+            """, data)
+            row = cur.fetchone()
+        conn.commit()
+    return str(row["id"])
+
+
+def delete_block(block_id: str) -> None:
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM manual_blocks WHERE id = %s", (block_id,))
+        conn.commit()
