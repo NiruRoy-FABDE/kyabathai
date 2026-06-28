@@ -1,18 +1,65 @@
-// LiveFeed.jsx — replaces the old reels section. Auto-ingested viral videos +
-// news, newest first, vertically scrollable, with filters and "load more".
+// LiveFeed.jsx — auto-ingested viral videos + news + manually added blocks
 import { useCallback, useEffect, useState } from "react";
-import { fetchFeed, isConfigured } from "../lib/api.js";
+import { fetchFeed, fetchBlocks, isConfigured } from "../lib/api.js";
 import FeedCard from "./FeedCard.jsx";
 
 const PAGE = 12;
 
+// ── Manual block card component ─────────────────────────────────────────────
+function ManualBlock({ block }) {
+  const typeIcon = { youtube: "▶", instagram: "📸", news: "📰", document: "📄", app: "🚀" };
+  const typeLabel = { youtube: "YouTube", instagram: "Instagram", news: "News", document: "Document", app: "App" };
+
+  function getYTThumb(url) {
+    const m = url.match(/(?:shorts\/|youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{11})/);
+    return m ? `https://i.ytimg.com/vi/${m[1]}/hqdefault.jpg` : null;
+  }
+
+  const thumb = block.thumbnail || (block.block_type === "youtube" ? getYTThumb(block.url) : null);
+  const icon = typeIcon[block.block_type] || "•";
+  const label = typeLabel[block.block_type] || block.block_type;
+
+  const docIcon = block.url?.endsWith(".pdf") ? "📕" : block.url?.endsWith(".docx") ? "📘" : "📄";
+
+  return (
+    <a href={block.url} target="_blank" rel="noopener noreferrer" className="feed-card manual-block">
+      <div className="fc-thumb">
+        {block.block_type === "document" ? (
+          <div className="fc-doc-placeholder">{docIcon}</div>
+        ) : thumb ? (
+          <img src={thumb} alt={block.title} />
+        ) : block.block_type === "instagram" ? (
+          <div className="fc-ig-placeholder">📸</div>
+        ) : (
+          <div className="fc-app-placeholder">{block.block_type === "app" ? "🚀" : "📰"}</div>
+        )}
+        <span className="fc-kind-badge">{icon} {label}</span>
+      </div>
+      <div className="fc-body">
+        <p className="fc-title">{block.title}</p>
+        {block.caption && <p className="fc-desc">{block.caption}</p>}
+        {block.description && !block.caption && <p className="fc-desc">{block.description}</p>}
+        <span className="fc-source">{block.source_label || label}</span>
+      </div>
+    </a>
+  );
+}
+
+// ── Main LiveFeed ────────────────────────────────────────────────────────────
 export default function LiveFeed() {
-  const [items, setItems] = useState([]);
-  const [kind, setKind] = useState(null);   // null | 'video' | 'news'
-  const [offset, setOffset] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
-  const [error, setError] = useState("");
+  const [items, setItems]       = useState([]);
+  const [blocks, setBlocks]     = useState([]);
+  const [kind, setKind]         = useState(null);
+  const [offset, setOffset]     = useState(0);
+  const [loading, setLoading]   = useState(false);
+  const [done, setDone]         = useState(false);
+  const [error, setError]       = useState("");
+
+  // Load manual blocks once
+  useEffect(() => {
+    if (!isConfigured()) return;
+    fetchBlocks().then(d => setBlocks(d.items || [])).catch(() => {});
+  }, []);
 
   const load = useCallback(async (reset) => {
     if (loading) return;
@@ -32,7 +79,6 @@ export default function LiveFeed() {
     }
   }, [loading, offset, kind]);
 
-  // (re)load whenever the filter changes
   useEffect(() => {
     if (!isConfigured()) return;
     setItems([]); setOffset(0); setDone(false);
@@ -50,6 +96,15 @@ export default function LiveFeed() {
       </button>
     );
   }
+
+  // Filter manual blocks by kind selector
+  const filteredBlocks = kind
+    ? blocks.filter(b => {
+        if (kind === "video") return b.block_type === "youtube" || b.block_type === "instagram";
+        if (kind === "news")  return b.block_type === "news";
+        return true;
+      })
+    : blocks;
 
   return (
     <section className="section feed-section" id="reels">
@@ -78,27 +133,24 @@ export default function LiveFeed() {
         {!isConfigured() && (
           <div className="feed-empty">
             <p><strong>Feed not connected yet.</strong></p>
-            <p>
-              Set <code>VITE_API_BASE</code> in Netlify to your Render backend URL,
-              then redeploy. Until then the rest of your site works exactly as before.
-            </p>
+            <p>Set <code>VITE_API_BASE</code> in Netlify to your Render backend URL, then redeploy.</p>
           </div>
         )}
 
+        {/* Manual blocks shown at top */}
+        {isConfigured() && filteredBlocks.map(b => <ManualBlock key={b.id} block={b} />)}
+
+        {/* Auto-ingested items */}
         {isConfigured() && items.map((it) => <FeedCard key={it.id} item={it} />)}
 
-        {isConfigured() && loading && items.length === 0 && (
+        {isConfigured() && loading && items.length === 0 && filteredBlocks.length === 0 && (
           <div className="feed-loading"><span className="spin" /> &nbsp;Loading the latest…</div>
         )}
 
-        {isConfigured() && !loading && items.length === 0 && !error && (
+        {isConfigured() && !loading && items.length === 0 && filteredBlocks.length === 0 && !error && (
           <div className="feed-empty">
             <p><strong>The feed is empty for now.</strong></p>
-            <p>
-              It fills automatically once the ingest job runs (every 3 hours), or instantly
-              when you trigger <code>/api/ingest</code>. Trending videos and news will appear
-              here, newest first.
-            </p>
+            <p>Add blocks from <strong>kyabathai.com/admin</strong> or wait for the auto-ingest to run.</p>
           </div>
         )}
 
