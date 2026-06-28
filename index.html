@@ -1642,6 +1642,7 @@
     min-height: 114px; /* was 143px → further 20% reduction */
     padding-top: 0;
     padding-bottom: 0;
+    background: #0d0d1a !important; /* kill the white bleed — dark fallback behind all mockups */
   }
   .app-bg-mockup {
     position: relative;
@@ -2678,12 +2679,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 12</span>
-        <div class="proj-icon tint-1">🌐</div>
-        <h3>Eaiin</h3>
-        <div class="domain">eaiin.store</div>
-        <p class="proj-tagline">Your domain is your most powerful asset — own it properly.</p>
-        <a href="https://eaiin.store" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 12</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">🌐</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Eaiin</h3>
+              <div class="domain">eaiin.store</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Your domain is your most powerful asset — own it properly.</p>
+          <a href="https://eaiin.store" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2720,12 +2727,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 13</span>
-        <div class="proj-icon tint-2">🧵</div>
-        <h3>Drapyfy</h3>
-        <div class="domain">drapyfy.com</div>
-        <p class="proj-tagline">Fashion and style, draped the way you actually want it.</p>
-        <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 13</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🧵</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Drapyfy</h3>
+              <div class="domain">drapyfy.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Fashion and style, draped the way you actually want it.</p>
+          <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -3207,12 +3220,18 @@
 
       article.innerHTML = `
         <div class="proj-card-top" style="padding:0;">
-          <span class="proj-id">№ ${String(num).padStart(2,'0')}</span>
-          <div class="proj-icon ${tint}">${a.icon || '🚀'}</div>
-          <h3>${a.name}</h3>
-          <div class="domain">${a.domain || ''}</div>
-          <p class="proj-tagline">${a.tagline || ''}</p>
-          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-top-visit${a.status === 'beta' ? ' beta' : ''}">${a.status === 'beta' ? 'Request Access →' : 'Visit Site →'}</a>` : ''}
+          <div class="proj-card-top-meta">
+            <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${String(num).padStart(2,'0')}</span>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div class="proj-icon ${tint}" style="margin-bottom:0;">${a.icon || '🚀'}</div>
+              <div>
+                <h3 style="margin-bottom:2px;">${a.name}</h3>
+                <div class="domain">${a.domain || ''}</div>
+              </div>
+            </div>
+            <p class="proj-tagline">${a.tagline || ''}</p>
+            ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-top-visit${a.status === 'beta' ? ' beta' : ''}">${a.status === 'beta' ? 'Request Access →' : 'Visit Site →'}</a>` : ''}
+          </div>
         </div>
         <div class="proj-card-body">
           ${a.status === 'beta' ? '<span class="beta-flag"><span class="blink"></span>Private Beta</span>' : ''}
