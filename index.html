@@ -1707,6 +1707,42 @@
       radial-gradient(ellipse at 60% 80%, rgba(255,140,66,0.10) 0%, transparent 50%);
   }
 
+  /* ===== MOCKUP IDENTITY OVERLAY — icon+name strip at bottom of any mockup ===== */
+  .mockup-id-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 5px 8px 6px;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 70%, transparent 100%);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .mockup-id-overlay .mid-icon { font-size: 1.5rem; line-height: 1; }
+  .mockup-id-overlay .mid-name {
+    font-size: 0.68rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  }
+  .mockup-id-overlay .mid-badge {
+    font-size: 0.38rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  /* Ensure parent mockup divs are position:relative so overlay can anchor */
+  .mockup-madaix, .mockup-tuftub, .mockup-airunly, .mockup-bitopine,
+  .mockup-jurissetu, .mockup-boardsol, .mockup-efundly, .mockup-livesetup,
+  .mockup-dhantron, .mockup-fingoal { position: relative; overflow: hidden; }
+
   /* ===== GOLD TEXT: Replace all hazy white on dark backgrounds ===== */
   .ticker span { color: var(--gold) !important; }
   .ticker span.pink { color: var(--gold) !important; }
@@ -2140,7 +2176,8 @@
             <div class="mx-input">Enter access password</div>
             <div class="mx-btn">Enter MADAIX →</div>
             <div class="mx-copy">© 2026 MADAIX · Private Beta</div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🎯</div><div class="mid-name">MADAIX</div><div class="mid-badge">AI Ad Campaigns Platform</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 01</span>
@@ -2244,7 +2281,8 @@
                 <div class="tt-desc">AI avatar presenter</div>
               </div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🧰</div><div class="mid-name">Tuftub</div><div class="mid-badge">The right AI tool for every task</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 03</span>
@@ -2334,7 +2372,8 @@
               <div class="ar-step active"><div class="dot"></div>Summarising findings…</div>
               <div class="ar-step"><div class="dot"></div>Prepare report</div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🤖</div><div class="mid-name">Airunly</div><div class="mid-badge">Tell it what to do. Watch AI do the rest.</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 05</span>
@@ -2372,7 +2411,7 @@
     <article class="proj-card">
       <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
-          <div class="mockup-bitopine" style="background:linear-gradient(150deg,#0d1a0d,#1a2e1a);">
+          <div class="mockup-bitopine" style="background:linear-gradient(150deg,#0d1a0d,#1a2e1a);position:relative;overflow:hidden;">
             <div class="bp-logo" style="color:#4ade80;">E<span style="color:#86efac;">aiin</span></div>
             <div style="font-size:0.3rem;color:#888;letter-spacing:1px;">Domain Intelligence Platform</div>
             <div class="bp-tags">
@@ -2380,6 +2419,7 @@
               <div class="bp-tag" style="color:#4ade80;border-color:rgba(74,222,128,0.25);">Brand Names</div>
               <div class="bp-tag" style="color:#4ade80;border-color:rgba(74,222,128,0.25);">Valuation</div>
             </div>
+            <div class="mockup-id-overlay"><div class="mid-icon">🌐</div><div class="mid-name">Eaiin</div><div class="mid-badge">Domain Intelligence Platform</div></div>
           </div>
         </div>
         <div class="proj-card-top-meta">
@@ -2428,6 +2468,7 @@
               <div class="bp-tag">SaaS Builds</div>
               <div class="bp-tag">UI/UX</div>
             </div>
+            <div class="mockup-id-overlay"><div class="mid-icon">💻</div><div class="mid-name">Bitopine</div><div class="mid-badge">Digital Excellence, Delivered</div></div>
           </div>
         </div>
         <div class="proj-card-top-meta">
@@ -2471,7 +2512,8 @@
             <div class="js-q">"Can my landlord increase rent mid-tenancy without notice?"</div>
             <div class="js-ans">Under the Rent Control Act, landlords generally cannot increase rent during a fixed lease period without mutual consent. You have the right to…</div>
             <div class="js-badge" style="margin-top:4px;">📄 Not legal advice · Consult a lawyer</div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">⚖️</div><div class="mid-name">Jurissetu</div><div class="mid-badge">Legal Q&A · AI-Powered</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 08</span>
@@ -2515,7 +2557,8 @@
             <div class="bs-row"><span>Budget Allocation FY27</span><span class="bs-status approved">Approved</span></div>
             <div class="bs-row"><span>New Director Appointment</span><span class="bs-status pending">Pending</span></div>
             <div class="bs-row"><span>Compliance Audit Report</span><span class="bs-status pending">Pending</span></div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🗂️</div><div class="mid-name">BoardSol</div><div class="mid-badge">Board Management · Modern India</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 09</span>
@@ -2606,7 +2649,8 @@
               <div class="ef-name">Angel Network India</div>
               <div class="ef-amt">₹1Cr+</div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">✅</div><div class="mid-name">Efundly</div><div class="mid-badge">Find the right funding, fast</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 11</span>
@@ -2677,7 +2721,8 @@
               <div class="ls-signin-btn">Sign In →</div>
               <div class="ls-register">New here? <span>Register for free 15-day trial</span></div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">⚡</div><div class="mid-name">Live Setup</div><div class="mid-badge">Algo Trading · Multi-Broker</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 12</span>
@@ -2725,7 +2770,8 @@
               <div class="dh-row"><span class="ts">09:16:05</span> <span class="sel">[SELL]</span> 57500 CE · qty 30</div>
               <div class="dh-row"><span class="ts">09:16:05</span> <span class="buy">[BUY]</span> 57800 CE · qty 30</div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">📈</div><div class="mid-name">Dhantron</div><div class="mid-badge">Automated Options Trading</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 13</span>
@@ -2776,7 +2822,8 @@
               <div class="fg-label"><span>🛡️ Emergency Fund</span><span style="color:#facc15">91%</span></div>
               <div class="fg-bar"><div class="fg-fill" style="width:91%;background:linear-gradient(90deg,#facc15,#4ade80)"></div></div>
             </div>
-          </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">💰</div><div class="mid-name">FinGoalInvesto</div><div class="mid-badge">Your money goals, mapped & tracked</div></div></div>
         </div>
         <div class="proj-card-top-meta">
           <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 14</span>
