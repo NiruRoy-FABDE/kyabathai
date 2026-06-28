@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyabathai Admin Panel</title>
+<style>
+  :root {
+    --ink: #1A1625; --cream: #FFF9F2; --marigold: #FF8C42;
+    --gulal: #FF4D8D; --jade: #00B894; --gold: #FFD700;
+    --card-bg: #0d1117; --border: rgba(255,255,255,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a14; color:#e0e0e0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; min-height:100vh; }
+  .top-bar { background:#111; border-bottom:2px solid var(--gulal); padding:16px 24px; display:flex; justify-content:space-between; align-items:center; }
+  .top-bar h1 { font-size:1.2rem; color:var(--gold); }
+  .top-bar .logo { font-size:0.85rem; color:#888; }
+  .tabs { display:flex; gap:0; border-bottom:2px solid #222; padding:0 24px; background:#0d0d1a; }
+  .tab { padding:12px 20px; font-size:0.85rem; font-weight:700; cursor:pointer; border-bottom:3px solid transparent; color:#666; transition:all 0.2s; }
+  .tab:hover { color:#aaa; }
+  .tab.active { color:var(--gold); border-color:var(--gold); }
+  .panel { display:none; padding:24px; max-width:900px; margin:0 auto; }
+  .panel.active { display:block; }
+  .card { background:#111827; border:1px solid #222; border-radius:12px; padding:20px; margin-bottom:16px; }
+  .card h3 { font-size:0.95rem; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  label { display:block; font-size:0.75rem; color:#888; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; margin-top:12px; }
+  label:first-child { margin-top:0; }
+  input, textarea, select { width:100%; background:#0d1117; border:1px solid #333; border-radius:8px; padding:10px 12px; color:#e0e0e0; font-size:0.85rem; font-family:inherit; }
+  input:focus, textarea:focus, select:focus { outline:none; border-color:var(--marigold); }
+  textarea { resize:vertical; min-height:70px; }
+  .row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .btn { display:inline-flex; align-items:center; gap:6px; padding:10px 18px; border-radius:8px; font-weight:700; font-size:0.82rem; border:none; cursor:pointer; transition:all 0.2s; }
+  .btn-primary { background:var(--gulal); color:#fff; }
+  .btn-primary:hover { filter:brightness(1.15); }
+  .btn-danger { background:#7f1d1d; color:#fca5a5; }
+  .btn-danger:hover { background:#991b1b; }
+  .btn-sm { padding:6px 12px; font-size:0.75rem; }
+  .mt { margin-top:14px; }
+  .status { padding:8px 14px; border-radius:6px; font-size:0.82rem; font-weight:600; margin-top:10px; display:none; }
+  .status.ok { background:rgba(0,184,148,0.15); color:var(--jade); border:1px solid rgba(0,184,148,0.3); display:block; }
+  .status.err { background:rgba(255,77,141,0.12); color:var(--gulal); border:1px solid rgba(255,77,141,0.3); display:block; }
+  .block-list { margin-top:20px; }
+  .block-item { background:#0d1117; border:1px solid #222; border-radius:8px; padding:14px 16px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+  .block-item .bi-info { flex:1; }
+  .block-item .bi-type { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.6px; color:var(--marigold); margin-bottom:4px; }
+  .block-item .bi-title { font-size:0.9rem; font-weight:700; color:#e0e0e0; margin-bottom:2px; }
+  .block-item .bi-url { font-size:0.72rem; color:#555; word-break:break-all; }
+  .type-badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:0.65rem; font-weight:800; text-transform:uppercase; }
+  .type-youtube { background:rgba(255,0,0,0.15); color:#f87171; }
+  .type-instagram { background:rgba(168,85,247,0.15); color:#c084fc; }
+  .type-news { background:rgba(255,140,66,0.15); color:var(--marigold); }
+  .type-document { background:rgba(0,184,148,0.15); color:var(--jade); }
+  .type-app { background:rgba(255,215,0,0.12); color:var(--gold); }
+  .empty { text-align:center; color:#444; padding:40px; font-size:0.9rem; }
+  .hint { font-size:0.75rem; color:#555; margin-top:4px; }
+  .api-cfg { background:#0d1117; border:1px solid #333; border-radius:8px; padding:14px; margin-bottom:20px; }
+  .api-cfg .api-row { display:flex; gap:8px; align-items:center; }
+  .api-cfg input { flex:1; }
+  .api-cfg .btn { flex-shrink:0; }
+  .saved-ok { color:var(--jade); font-size:0.75rem; margin-left:8px; display:none; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>🎛️ Kyabathai Admin Panel</h1>
+  <span class="logo">kyabathai.com/admin</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('add',this)">➕ Add Block</div>
+  <div class="tab" onclick="switchTab('manage',this)">📋 Manage Blocks</div>
+  <div class="tab" onclick="switchTab('ingest',this)">🔄 Trigger Ingest</div>
+  <div class="tab" onclick="switchTab('settings',this)">⚙️ Settings</div>
+</div>
+
+<!-- ===== SETTINGS ===== -->
+<div id="tab-settings" class="panel">
+  <div class="card">
+    <h3>🔑 API Configuration</h3>
+    <p style="font-size:0.8rem;color:#666;margin-bottom:14px;">Save your backend URL and ingest secret here. They're stored in your browser only.</p>
+    <label>Backend URL (your Render URL)</label>
+    <input type="text" id="cfg-api" placeholder="https://kyabathai-api.onrender.com">
+    <label>Ingest Secret</label>
+    <input type="password" id="cfg-secret" placeholder="your INGEST_SECRET value">
+    <div class="mt">
+      <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
+      <span class="saved-ok" id="settings-ok">✅ Saved!</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADD BLOCK ===== -->
+<div id="tab-add" class="panel active">
+  <div class="card">
+    <h3>➕ Add New Content Block</h3>
+    <label>Block Type</label>
+    <select id="b-type" onchange="onTypeChange()">
+      <option value="youtube">▶ YouTube Video</option>
+      <option value="instagram">📸 Instagram Reel/Post</option>
+      <option value="news">📰 News Article</option>
+      <option value="document">📄 PDF / Document</option>
+      <option value="app">🚀 App / Site Card</option>
+    </select>
+
+    <label>Title <span style="color:#555">(required)</span></label>
+    <input type="text" id="b-title" placeholder="e.g. The CEO of Alphabet — World Leaders">
+
+    <label>URL <span style="color:#555">(required)</span></label>
+    <input type="text" id="b-url" placeholder="https://...">
+    <div class="hint" id="b-url-hint">YouTube video URL or Shorts URL</div>
+
+    <label>Thumbnail URL <span style="color:#555">(optional — auto for YouTube)</span></label>
+    <input type="text" id="b-thumbnail" placeholder="https://... or leave blank">
+
+    <div class="row">
+      <div>
+        <label>Caption / Short Description</label>
+        <input type="text" id="b-caption" placeholder="One-line caption">
+      </div>
+      <div>
+        <label>Source Label <span style="color:#555">(optional)</span></label>
+        <input type="text" id="b-source" placeholder="e.g. YouTube, Times of India">
+      </div>
+    </div>
+
+    <label>Long Description <span style="color:#555">(optional)</span></label>
+    <textarea id="b-desc" placeholder="More details about this block (shown on cards)"></textarea>
+
+    <label>Sort Order <span style="color:#555">(lower = shown first)</span></label>
+    <input type="number" id="b-order" value="0" min="0">
+
+    <div class="mt">
+      <button class="btn btn-primary" onclick="addBlock()">➕ Add Block</button>
+    </div>
+    <div class="status" id="add-status"></div>
+  </div>
+</div>
+
+<!-- ===== MANAGE ===== -->
+<div id="tab-manage" class="panel">
+  <div class="card">
+    <h3>📋 All Manual Blocks</h3>
+    <button class="btn btn-primary btn-sm" onclick="loadBlocks()">🔄 Refresh</button>
+    <div class="block-list" id="block-list">
+      <div class="empty">Click Refresh to load blocks</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INGEST ===== -->
+<div id="tab-ingest" class="panel">
+  <div class="card">
+    <h3>🔄 Trigger Content Ingest</h3>
+    <p style="font-size:0.82rem;color:#888;margin-bottom:16px;">This pulls the latest viral YouTube videos and news articles into the feed right now. Normally runs automatically every 3 hours.</p>
+    <button class="btn btn-primary" onclick="triggerIngest()">🔄 Run Ingest Now</button>
+    <div class="status" id="ingest-status"></div>
+  </div>
+</div>
+
+<script>
+// ── Config ──────────────────────────────────────────────────────────────────
+function getApi()    { return localStorage.getItem('kb_api')    || ''; }
+function getSecret() { return localStorage.getItem('kb_secret') || ''; }
+
+function saveSettings() {
+  localStorage.setItem('kb_api',    document.getElementById('cfg-api').value.trim().replace(/\/$/,''));
+  localStorage.setItem('kb_secret', document.getElementById('cfg-secret').value.trim());
+  const ok = document.getElementById('settings-ok');
+  ok.style.display = 'inline';
+  setTimeout(() => ok.style.display = 'none', 2000);
+}
+
+window.addEventListener('load', () => {
+  document.getElementById('cfg-api').value    = getApi();
+  document.getElementById('cfg-secret').value = getSecret();
+  if (!getApi()) switchTab('settings', document.querySelector('.tab:last-child'));
+});
+
+// ── Tabs ────────────────────────────────────────────────────────────────────
+function switchTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'manage') loadBlocks();
+}
+
+// ── Type hints ───────────────────────────────────────────────────────────────
+const URL_HINTS = {
+  youtube:   'YouTube video URL or Shorts URL (e.g. https://youtube.com/shorts/abc123)',
+  instagram: 'Instagram reel or post URL (e.g. https://www.instagram.com/reel/abc123/)',
+  news:      'Full article URL (e.g. https://timesofindia.com/...)',
+  document:  'PDF/doc URL — can be a Google Drive share link or direct file URL',
+  app:       'Website URL (e.g. https://myapp.com)',
+};
+function onTypeChange() {
+  const t = document.getElementById('b-type').value;
+  document.getElementById('b-url-hint').textContent = URL_HINTS[t] || '';
+}
+
+// ── Status helper ────────────────────────────────────────────────────────────
+function showStatus(id, msg, isErr) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'status ' + (isErr ? 'err' : 'ok');
+}
+
+// ── Add block ────────────────────────────────────────────────────────────────
+async function addBlock() {
+  const api    = getApi();
+  const secret = getSecret();
+  if (!api)    return showStatus('add-status', '⚠️ Set your Backend URL in Settings first.', true);
+  if (!secret) return showStatus('add-status', '⚠️ Set your Ingest Secret in Settings first.', true);
+
+  const title = document.getElementById('b-title').value.trim();
+  const url   = document.getElementById('b-url').value.trim();
+  if (!title) return showStatus('add-status', '⚠️ Title is required.', true);
+  if (!url)   return showStatus('add-status', '⚠️ URL is required.', true);
+
+  const body = {
+    block_type:   document.getElementById('b-type').value,
+    title,
+    url,
+    thumbnail:    document.getElementById('b-thumbnail').value.trim() || null,
+    caption:      document.getElementById('b-caption').value.trim()   || null,
+    description:  document.getElementById('b-desc').value.trim()      || null,
+    source_label: document.getElementById('b-source').value.trim()    || null,
+    sort_order:   parseInt(document.getElementById('b-order').value)  || 0,
+    visible:      true,
+  };
+
+  try {
+    const res = await fetch(api + '/api/blocks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Ingest-Secret': secret },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Error');
+    showStatus('add-status', '✅ Block added! ID: ' + data.id, false);
+    // clear form
+    ['b-title','b-url','b-thumbnail','b-caption','b-source','b-desc'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('b-order').value = '0';
+  } catch(e) {
+    showStatus('add-status', '❌ ' + e.message, true);
+  }
+}
+
+// ── Load blocks ───────────────────────────────────────────────────────────────
+async function loadBlocks() {
+  const api = getApi();
+  if (!api) {
+    document.getElementById('block-list').innerHTML = '<div class="empty">Set your Backend URL in Settings first.</div>';
+    return;
+  }
+  try {
+    const res  = await fetch(api + '/api/blocks');
+    const data = await res.json();
+    renderBlocks(data.items || []);
+  } catch(e) {
+    document.getElementById('block-list').innerHTML = '<div class="empty">❌ Could not load blocks: ' + e.message + '</div>';
+  }
+}
+
+function renderBlocks(items) {
+  const list = document.getElementById('block-list');
+  if (!items.length) {
+    list.innerHTML = '<div class="empty">No blocks yet. Add some from the "Add Block" tab!</div>';
+    return;
+  }
+  const typeIcon = { youtube:'▶', instagram:'📸', news:'📰', document:'📄', app:'🚀' };
+  list.innerHTML = items.map(it => `
+    <div class="block-item">
+      <div class="bi-info">
+        <div class="bi-type">
+          <span class="type-badge type-${it.block_type}">${typeIcon[it.block_type]||'•'} ${it.block_type}</span>
+          &nbsp;Order: ${it.sort_order}
+        </div>
+        <div class="bi-title">${escHtml(it.title)}</div>
+        <div class="bi-url">${escHtml(it.url)}</div>
+        ${it.caption ? `<div style="font-size:0.75rem;color:#666;margin-top:3px;">${escHtml(it.caption)}</div>` : ''}
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="deleteBlock('${it.id}')">🗑 Delete</button>
+    </div>
+  `).join('');
+}
+
+async function deleteBlock(id) {
+  if (!confirm('Delete this block?')) return;
+  const api    = getApi();
+  const secret = getSecret();
+  if (!api || !secret) return alert('Set API URL and secret in Settings first.');
+  try {
+    const res = await fetch(api + '/api/blocks/' + id, {
+      method: 'DELETE',
+      headers: { 'X-Ingest-Secret': secret },
+    });
+    if (!res.ok) throw new Error('Delete failed');
+    loadBlocks();
+  } catch(e) {
+    alert('❌ ' + e.message);
+  }
+}
+
+// ── Ingest ────────────────────────────────────────────────────────────────────
+async function triggerIngest() {
+  const api    = getApi();
+  const secret = getSecret();
+  if (!api)    return showStatus('ingest-status', '⚠️ Set Backend URL in Settings.', true);
+  if (!secret) return showStatus('ingest-status', '⚠️ Set Ingest Secret in Settings.', true);
+  showStatus('ingest-status', '⏳ Running ingest…', false);
+  try {
+    const res  = await fetch(api + '/api/ingest', {
+      method: 'POST',
+      headers: { 'X-Ingest-Secret': secret },
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Error');
+    showStatus('ingest-status', '✅ Ingest done! Videos: ' + (data.videos||0) + ' News: ' + (data.news||0), false);
+  } catch(e) {
+    showStatus('ingest-status', '❌ ' + e.message, true);
+  }
+}
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
