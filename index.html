@@ -1686,6 +1686,26 @@
     min-height: 88px; /* was 110px → further 20% reduction */
     filter: brightness(1.15) saturate(1.2);
   }
+  /* Placeholder mockup for dynamic cards without a real mockup image */
+  .mockup-placeholder {
+    width: 100%;
+    min-height: 88px;
+    background: linear-gradient(135deg, #0d0d2b 0%, #1a0a2e 40%, #0a1a2e 70%, #0d1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mockup-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(130,60,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(0,180,148,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 60% 80%, rgba(255,140,66,0.10) 0%, transparent 50%);
+  }
 
   /* ===== GOLD TEXT: Replace all hazy white on dark backgrounds ===== */
   .ticker span { color: var(--gold) !important; }
@@ -3220,6 +3240,7 @@
 
       article.innerHTML = `
         <div class="proj-card-top" style="padding:0;">
+          <div class="app-bg-mockup"><div class="mockup-placeholder"></div></div>
           <div class="proj-card-top-meta">
             <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${String(num).padStart(2,'0')}</span>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
