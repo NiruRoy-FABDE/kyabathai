@@ -419,24 +419,17 @@
     overflow: hidden;
   }
 
-  /* ===== APP BACKGROUND MOCKUP FLOATING IN CARD TOP ===== */
+  /* ===== APP BACKGROUND MOCKUP — FULL CARD TOP BACKGROUND ===== */
   .app-bg-mockup {
     position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 52%;
-    border-radius: 0 16px 0 0;
+    top: 0; right: 0; bottom: 0; left: 0;
     overflow: hidden;
-    opacity: 0.92;
+    opacity: 1;
     pointer-events: none;
     z-index: 0;
   }
-  .app-bg-mockup::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(255,252,255,1) 0%, rgba(255,252,255,0) 45%);
-  }
-  /* make the card text sit above mockup */
+  /* No hazy overlay — let the mockup show fully and crisply */
+  /* Card text floats on top with a semi-transparent dark pill so it stays readable */
   .proj-card-top .proj-id,
   .proj-card-top .proj-icon,
   .proj-card-top h3,
@@ -445,6 +438,27 @@
   .proj-card-top .proj-top-visit {
     position: relative;
     z-index: 1;
+  }
+  /* Text legibility over dark app backgrounds */
+  .proj-card-top h3 {
+    text-shadow: 0 1px 8px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.9);
+    color: #fff !important;
+  }
+  .proj-card-top .domain {
+    color: rgba(255,255,255,0.75) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-tagline {
+    color: #fff !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-id {
+    color: rgba(255,255,255,0.6) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-icon {
+    border-color: rgba(255,255,255,0.35) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
   }
 
   /* ── MADAIX mockup: black/gold private beta screen ── */
@@ -456,104 +470,168 @@
     justify-content: center;
     gap: 8px;
     padding: 14px 10px;
+    width: 100%; height: 100%;
   }
   .mockup-madaix .mx-title {
     font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
+    font-size: 1.3rem;
     font-weight: 900;
     color: #E8A800;
-    letter-spacing: 4px;
+    letter-spacing: 6px;
     text-transform: uppercase;
   }
   .mockup-madaix .mx-sub {
-    font-size: 0.42rem;
+    font-size: 0.52rem;
     color: #888;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
   .mockup-madaix .mx-lock {
-    font-size: 0.55rem;
+    font-size: 0.62rem;
     color: #E8A800;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .mockup-madaix .mx-input {
-    width: 85%;
+    width: 75%;
     background: #1a1a1a;
     border: 1px solid #333;
-    border-radius: 6px;
-    padding: 5px 8px;
-    font-size: 0.48rem;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.58rem;
     color: #555;
     text-align: center;
   }
   .mockup-madaix .mx-btn {
-    width: 85%;
+    width: 75%;
     background: #E8A800;
     color: #000;
-    border-radius: 6px;
-    padding: 5px 8px;
-    font-size: 0.48rem;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.62rem;
     font-weight: 800;
     text-align: center;
     letter-spacing: 0.5px;
   }
   .mockup-madaix .mx-copy {
-    font-size: 0.38rem;
+    font-size: 0.45rem;
     color: #444;
-    margin-top: 4px;
+    margin-top: 6px;
   }
 
-  /* ── Live Setup mockup: dark/green algo trading screen ── */
+  /* ── Live Setup mockup: actual live-setup.com design ── */
   .mockup-livesetup {
-    background: linear-gradient(160deg, #0a1628 0%, #0d2040 100%);
+    background: #0d1117;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+  .mockup-livesetup .ls-left {
+    padding: 12px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 4px;
+    gap: 6px;
+    border-right: 1px solid rgba(255,255,255,0.07);
   }
-  .mockup-livesetup .ls-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: rgba(0,191,166,0.15);
-    border: 1px solid rgba(0,191,166,0.3);
-    border-radius: 999px;
-    padding: 2px 7px;
-    font-size: 0.36rem;
-    color: #00BFA6;
+  .mockup-livesetup .ls-logo {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #00E5B0;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .mockup-livesetup .ls-desc {
+    font-size: 0.3rem;
+    color: #8899aa;
+    line-height: 1.5;
+  }
+  .mockup-livesetup .ls-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 3px;
+  }
+  .mockup-livesetup .ls-feat-icon {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    background: rgba(0,229,176,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mockup-livesetup .ls-feat-text strong {
+    display: block;
+    font-size: 0.32rem;
+    color: #fff;
+    font-weight: 700;
+  }
+  .mockup-livesetup .ls-feat-text span {
+    font-size: 0.27rem;
+    color: #667788;
+    line-height: 1.3;
+  }
+  .mockup-livesetup .ls-right {
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .mockup-livesetup .ls-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 4px;
+    gap: 10px;
+  }
+  .mockup-livesetup .ls-tab {
+    font-size: 0.32rem;
+    font-weight: 700;
+    color: #556677;
+    padding-bottom: 3px;
+  }
+  .mockup-livesetup .ls-tab.active {
+    color: #00E5B0;
+    border-bottom: 2px solid #00E5B0;
+  }
+  .mockup-livesetup .ls-field-label {
+    font-size: 0.28rem;
+    color: #aabbcc;
     font-weight: 700;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
-    width: fit-content;
+    text-transform: uppercase;
+    margin-bottom: 2px;
   }
-  .mockup-livesetup .ls-h {
-    font-size: 0.7rem;
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.2;
-  }
-  .mockup-livesetup .ls-h span { color: #00E5D0; }
-  .mockup-livesetup .ls-log {
-    background: rgba(0,0,0,0.5);
-    border-radius: 4px;
+  .mockup-livesetup .ls-input {
+    background: #1a2230;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
     padding: 4px 6px;
-    margin-top: 5px;
+    font-size: 0.3rem;
+    color: #445566;
+    width: 100%;
   }
-  .mockup-livesetup .ls-log-row {
-    font-family: 'Courier New', monospace;
+  .mockup-livesetup .ls-signin-btn {
+    background: #00E5B0;
+    color: #000;
+    border-radius: 5px;
+    padding: 5px 6px;
     font-size: 0.32rem;
-    color: #7ecec4;
-    line-height: 1.7;
-    white-space: nowrap;
-    overflow: hidden;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 3px;
   }
-  .mockup-livesetup .ls-log-row .ok  { color: #4ade80; }
-  .mockup-livesetup .ls-log-row .tag { color: #fb923c; }
-  .mockup-livesetup .ls-log-row .sell{ color: #f87171; }
-  .mockup-livesetup .ls-log-row .buy { color: #4ade80; }
+  .mockup-livesetup .ls-register {
+    font-size: 0.27rem;
+    color: #556677;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .mockup-livesetup .ls-register span { color: #00E5B0; }
 
   /* ── Dhantron mockup: dark purple/cyan trading screen ── */
   .mockup-dhantron {
@@ -561,23 +639,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 5px;
+    padding: 14px 16px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
   .mockup-dhantron .dh-pill {
     display: inline-flex;
     background: rgba(0,180,255,0.12);
     border: 1px solid rgba(0,180,255,0.25);
     border-radius: 999px;
-    padding: 2px 6px;
-    font-size: 0.33rem;
+    padding: 3px 8px;
+    font-size: 0.42rem;
     color: #00d4ff;
     font-weight: 700;
     letter-spacing: 0.5px;
     width: fit-content;
   }
   .mockup-dhantron .dh-h {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 900;
     color: #fff;
     line-height: 1.2;
@@ -585,13 +664,13 @@
   .mockup-dhantron .dh-h span { color: #00E5FF; }
   .mockup-dhantron .dh-log {
     background: rgba(0,0,0,0.6);
-    border-radius: 4px;
-    padding: 4px 5px;
-    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,0.08);
   }
   .mockup-dhantron .dh-row {
     font-family: 'Courier New', monospace;
-    font-size: 0.3rem;
+    font-size: 0.42rem;
     color: #88ccdd;
     line-height: 1.8;
     white-space: nowrap;
@@ -610,12 +689,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    gap: 5px;
+    padding: 16px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
-  .mockup-aiversecampus .av-icon { font-size: 1.6rem; }
+  .mockup-aiversecampus .av-icon { font-size: 2.2rem; }
   .mockup-aiversecampus .av-title {
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     font-weight: 900;
     color: #fff;
     text-align: center;
@@ -624,8 +704,8 @@
   .mockup-aiversecampus .av-badge {
     background: linear-gradient(90deg,#a855f7,#6366f1);
     border-radius: 999px;
-    padding: 2px 8px;
-    font-size: 0.32rem;
+    padding: 3px 10px;
+    font-size: 0.42rem;
     color: #fff;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -633,16 +713,16 @@
   .mockup-aiversecampus .av-pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 3px;
+    gap: 4px;
     justify-content: center;
-    margin-top: 3px;
+    margin-top: 4px;
   }
   .mockup-aiversecampus .av-pill {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
     border-radius: 4px;
-    padding: 2px 5px;
-    font-size: 0.3rem;
+    padding: 3px 7px;
+    font-size: 0.4rem;
     color: #ccc;
   }
 
@@ -652,11 +732,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 4px;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
   .mockup-airunly .ar-label {
-    font-size: 0.32rem;
+    font-size: 0.45rem;
     color: #5599ff;
     font-weight: 700;
     text-transform: uppercase;
@@ -666,26 +747,26 @@
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(85,153,255,0.2);
     border-radius: 5px;
-    padding: 4px 6px;
-    font-size: 0.35rem;
+    padding: 6px 8px;
+    font-size: 0.45rem;
     color: #cde;
     line-height: 1.5;
   }
   .mockup-airunly .ar-steps {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-top: 3px;
+    gap: 4px;
+    margin-top: 4px;
   }
   .mockup-airunly .ar-step {
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 0.32rem;
+    gap: 6px;
+    font-size: 0.42rem;
     color: #888;
   }
   .mockup-airunly .ar-step .dot {
-    width: 6px;height:6px;
+    width: 8px;height:8px;
     border-radius: 50%;
     background: #334;
     flex-shrink: 0;
@@ -701,14 +782,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 5px;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
   .mockup-tuftub .tt-q {
-    font-size: 0.36rem;
+    font-size: 0.46rem;
     color: #aaa;
     font-style: italic;
-    padding: 4px 6px;
+    padding: 5px 8px;
     background: rgba(255,255,255,0.05);
     border-radius: 4px;
     border-left: 2px solid #ff8c42;
@@ -716,15 +798,15 @@
   .mockup-tuftub .tt-result {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 7px;
     background: rgba(255,140,66,0.08);
     border: 1px solid rgba(255,140,66,0.2);
-    border-radius: 5px;
-    padding: 4px 6px;
+    border-radius: 6px;
+    padding: 6px 8px;
   }
-  .mockup-tuftub .tt-result .tt-icon { font-size: 0.9rem; }
-  .mockup-tuftub .tt-result .tt-name { font-size: 0.38rem; font-weight: 700; color: #ff8c42; }
-  .mockup-tuftub .tt-result .tt-desc { font-size: 0.3rem; color: #888; }
+  .mockup-tuftub .tt-result .tt-icon { font-size: 1.2rem; }
+  .mockup-tuftub .tt-result .tt-name { font-size: 0.48rem; font-weight: 700; color: #ff8c42; }
+  .mockup-tuftub .tt-result .tt-desc { font-size: 0.38rem; color: #888; }
 
   /* ── Jurissetu mockup: legal Q&A screen ── */
   .mockup-jurissetu {
@@ -732,20 +814,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 4px;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
   .mockup-jurissetu .js-q {
-    font-size: 0.35rem;
+    font-size: 0.46rem;
     color: #ccc;
-    padding: 4px 6px;
+    padding: 6px 8px;
     background: rgba(255,255,255,0.05);
     border-radius: 5px;
     border-left: 2px solid #7B00FF;
     line-height: 1.4;
   }
   .mockup-jurissetu .js-ans {
-    font-size: 0.32rem;
+    font-size: 0.42rem;
     color: #888;
     line-height: 1.5;
     padding: 0 2px;
@@ -754,8 +837,8 @@
     background: rgba(123,0,255,0.15);
     border: 1px solid rgba(123,0,255,0.3);
     border-radius: 999px;
-    padding: 2px 7px;
-    font-size: 0.3rem;
+    padding: 3px 9px;
+    font-size: 0.4rem;
     color: #a855f7;
     font-weight: 700;
     width: fit-content;
@@ -767,29 +850,30 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 4px;
+    padding: 14px 14px;
+    gap: 5px;
+    width: 100%; height: 100%;
   }
   .mockup-boardsol .bs-header {
-    font-size: 0.4rem;
+    font-size: 0.52rem;
     font-weight: 700;
     color: #fff;
-    padding-bottom: 3px;
+    padding-bottom: 4px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
   .mockup-boardsol .bs-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 0.32rem;
+    font-size: 0.42rem;
     color: #888;
-    padding: 2px 0;
+    padding: 3px 0;
     border-bottom: 1px solid rgba(255,255,255,0.04);
   }
   .mockup-boardsol .bs-row .bs-status {
-    padding: 1px 5px;
+    padding: 2px 6px;
     border-radius: 999px;
-    font-size: 0.28rem;
+    font-size: 0.36rem;
     font-weight: 700;
   }
   .mockup-boardsol .bs-status.approved { background: rgba(74,222,128,0.15); color: #4ade80; }
@@ -801,22 +885,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 5px;
+    padding: 14px 16px;
+    gap: 8px;
+    width: 100%; height: 100%;
   }
   .mockup-fingoal .fg-goal {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
   }
   .mockup-fingoal .fg-label {
     display: flex;
     justify-content: space-between;
-    font-size: 0.32rem;
+    font-size: 0.44rem;
     color: #aaa;
   }
   .mockup-fingoal .fg-bar {
-    height: 5px;
+    height: 7px;
     background: rgba(255,255,255,0.1);
     border-radius: 999px;
     overflow: hidden;
@@ -834,25 +919,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
-    gap: 5px;
+    padding: 14px 14px;
+    gap: 7px;
+    width: 100%; height: 100%;
   }
   .mockup-bitopine .bp-logo {
-    font-size: 0.55rem;
+    font-size: 0.75rem;
     font-weight: 900;
     color: #fff;
     letter-spacing: 2px;
   }
   .mockup-bitopine .bp-logo span { color: #a855f7; }
   .mockup-bitopine .bp-tags {
-    display: flex; gap: 3px; flex-wrap: wrap; justify-content: center;
+    display: flex; gap: 5px; flex-wrap: wrap; justify-content: center;
   }
   .mockup-bitopine .bp-tag {
     background: rgba(168,85,247,0.1);
     border: 1px solid rgba(168,85,247,0.25);
     border-radius: 4px;
-    padding: 2px 5px;
-    font-size: 0.3rem;
+    padding: 3px 7px;
+    font-size: 0.4rem;
     color: #c084fc;
   }
 
@@ -862,33 +948,34 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    gap: 4px;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
   }
   .mockup-efundly .ef-search {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(0,200,83,0.2);
-    border-radius: 5px;
-    padding: 4px 6px;
-    font-size: 0.32rem;
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.42rem;
     color: #888;
   }
   .mockup-efundly .ef-result {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 3px 5px;
+    gap: 6px;
+    padding: 4px 6px;
     background: rgba(0,200,83,0.06);
-    border-radius: 4px;
+    border-radius: 5px;
   }
   .mockup-efundly .ef-dot {
-    width: 6px; height: 6px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     background: #00C853;
     flex-shrink: 0;
   }
-  .mockup-efundly .ef-name { font-size: 0.33rem; color: #ccc; font-weight: 600; }
-  .mockup-efundly .ef-amt  { font-size: 0.3rem; color: #4ade80; margin-left: auto; }
+  .mockup-efundly .ef-name { font-size: 0.43rem; color: #ccc; font-weight: 600; }
+  .mockup-efundly .ef-amt  { font-size: 0.4rem; color: #4ade80; margin-left: auto; }
   .proj-id {
     position: absolute;
     top: 18px; right: 20px;
@@ -915,6 +1002,7 @@
     margin-bottom: 6px;
     color: var(--ink);
   }
+  /* When inside a card that has an app background, text is overridden via .proj-card-top overrides above */
   .proj-card-top .domain {
     font-family: 'Courier New', monospace;
     font-size: 0.82rem;
@@ -1484,6 +1572,32 @@
     .section { padding: 56px 6%; }
     .hero { padding: 56px 6% 40px; }
   }
+
+  /* ===== APP CARD TOP: TEXT LEGIBILITY OVER DARK MOCKUP BACKGROUNDS ===== */
+  /* These must be last to win over all base rules */
+  .proj-card-top h3 {
+    color: #fff !important;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,1);
+  }
+  .proj-card-top .domain {
+    color: rgba(255,255,255,0.8) !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-tagline {
+    color: #fff !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-id {
+    color: rgba(255,255,255,0.65) !important;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-icon {
+    border-color: rgba(255,255,255,0.4) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6) !important;
+  }
+  .proj-card-top .proj-top-visit {
+    backdrop-filter: blur(4px);
+  }
 </style>
 </head>
 <body>
@@ -1864,14 +1978,37 @@
       <div class="proj-card-top">
         <div class="app-bg-mockup">
           <div class="mockup-livesetup">
-            <div class="ls-pill">BankNifty Options · Automated · SEBI Compliant</div>
-            <div class="ls-h">Trade Like a<br><span>Market Maker.</span><br>Without the Desk.</div>
-            <div class="ls-log">
-              <div class="ls-log-row"><span class="ok">[OK]</span> Session started — FA111301</div>
-              <div class="ls-log-row"><span class="tag">[RANGE]</span> Collecting 20/20</div>
-              <div class="ls-log-row"><span class="ok">[BIAS]</span> CE confirmed · 57,420</div>
-              <div class="ls-log-row"><span class="sell">[SELL]</span> BNF 57500CE · qty 30</div>
-              <div class="ls-log-row"><span class="buy">[BUY]</span> BNF 57800CE · qty 30</div>
+            <div class="ls-left">
+              <div class="ls-logo">live-setup</div>
+              <div class="ls-desc">Automate your BankNifty options trading via TradingView signals — executed live in your own Shoonya broker account.</div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">⚡</div>
+                <div class="ls-feat-text"><strong>Fully Automated</strong><span>Signals from TradingView execute instantly via Shoonya API.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">🔒</div>
+                <div class="ls-feat-text"><strong>Your Own Account</strong><span>Trades execute in your own Shoonya broker account.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">🎁</div>
+                <div class="ls-feat-text"><strong>15-Day Free Trial</strong><span>Register now and get 15 days of live trading access.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">📊</div>
+                <div class="ls-feat-text"><strong>Live P&amp;L Tracking</strong><span>Daily and monthly performance reports on every trade.</span></div>
+              </div>
+            </div>
+            <div class="ls-right">
+              <div class="ls-tabs">
+                <div class="ls-tab active">Sign In</div>
+                <div class="ls-tab">Register Free</div>
+              </div>
+              <div class="ls-field-label">Email Address</div>
+              <div class="ls-input">you@example.com</div>
+              <div class="ls-field-label" style="margin-top:3px;">Password</div>
+              <div class="ls-input">••••••••</div>
+              <div class="ls-signin-btn">Sign In →</div>
+              <div class="ls-register">New here? <span>Register for free 15-day trial</span></div>
             </div>
           </div>
         </div>
