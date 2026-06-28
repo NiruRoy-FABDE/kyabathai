@@ -391,8 +391,7 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    max-height: 550px;
-    overflow-y: auto;
+    /* removed max-height and overflow-y so card shows fully */
     position: relative;
   }
   /* Vivid top colour bar per card — rotates via nth-child */
@@ -525,7 +524,8 @@
     background: #0d1117;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 100%; height: 100%;
+    width: 100%;
+    min-height: 220px;
     overflow: hidden;
   }
   .mockup-livesetup .ls-left {
@@ -1037,57 +1037,76 @@
   .proj-top-visit.beta { background: var(--marigold-deep); }
 
   .proj-card-body {
-    padding: 12px 18px;
+    padding: 16px 18px;
     flex: 1;
-    background: #fdfcff;
+    /* card 1 (3n+1): deep pink/magenta theme */
+    background: linear-gradient(160deg, #1a0520 0%, #2d0a2e 100%);
+    color: #fff;
   }
-  .proj-block { margin-bottom: 10px; }
+  /* Per-card vivid body backgrounds */
+  .proj-card:nth-child(3n+2) .proj-card-body {
+    background: linear-gradient(160deg, #0a0520 0%, #160a40 100%);
+  }
+  .proj-card:nth-child(3n+3) .proj-card-body {
+    background: linear-gradient(160deg, #051a10 0%, #0a2e1a 100%);
+  }
+
+  /* Body text: bright white */
+  .proj-card-body .proj-block p {
+    color: rgba(255,255,255,0.92) !important;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .proj-block { margin-bottom: 12px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
-    font-size: 0.7rem;
-    font-weight: 800;
+    font-size: 0.68rem;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #FF4D8D;
+    letter-spacing: 0.8px;
+    color: #FF6EB0;
     margin-bottom: 5px;
     display: block;
   }
-  .proj-card:nth-child(3n+2) .proj-block .label { color: #7B00FF; }
-  .proj-card:nth-child(3n+3) .proj-block .label { color: #00876A; }
+  .proj-card:nth-child(3n+2) .proj-block .label { color: #A78BFA; }
+  .proj-card:nth-child(3n+3) .proj-block .label { color: #34D399; }
   .proj-block p {
-    font-size: 0.78rem;
-    color: var(--ink);
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.92);
     font-weight: 500;
   }
   .proj-block .who-tags {
-    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;
   }
   .proj-block .who-tags span {
-    background: linear-gradient(135deg, rgba(255,77,141,0.12), rgba(255,140,66,0.12));
-    color: var(--marigold-deep);
+    background: rgba(255,255,255,0.12);
+    color: #fff;
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(255,140,66,0.3);
+    border: 1px solid rgba(255,255,255,0.25);
   }
   .proj-card:nth-child(3n+2) .proj-block .who-tags span {
-    background: linear-gradient(135deg, rgba(123,0,255,0.1), rgba(0,191,255,0.1));
-    color: #7B00FF;
-    border-color: rgba(123,0,255,0.25);
+    background: rgba(167,139,250,0.15);
+    color: #C4B5FD;
+    border-color: rgba(167,139,250,0.3);
   }
   .proj-card:nth-child(3n+3) .proj-block .who-tags span {
-    background: linear-gradient(135deg, rgba(0,200,83,0.1), rgba(0,191,255,0.1));
-    color: #00876A;
-    border-color: rgba(0,200,83,0.25);
+    background: rgba(52,211,153,0.12);
+    color: #6EE7B7;
+    border-color: rgba(52,211,153,0.3);
   }
 
   .beta-flag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--ink);
-    color: var(--cream);
+    background: rgba(255,140,66,0.2);
+    border: 1px solid rgba(255,140,66,0.5);
+    color: #FFD080;
     font-size: 0.72rem;
     font-weight: 800;
     padding: 5px 11px;
@@ -1100,8 +1119,8 @@
 
   .proj-card-cta {
     padding: 18px 22px;
-    border-top: 3px dashed var(--ink);
-    background: #fff;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.35);
   }
   .proj-visit-btn {
     display: flex;
@@ -1136,20 +1155,11 @@
   .tint-2 { background: var(--tint-pink); }
   .tint-3 { background: var(--tint-jade); }
 
-  /* Side ad panels for showcase section */
+  /* Side ad panels for showcase section — hidden, replaced by top pill strip */
   #showcase { position: relative; }
   .showcase-side-ads {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 5;
+    display: none !important;
   }
-  .showcase-side-ads.left  { left: 0.5%; align-items: flex-start; }
-  .showcase-side-ads.right { right: 0.5%; align-items: flex-end; }
-  @media (max-width: 1300px) { .showcase-side-ads { display: none; } }
 
   /* ===== AD SLOTS ===== */
   .ad-section { background: var(--tint-pink); }
@@ -1406,29 +1416,19 @@
     box-shadow: none;
   }
 
-  /* ===== SIDE SPARKLE AD PANELS (hero + reels) ===== */
+  /* ===== SIDE SPARKLE AD PANELS → now top horizontal strip ===== */
   .hero {
-    /* override to allow side panels */
-    overflow: visible;
+    overflow: hidden;
   }
   .hero-inner {
     position: relative;
     z-index: 2;
   }
 
-  /* Left and right floating column panels inside hero */
+  /* Hero ad pills: hidden (moved to section-ad-strip) */
   .hero-side-ads {
-    position: absolute;
-    top: 0; bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-    z-index: 5;
-    pointer-events: none;
+    display: none !important;
   }
-  .hero-side-ads.left  { left: 1.5%; align-items: flex-start; }
-  .hero-side-ads.right { right: 1.5%; align-items: flex-end; }
 
   .side-ad-pill {
     display: inline-flex;
@@ -1480,21 +1480,13 @@
   .side-ad-pill .pill-text strong { display: block; font-size: 0.8rem; color: #fff; }
   .side-ad-pill .pill-text span { font-size: 0.62rem; opacity: 0.85; font-weight: 600; color: #FFE8A0; }
 
-  /* Reels section side ad panels */
+  /* Reels section side ad panels — hidden, replaced by top pill strip */
   .reels-section {
     position: relative;
   }
   .reels-side-ads {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 5;
+    display: none !important;
   }
-  .reels-side-ads.left  { left: 0.8%; align-items: flex-start; }
-  .reels-side-ads.right { right: 0.8%; align-items: flex-end; }
 
   /* dark variant — same vivid colours, slightly brighter glow on dark bg */
   .side-ad-pill.dark {
@@ -1598,7 +1590,89 @@
   .proj-card-top .proj-top-visit {
     backdrop-filter: blur(4px);
   }
-</style>
+
+  /* ===== SECTION APP AD PILL STRIP (replaces floating side ads) ===== */
+  .section-ad-strip {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 14px 6% 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;          /* SINGLE LINE — never wrap */
+    margin-bottom: 28px;
+    justify-content: flex-start;
+    /* hide scrollbar but keep scroll behaviour */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .section-ad-strip::-webkit-scrollbar { display: none; }
+  /* dark variant for dark backgrounds (reels section) */
+  .section-ad-strip.dark .side-ad-pill {
+    border-color: rgba(255,255,255,0.5);
+    filter: brightness(1.1);
+    box-shadow: 0 0 22px rgba(255,77,141,0.7), 0 4px 16px rgba(0,0,0,0.5);
+  }
+
+  /* ===== APP CARD: TALLER TOP MOCKUP, NO SQUEEZE ===== */
+  .proj-card {
+    max-height: none; /* remove the 550px cap */
+    overflow: visible;
+    overflow-y: visible;
+  }
+  .proj-card-top {
+    min-height: 260px; /* give the mockup real breathing room */
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .app-bg-mockup {
+    position: relative; /* take up natural flow space */
+    width: 100%;
+    min-height: 200px;
+    overflow: hidden;
+    /* NO overlay, no opacity fade — full crisp colours */
+  }
+  /* Remove any hazy/dim overlay that was dimming the mockup */
+  .app-bg-mockup::after { display: none !important; }
+
+  /* Card content floats over mockup only for the icon/title row — shift to bottom of mockup */
+  .proj-card-top .proj-id,
+  .proj-card-top .proj-icon,
+  .proj-card-top h3,
+  .proj-card-top .domain,
+  .proj-card-top .proj-tagline,
+  .proj-card-top .proj-top-visit {
+    position: relative;
+    z-index: 2;
+    display: block;
+  }
+  /* Overlay pill for card identity, placed below the mockup bg */
+  .proj-card-top-meta {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    padding: 12px 18px 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: -4px;
+  }
+  /* Ensure all mockups fill their container fully and brightly */
+  .mockup-madaix,
+  .mockup-livesetup,
+  .mockup-dhantron,
+  .mockup-aiversecampus,
+  .mockup-airunly,
+  .mockup-tuftub,
+  .mockup-jurissetu,
+  .mockup-boardsol,
+  .mockup-fingoal,
+  .mockup-bitopine,
+  .mockup-efundly {
+    width: 100%;
+    min-height: 200px;
+    filter: brightness(1.15) saturate(1.2); /* brighter, more vivid */
+  }
+  /* section-ad-strip is always single-line nowrap scroll */</style>
 </head>
 <body>
 
@@ -1678,6 +1752,17 @@
   </div>
 
   <div class="hero-inner">
+    <!-- APP AD PILL STRIP inside hero -->
+    <div class="section-ad-strip" style="margin-bottom:18px;justify-content:center;padding-left:0;padding-right:0;">
+      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+      <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Right AI Tool</span></div></a>
+      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+      <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    </div>
     <div class="hero-eyebrow"><span class="blink"></span> Smart hacks something worth your time</div>
 
     <h1>Internet ka sabse <span class="highlight">bawaal</span> stuff, <br> AI Tools & Apps <span class="highlight2"> life hacks</span> for all.</h1>
@@ -1727,6 +1812,15 @@
   </div>
 
   <div class="section-head">
+    <!-- APP AD PILL STRIP — above the heading -->
+    <div class="section-ad-strip dark">
+      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    </div>
     <span class="section-tag jade" style="background:#2A2436; color:var(--jade);">Daily Wow</span>
     <h2>Stuff you won't stop seeing and make you say it loud kya bat hai</h2>
     <p>Reels, clips, weird tech demos, and life-hack-y things — the actual "kya baat hai" content. Swipe through.</p>
@@ -1927,6 +2021,17 @@
   </div>
 
   <div class="section-head">
+    <!-- APP AD PILL STRIP — above the heading -->
+    <div class="section-ad-strip">
+      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+      <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+      <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    </div>
     <span class="section-tag">My Universe</span>
     <h2>Apps, platforms and smart hacks AI Apps</h2>
     <p>Not just memes — but all life hacks things. AI tools, fintech, legal tech. Here's the full lineup, what each one solves, and who it's for.</p>
@@ -1936,22 +2041,29 @@
 
     <!-- MADAIX -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-madaix">
             <div class="mx-title">MADAIX</div>
+            <div class="mx-sub">AI Ad Campaigns Platform</div>
             <div class="mx-lock">🔒 Private Beta — Access Required</div>
             <div class="mx-input">Enter access password</div>
             <div class="mx-btn">Enter MADAIX →</div>
             <div class="mx-copy">© 2026 MADAIX · Private Beta</div>
           </div>
         </div>
-        <span class="proj-id">№ 01</span>
-        <div class="proj-icon tint-2">🎯</div>
-        <h3>MADAIX</h3>
-        <div class="domain">madaix.com</div>
-        <p class="proj-tagline">Run Meta ad campaigns by just describing what you want.</p>
-        <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-top-visit beta">Request Access →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 01</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🎯</div>
+            <div>
+              <h3 style="margin-bottom:2px;">MADAIX</h3>
+              <div class="domain">madaix.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Run Meta ad campaigns by just describing what you want.</p>
+          <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-top-visit beta">Request Access →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <span class="beta-flag"><span class="blink"></span>Private Beta</span>
@@ -1975,7 +2087,7 @@
 
     <!-- LIVE-SETUP -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-livesetup">
             <div class="ls-left">
@@ -2012,12 +2124,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 02</span>
-        <div class="proj-icon tint-3">⚡</div>
-        <h3>Live Setup</h3>
-        <div class="domain">live-setup.com</div>
-        <p class="proj-tagline">One TradingView signal, fired out to every connected trader's account.</p>
-        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 02</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">⚡</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Live Setup</h3>
+              <div class="domain">live-setup.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">One TradingView signal, fired out to every connected trader's account.</p>
+          <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2040,7 +2158,7 @@
 
     <!-- DHANTRON -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-dhantron">
             <div class="dh-pill">BankNifty Options · Automated · SEBI Compliant</div>
@@ -2054,12 +2172,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 03</span>
-        <div class="proj-icon tint-1">📈</div>
-        <h3>Dhantron</h3>
-        <div class="domain">dhantron.com</div>
-        <p class="proj-tagline">Trade like a market maker — without sitting at a trading desk all day.</p>
-        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 03</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">📈</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Dhantron</h3>
+              <div class="domain">dhantron.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Trade like a market maker — without sitting at a trading desk all day.</p>
+          <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2082,7 +2206,7 @@
 
     <!-- AIVERSECAMPUS -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-aiversecampus">
             <div class="av-icon">🎓</div>
@@ -2096,12 +2220,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 04</span>
-        <div class="proj-icon tint-2">🎓</div>
-        <h3>AIverse Campus</h3>
-        <div class="domain">www.aiversecampus.com</div>
-        <p class="proj-tagline">Stop using AI the wrong way — learn how it's actually meant to be used.</p>
-        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 04</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🎓</div>
+            <div>
+              <h3 style="margin-bottom:2px;">AIverse Campus</h3>
+              <div class="domain">www.aiversecampus.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Stop using AI the wrong way — learn how it's actually meant to be used.</p>
+          <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2124,7 +2254,7 @@
 
     <!-- AIRUNLY -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-airunly">
             <div class="ar-label">🤖 Agent Task</div>
@@ -2137,12 +2267,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 05</span>
-        <div class="proj-icon tint-3">🤖</div>
-        <h3>Airunly</h3>
-        <div class="domain">www.airunly.com</div>
-        <p class="proj-tagline">Tell it what to do. Watch AI do the rest.</p>
-        <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 05</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">🤖</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Airunly</h3>
+              <div class="domain">www.airunly.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Tell it what to do. Watch AI do the rest.</p>
+          <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2165,7 +2301,7 @@
 
     <!-- TUFTUB -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-tuftub">
             <div class="tt-q">"I need to create a short explainer video for my product…"</div>
@@ -2186,12 +2322,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 06</span>
-        <div class="proj-icon tint-1">🧰</div>
-        <h3>Tuftub</h3>
-        <div class="domain">tuftub.com</div>
-        <p class="proj-tagline">The right AI tool for every task — picked for you, automatically.</p>
-        <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 06</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">🧰</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Tuftub</h3>
+              <div class="domain">tuftub.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">The right AI tool for every task — picked for you, automatically.</p>
+          <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2214,7 +2356,7 @@
 
     <!-- JURISSETU -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-jurissetu">
             <div class="js-badge">⚖️ Legal Q&amp;A · AI-Powered</div>
@@ -2223,12 +2365,18 @@
             <div class="js-badge" style="margin-top:4px;">📄 Not legal advice · Consult a lawyer</div>
           </div>
         </div>
-        <span class="proj-id">№ 07</span>
-        <div class="proj-icon tint-2">⚖️</div>
-        <h3>Jurissetu</h3>
-        <div class="domain">jurissetu.com</div>
-        <p class="proj-tagline">Your legal questions, answered with authority.</p>
-        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 07</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">⚖️</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Jurissetu</h3>
+              <div class="domain">jurissetu.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Your legal questions, answered with authority.</p>
+          <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2251,7 +2399,7 @@
 
     <!-- BOARDSOL -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-boardsol">
             <div class="bs-header">🗂️ Board Meetings · Q3 2026</div>
@@ -2261,12 +2409,18 @@
             <div class="bs-row"><span>Compliance Audit Report</span><span class="bs-status pending">Pending</span></div>
           </div>
         </div>
-        <span class="proj-id">№ 08</span>
-        <div class="proj-icon tint-3">🗂️</div>
-        <h3>BoardSol</h3>
-        <div class="domain">boardsol.com</div>
-        <p class="proj-tagline">Secure board management for modern India.</p>
-        <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 08</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">🗂️</div>
+            <div>
+              <h3 style="margin-bottom:2px;">BoardSol</h3>
+              <div class="domain">boardsol.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Secure board management for modern India.</p>
+          <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2289,7 +2443,7 @@
 
     <!-- FINGOALINVESTO -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-fingoal">
             <div class="fg-goal">
@@ -2306,12 +2460,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 09</span>
-        <div class="proj-icon tint-1">💰</div>
-        <h3>FinGoalInvesto</h3>
-        <div class="domain">fingoalinvesto.com</div>
-        <p class="proj-tagline">Put a name and a number on your money goals — then actually hit them.</p>
-        <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 09</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">💰</div>
+            <div>
+              <h3 style="margin-bottom:2px;">FinGoalInvesto</h3>
+              <div class="domain">fingoalinvesto.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Put a name and a number on your money goals — then actually hit them.</p>
+          <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2334,7 +2494,7 @@
 
     <!-- BITOPINE -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-bitopine">
             <div class="bp-logo">BIT<span>O</span>PINE</div>
@@ -2347,12 +2507,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 10</span>
-        <div class="proj-icon tint-2">💻</div>
-        <h3>Bitopine</h3>
-        <div class="domain">bitopine.com</div>
-        <p class="proj-tagline">Digital excellence, delivered to you.</p>
-        <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 10</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">💻</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Bitopine</h3>
+              <div class="domain">bitopine.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Digital excellence, delivered to you.</p>
+          <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2375,7 +2541,7 @@
 
     <!-- EFUNDLY -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-efundly">
             <div class="ef-search">🔍 "startup seed funding under ₹50L…"</div>
@@ -2397,12 +2563,18 @@
             </div>
           </div>
         </div>
-        <span class="proj-id">№ 11</span>
-        <div class="proj-icon tint-3">✅</div>
-        <h3>Efundly</h3>
-        <div class="domain">efundly.com</div>
-        <p class="proj-tagline">Funding and finance, made simple to access.</p>
-        <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 11</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">✅</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Efundly</h3>
+              <div class="domain">efundly.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Funding and finance, made simple to access.</p>
+          <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -2425,7 +2597,7 @@
 
     <!-- EAIIN -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-bitopine" style="background:linear-gradient(150deg,#0d1a0d,#1a2e1a);">
             <div class="bp-logo" style="color:#4ade80;">E<span style="color:#86efac;">aiin</span></div>
@@ -2466,7 +2638,7 @@
 
     <!-- DRAPYFY -->
     <article class="proj-card">
-      <div class="proj-card-top">
+      <div class="proj-card-top" style="padding:0;">
         <div class="app-bg-mockup">
           <div class="mockup-aiversecampus" style="background:linear-gradient(150deg,#1a0d1a,#2e1a2e);">
             <div class="av-icon">🧵</div>
@@ -2965,7 +3137,7 @@
       ].join('');
 
       article.innerHTML = `
-        <div class="proj-card-top">
+        <div class="proj-card-top" style="padding:0;">
           <span class="proj-id">№ ${String(num).padStart(2,'0')}</span>
           <div class="proj-icon ${tint}">${a.icon || '🚀'}</div>
           <h3>${a.name}</h3>
