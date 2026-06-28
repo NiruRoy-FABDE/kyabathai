@@ -39,3 +39,7 @@ export function fetchArchive({ limit = 24, offset = 0, q = "", kind = null } = {
 export function explainItem(id) {
   return post(`/api/explain`, { id });
 }
+
+export function fetchBlocks() {
+  return get("/api/blocks");
+}
