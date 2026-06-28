@@ -1,0 +1,3381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kya Baat Hai — Cool Finds, Daily Wow, &amp; A Bunch of Things-life hacks</title>
+<meta name="description" content="A daily dose of internet wow — funny reels, weird tech, useful life hacks, apps and platforms, AI Tools and sites, Tech Talk etc. Kya baat hai, right?">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Kya Baat Hai — Cool Finds & Things">
+<meta property="og:description" content="Funny, useful, occasionally life-changing internet finds — AI Tools and sites, all in one place.">
+<meta property="og:type" content="website">
+
+<style>
+  :root {
+    --cream: #FFF9F2;
+    --cream-2: #FFF2E3;
+    --ink: #1A1625;
+    --ink-soft: #4A4458;
+    --marigold: #FF8C42;
+    --marigold-deep: #E8702A;
+    --gulal: #FF4D8D;
+    --gulal-soft: #FFD6E8;
+    --jade: #00B894;
+    --jade-deep: #00876А;
+    --tint-orange: #FFE5D4;
+    --tint-pink: #FFD6E8;
+    --tint-jade: #D4F5EA;
+    --card-shadow: 0 4px 0 rgba(26,22,37,0.9);
+    --radius: 18px;
+    --serif-stamp: Georgia, 'Times New Roman', serif;
+    /* Deep gold for all white text on dark backgrounds */
+    --gold: #FFD700;
+    --gold-soft: #FFCA28;
+    --gold-dim: #FFB300;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  :focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ===== MARQUEE TICKER ===== */
+  .ticker-wrap {
+    background: var(--ink);
+    color: var(--cream);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+    border-bottom: 3px solid var(--ink);
+  }
+  .ticker {
+    display: inline-flex;
+    animation: scroll-left 32s linear infinite;
+  }
+  .ticker span {
+    padding: 0 28px;
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ticker span.pink { color: var(--gulal); }
+  .ticker span.marigold-c { color: var(--marigold); }
+  .ticker span.jade-c { color: var(--jade); }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 3px solid var(--ink);
+    padding: 14px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: var(--serif-stamp);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+  }
+  .logo .dot { color: var(--gulal); }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+  .nav-links a {
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .nav-links a:hover { border-color: var(--marigold); }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 70px 6% 50px;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 10% 0%, #FFB3D9 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 0%, #FFD4A0 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 100%, #C8F5E8 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 60%, #E8D5FF 0%, transparent 40%),
+      linear-gradient(135deg, #FFF0F8 0%, #FFF9F2 50%, #F0FFF8 100%);
+  }
+  /* Sparkle decorations in hero */
+  .hero::before {
+    content: '✦';
+    position: absolute; top: 12%; left: 18%; font-size: 1.1rem;
+    color: #FF4D8D; opacity: 0.5; animation: sparkle-spin 4s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '✦';
+    position: absolute; bottom: 18%; right: 20%; font-size: 0.8rem;
+    color: #FF8C42; opacity: 0.5; animation: sparkle-spin 3s ease-in-out infinite reverse;
+  }
+  @keyframes sparkle-spin {
+    0%,100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 0.9; }
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 5px 13px;
+    border-radius: 999px;
+    font-size: 0.47rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow .blink {
+    width: 7px; height: 7px;
+    background: var(--jade);
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .hero h1 {
+    font-family: var(--serif-stamp);
+    font-size: clamp(1.44rem, 4.2vw, 2.76rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -1px;
+    max-width: 900px;
+    margin: 0 auto 22px;
+  }
+  .hero h1 .highlight {
+    color: var(--gulal);
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 .highlight2 { color: var(--marigold-deep); }
+
+  .hero p.sub {
+    max-width: 580px;
+    margin: 0 auto 36px;
+    font-size: 0.69rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 17px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.6rem;
+    border: 3px solid var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: var(--card-shadow);
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(1px); box-shadow: 0 1px 0 rgba(26,22,37,0.9); }
+  .btn-primary { background: var(--gulal); color: var(--cream); }
+  .btn-secondary { background: var(--cream); color: var(--ink); }
+
+  /* floating stickers in hero */
+  .sticker {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.9;
+    animation: float 5s ease-in-out infinite;
+  }
+  .sticker.s1 { top: 18%; left: 6%; animation-delay: 0s; }
+  .sticker.s2 { top: 65%; left: 10%; animation-delay: 1.2s; font-size: 1.6rem; }
+  .sticker.s3 { top: 25%; right: 7%; animation-delay: 0.6s; }
+  .sticker.s4 { top: 70%; right: 10%; animation-delay: 1.8s; font-size: 1.7rem; }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-14px) rotate(4deg); }
+  }
+  @media (max-width: 700px) {
+    .sticker { display: none; }
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section { padding: 80px 6%; }
+  .section-head {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+
+  /* pill strip breaks OUT of section-head max-width — full viewport width */
+  .section-ad-strip-wrap {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--tint-orange);
+    color: var(--marigold-deep);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.47rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-tag.pink { background: var(--tint-pink); color: var(--gulal); }
+  .section-tag.jade { background: var(--tint-jade); color: var(--jade-deep); }
+  .section-head h2 {
+    font-family: var(--serif-stamp);
+    font-size: clamp(1.08rem, 2.4vw, 1.56rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+  .section-head p {
+    color: var(--ink-soft);
+    font-size: 0.63rem;
+    font-weight: 500;
+  }
+
+  /* ===== REELS / STORIES STRIP ===== */
+  .reels-section { background: var(--ink); color: var(--cream); }
+  .reels-section .section-head h2 { color: var(--cream); }
+  .reels-section .section-head p { color: #C9C2D6; }
+
+  .reels-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0 22px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    direction: ltr;
+  }
+  .reels-scroll::-webkit-scrollbar { height: 8px; }
+  .reels-scroll::-webkit-scrollbar-thumb { background: var(--gulal); border-radius: 8px; }
+  .reels-scroll::-webkit-scrollbar-track { background: #2A2436; }
+
+  .reel-card {
+    scroll-snap-align: start;
+    flex: 0 0 156px;
+    background: #241F31;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 2px solid #3A3349;
+  }
+  .reel-card .embed-slot {
+    width: 100%;
+    aspect-ratio: 9 / 14;
+    background: linear-gradient(145deg, #2E2740, #1F1A2B);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    color: #C9C2D6;
+    text-align: center;
+    padding: 10px;
+  }
+  .reel-card .embed-slot iframe {
+    width: 100%; height: 100%; border: 0;
+  }
+  .reel-card .embed-slot .icon { font-size: 1.4rem; }
+  .reel-card .embed-slot small { font-size: 0.64rem; line-height: 1.3; color: #C9C2D6; }
+  .reel-card .reel-caption {
+    padding: 7px 9px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #E8E4F0;
+  }
+  .reel-card .reel-caption .src-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--marigold);
+    margin-bottom: 2px;
+  }
+
+  /* a wide "story" card for landscape/article style finds */
+  .reel-card.wide {
+    flex: 0 0 210px;
+  }
+  .reel-card.wide .embed-slot { aspect-ratio: 16/10; }
+
+  /* ===== PROJECT SHOWCASE ===== */
+  /* Vibrant showcase section background */
+  #showcase {
+    background:
+      radial-gradient(ellipse at 5% 20%, rgba(255,77,141,0.18) 0%, transparent 40%),
+      radial-gradient(ellipse at 95% 10%, rgba(255,140,66,0.18) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 80%, rgba(123,0,255,0.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 20% 70%, rgba(0,191,255,0.10) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 60%, rgba(0,200,83,0.08) 0%, transparent 35%),
+      linear-gradient(160deg, #FFF0FA 0%, #FFF9F2 35%, #F0F0FF 65%, #F0FFF8 100%);
+    position: relative;
+  }
+  /* sparkle corner accents */
+  #showcase::before {
+    content: '✦';
+    position: absolute; top: 40px; left: 40px;
+    font-size: 2rem; color: #FF4D8D; opacity: 0.35;
+    animation: sparkle-spin 5s ease-in-out infinite;
+  }
+  #showcase::after {
+    content: '✦';
+    position: absolute; top: 40px; right: 40px;
+    font-size: 1.5rem; color: #FF8C42; opacity: 0.35;
+    animation: sparkle-spin 4s ease-in-out infinite reverse;
+  }
+
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+  .showcase-grid .proj-card {
+    display: flex;
+    flex-direction: column;
+  }
+  @media (max-width: 900px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .showcase-grid { grid-template-columns: 1fr; } }
+
+  .proj-card {
+    background: #ffffff;
+    border: 3px solid var(--ink);
+    border-radius: var(--radius);
+    box-shadow: 5px 5px 0 rgba(26,22,37,0.9);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* removed max-height and overflow-y so card shows fully */
+    position: relative;
+    cursor: pointer;
+  }
+  /* Vivid top colour bar per card — rotates via nth-child */
+  .proj-card::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: linear-gradient(90deg, #FF4D8D, #FF8C42);
+    flex-shrink: 0;
+  }
+  .proj-card:nth-child(3n+2)::before { background: linear-gradient(90deg, #7B00FF, #00BFFF); }
+  .proj-card:nth-child(3n+3)::before { background: linear-gradient(90deg, #00C853, #00BFFF); }
+
+  .proj-card:hover {
+    transform: translate(-3px, -6px) rotate(-0.4deg);
+    box-shadow: 8px 10px 0 rgba(26,22,37,0.9);
+  }
+
+  .proj-card-top {
+    padding: 16px 18px 12px;
+    border-bottom: 3px dashed var(--ink);
+    position: relative;
+    background: linear-gradient(145deg, #fffcff 0%, #fff9f2 100%);
+    overflow: hidden;
+  }
+
+  /* ===== APP BACKGROUND MOCKUP — FULL CARD TOP BACKGROUND ===== */
+  .app-bg-mockup {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    overflow: hidden;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* No hazy overlay — let the mockup show fully and crisply */
+  /* Card text floats on top with a semi-transparent dark pill so it stays readable */
+  .proj-card-top .proj-id,
+  .proj-card-top .proj-icon,
+  .proj-card-top h3,
+  .proj-card-top .domain,
+  .proj-card-top .proj-tagline,
+  .proj-card-top .proj-top-visit {
+    position: relative;
+    z-index: 1;
+  }
+  /* Text legibility over dark app backgrounds */
+  .proj-card-top h3 {
+    text-shadow: 0 1px 8px rgba(0,0,0,0.7), 0 0 2px rgba(0,0,0,0.9);
+    color: #fff !important;
+  }
+  .proj-card-top .domain {
+    color: rgba(255,255,255,0.75) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-tagline {
+    color: #fff !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-id {
+    color: rgba(255,255,255,0.6) !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .proj-card-top .proj-icon {
+    border-color: rgba(255,255,255,0.35) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* ── MADAIX mockup: black/gold private beta screen ── */
+  .mockup-madaix {
+    background: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 10px;
+    width: 100%; height: 100%;
+  }
+  .mockup-madaix .mx-title {
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #E8A800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+  }
+  .mockup-madaix .mx-sub {
+    font-size: 0.52rem;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .mockup-madaix .mx-lock {
+    font-size: 0.62rem;
+    color: #E8A800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .mockup-madaix .mx-input {
+    width: 75%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.58rem;
+    color: #555;
+    text-align: center;
+  }
+  .mockup-madaix .mx-btn {
+    width: 75%;
+    background: #E8A800;
+    color: #000;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .mockup-madaix .mx-copy {
+    font-size: 0.45rem;
+    color: #444;
+    margin-top: 6px;
+  }
+
+  /* ── Live Setup mockup: actual live-setup.com design ── */
+  .mockup-livesetup {
+    background: #0d1117;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-height: 220px;
+    overflow: hidden;
+  }
+  .mockup-livesetup .ls-left {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .mockup-livesetup .ls-logo {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #00E5B0;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .mockup-livesetup .ls-desc {
+    font-size: 0.3rem;
+    color: #8899aa;
+    line-height: 1.5;
+  }
+  .mockup-livesetup .ls-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 3px;
+  }
+  .mockup-livesetup .ls-feat-icon {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    background: rgba(0,229,176,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.45rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mockup-livesetup .ls-feat-text strong {
+    display: block;
+    font-size: 0.32rem;
+    color: #fff;
+    font-weight: 700;
+  }
+  .mockup-livesetup .ls-feat-text span {
+    font-size: 0.27rem;
+    color: #667788;
+    line-height: 1.3;
+  }
+  .mockup-livesetup .ls-right {
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .mockup-livesetup .ls-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 4px;
+    gap: 10px;
+  }
+  .mockup-livesetup .ls-tab {
+    font-size: 0.32rem;
+    font-weight: 700;
+    color: #556677;
+    padding-bottom: 3px;
+  }
+  .mockup-livesetup .ls-tab.active {
+    color: #00E5B0;
+    border-bottom: 2px solid #00E5B0;
+  }
+  .mockup-livesetup .ls-field-label {
+    font-size: 0.28rem;
+    color: #aabbcc;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .mockup-livesetup .ls-input {
+    background: #1a2230;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+    padding: 4px 6px;
+    font-size: 0.3rem;
+    color: #445566;
+    width: 100%;
+  }
+  .mockup-livesetup .ls-signin-btn {
+    background: #00E5B0;
+    color: #000;
+    border-radius: 5px;
+    padding: 5px 6px;
+    font-size: 0.32rem;
+    font-weight: 800;
+    text-align: center;
+    margin-top: 3px;
+  }
+  .mockup-livesetup .ls-register {
+    font-size: 0.27rem;
+    color: #556677;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .mockup-livesetup .ls-register span { color: #00E5B0; }
+
+  /* ── Dhantron mockup: dark purple/cyan trading screen ── */
+  .mockup-dhantron {
+    background: linear-gradient(150deg, #0a0a1a 0%, #120d2a 50%, #0a1520 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 16px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-dhantron .dh-pill {
+    display: inline-flex;
+    background: rgba(0,180,255,0.12);
+    border: 1px solid rgba(0,180,255,0.25);
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 0.42rem;
+    color: #00d4ff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    width: fit-content;
+  }
+  .mockup-dhantron .dh-h {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .mockup-dhantron .dh-h span { color: #00E5FF; }
+  .mockup-dhantron .dh-log {
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .mockup-dhantron .dh-row {
+    font-family: 'Courier New', monospace;
+    font-size: 0.42rem;
+    color: #88ccdd;
+    line-height: 1.8;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .mockup-dhantron .dh-row .ts  { color: #5599bb; }
+  .mockup-dhantron .dh-row .ok  { color: #4ade80; }
+  .mockup-dhantron .dh-row .rng { color: #fb923c; }
+  .mockup-dhantron .dh-row .sel { color: #f87171; }
+  .mockup-dhantron .dh-row .buy { color: #4ade80; }
+
+  /* ── AIverse Campus mockup: gradient edu screen ── */
+  .mockup-aiversecampus {
+    background: linear-gradient(150deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-aiversecampus .av-icon { font-size: 2.2rem; }
+  .mockup-aiversecampus .av-title {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .mockup-aiversecampus .av-badge {
+    background: linear-gradient(90deg,#a855f7,#6366f1);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.42rem;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .mockup-aiversecampus .av-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  .mockup-aiversecampus .av-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 0.4rem;
+    color: #ccc;
+  }
+
+  /* ── Airunly mockup: agent task screen ── */
+  .mockup-airunly {
+    background: linear-gradient(150deg, #0a0f1e 0%, #0f1d38 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-airunly .ar-label {
+    font-size: 0.45rem;
+    color: #5599ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .mockup-airunly .ar-task {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(85,153,255,0.2);
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 0.45rem;
+    color: #cde;
+    line-height: 1.5;
+  }
+  .mockup-airunly .ar-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .mockup-airunly .ar-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.42rem;
+    color: #888;
+  }
+  .mockup-airunly .ar-step .dot {
+    width: 8px;height:8px;
+    border-radius: 50%;
+    background: #334;
+    flex-shrink: 0;
+  }
+  .mockup-airunly .ar-step.done .dot { background: #4ade80; }
+  .mockup-airunly .ar-step.active .dot { background: #facc15; animation: pulse 1s infinite; }
+  .mockup-airunly .ar-step.done { color: #4ade80; }
+  .mockup-airunly .ar-step.active { color: #facc15; }
+
+  /* ── Tuftub mockup: tool finder screen ── */
+  .mockup-tuftub {
+    background: linear-gradient(150deg, #0f1923 0%, #1a2535 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-tuftub .tt-q {
+    font-size: 0.46rem;
+    color: #aaa;
+    font-style: italic;
+    padding: 5px 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    border-left: 2px solid #ff8c42;
+  }
+  .mockup-tuftub .tt-result {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,140,66,0.08);
+    border: 1px solid rgba(255,140,66,0.2);
+    border-radius: 6px;
+    padding: 6px 8px;
+  }
+  .mockup-tuftub .tt-result .tt-icon { font-size: 1.2rem; }
+  .mockup-tuftub .tt-result .tt-name { font-size: 0.48rem; font-weight: 700; color: #ff8c42; }
+  .mockup-tuftub .tt-result .tt-desc { font-size: 0.38rem; color: #888; }
+
+  /* ── Jurissetu mockup: legal Q&A screen ── */
+  .mockup-jurissetu {
+    background: linear-gradient(150deg, #0d1117 0%, #1a1f2e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-jurissetu .js-q {
+    font-size: 0.46rem;
+    color: #ccc;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    border-left: 2px solid #7B00FF;
+    line-height: 1.4;
+  }
+  .mockup-jurissetu .js-ans {
+    font-size: 0.42rem;
+    color: #888;
+    line-height: 1.5;
+    padding: 0 2px;
+  }
+  .mockup-jurissetu .js-badge {
+    background: rgba(123,0,255,0.15);
+    border: 1px solid rgba(123,0,255,0.3);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 0.4rem;
+    color: #a855f7;
+    font-weight: 700;
+    width: fit-content;
+  }
+
+  /* ── BoardSol mockup: board governance screen ── */
+  .mockup-boardsol {
+    background: linear-gradient(150deg, #0a0f1e 0%, #111827 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 14px;
+    gap: 5px;
+    width: 100%; height: 100%;
+  }
+  .mockup-boardsol .bs-header {
+    font-size: 0.52rem;
+    font-weight: 700;
+    color: #fff;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .mockup-boardsol .bs-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.42rem;
+    color: #888;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .mockup-boardsol .bs-row .bs-status {
+    padding: 2px 6px;
+    border-radius: 999px;
+    font-size: 0.36rem;
+    font-weight: 700;
+  }
+  .mockup-boardsol .bs-status.approved { background: rgba(74,222,128,0.15); color: #4ade80; }
+  .mockup-boardsol .bs-status.pending  { background: rgba(250,204,21,0.15); color: #facc15; }
+
+  /* ── FinGoalInvesto mockup: goals tracker ── */
+  .mockup-fingoal {
+    background: linear-gradient(150deg, #0c1a0c 0%, #1a2e1a 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 16px;
+    gap: 8px;
+    width: 100%; height: 100%;
+  }
+  .mockup-fingoal .fg-goal {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .mockup-fingoal .fg-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.44rem;
+    color: #aaa;
+  }
+  .mockup-fingoal .fg-bar {
+    height: 7px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .mockup-fingoal .fg-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #00C853, #00BFFF);
+  }
+
+  /* ── Bitopine mockup: digital studio screen ── */
+  .mockup-bitopine {
+    background: linear-gradient(150deg, #0d0d1a 0%, #1a1030 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 14px;
+    gap: 7px;
+    width: 100%; height: 100%;
+  }
+  .mockup-bitopine .bp-logo {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  .mockup-bitopine .bp-logo span { color: #a855f7; }
+  .mockup-bitopine .bp-tags {
+    display: flex; gap: 5px; flex-wrap: wrap; justify-content: center;
+  }
+  .mockup-bitopine .bp-tag {
+    background: rgba(168,85,247,0.1);
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 4px;
+    padding: 3px 7px;
+    font-size: 0.4rem;
+    color: #c084fc;
+  }
+
+  /* ── Efundly mockup: funding finder ── */
+  .mockup-efundly {
+    background: linear-gradient(150deg, #0f1a0f 0%, #1a2e1f 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 14px;
+    gap: 6px;
+    width: 100%; height: 100%;
+  }
+  .mockup-efundly .ef-search {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,200,83,0.2);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.42rem;
+    color: #888;
+  }
+  .mockup-efundly .ef-result {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    background: rgba(0,200,83,0.06);
+    border-radius: 5px;
+  }
+  .mockup-efundly .ef-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #00C853;
+    flex-shrink: 0;
+  }
+  .mockup-efundly .ef-name { font-size: 0.43rem; color: #ccc; font-weight: 600; }
+  .mockup-efundly .ef-amt  { font-size: 0.4rem; color: #4ade80; margin-left: auto; }
+  .proj-id {
+    position: absolute;
+    top: 18px; right: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.77rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: 0.5px;
+  }
+  .proj-icon {
+    width: 26px; height: 26px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.96rem;
+    margin-bottom: 4px;
+    border: 2px solid var(--ink);
+  }
+  .proj-card-top h3 {
+    font-family: var(--serif-stamp);
+    font-size: 0.90rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--ink);
+  }
+  /* When inside a card that has an app background, text is overridden via .proj-card-top overrides above */
+  .proj-card-top .domain {
+    font-family: 'Courier New', monospace;
+    font-size: 0.66rem;
+    color: var(--ink-soft);
+    font-weight: 700;
+  }
+  .proj-tagline {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--gulal);
+    margin-top: 3px;
+  }
+  /* alternate tagline colours per card */
+  .proj-card:nth-child(3n+2) .proj-tagline { color: #7B00FF; }
+  .proj-card:nth-child(3n+3) .proj-tagline { color: #00876A; }
+
+  .proj-top-visit {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 3px;
+    padding: 3px 9px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .proj-top-visit:hover { background: var(--gulal); }
+  .proj-top-visit.beta { background: var(--marigold-deep); }
+
+  .proj-card-body {
+    padding: 8px 10px;
+    flex: 1;
+    /* card 1 (3n+1): deep pink/magenta theme */
+    background: linear-gradient(160deg, #1a0520 0%, #2d0a2e 100%);
+    color: #fff;
+  }
+  /* Per-card vivid body backgrounds */
+  .proj-card:nth-child(3n+2) .proj-card-body {
+    background: linear-gradient(160deg, #0a0520 0%, #160a40 100%);
+  }
+  .proj-card:nth-child(3n+3) .proj-card-body {
+    background: linear-gradient(160deg, #051a10 0%, #0a2e1a 100%);
+  }
+
+  /* Body text: bright white */
+  .proj-card-body .proj-block p {
+    color: rgba(255,255,255,0.92) !important;
+    font-size: 0.64rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .proj-block { margin-bottom: 5px; }
+  .proj-block:last-child { margin-bottom: 0; }
+  .proj-block .label {
+    font-size: 0.54rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #FF6EB0;
+    margin-bottom: 2px;
+    display: block;
+  }
+  .proj-card:nth-child(3n+2) .proj-block .label { color: #A78BFA; }
+  .proj-card:nth-child(3n+3) .proj-block .label { color: #34D399; }
+  .proj-block p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.92);
+    font-weight: 500;
+  }
+  .proj-block .who-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;
+  }
+  .proj-block .who-tags span {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .proj-card:nth-child(3n+2) .proj-block .who-tags span {
+    background: rgba(167,139,250,0.15);
+    color: #C4B5FD;
+    border-color: rgba(167,139,250,0.3);
+  }
+  .proj-card:nth-child(3n+3) .proj-block .who-tags span {
+    background: rgba(52,211,153,0.12);
+    color: #6EE7B7;
+    border-color: rgba(52,211,153,0.3);
+  }
+
+  .beta-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,140,66,0.2);
+    border: 1px solid rgba(255,140,66,0.5);
+    color: #FFD080;
+    font-size: 0.55rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 999px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .beta-flag .blink { width: 6px; height: 6px; background: var(--marigold); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+
+  .proj-card-cta {
+    padding: 8px 11px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.35);
+  }
+  .proj-visit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    padding: 7px;
+    background: linear-gradient(135deg, #FF4D8D, #FF8C42);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.68rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255,77,141,0.35);
+  }
+  .proj-visit-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,77,141,0.5);
+  }
+  .proj-card:nth-child(3n+2) .proj-visit-btn { background: linear-gradient(135deg, #7B00FF, #00BFFF); box-shadow: 0 4px 14px rgba(123,0,255,0.35); }
+  .proj-card:nth-child(3n+3) .proj-visit-btn { background: linear-gradient(135deg, #00C853, #00BFFF); box-shadow: 0 4px 14px rgba(0,200,83,0.3); }
+  .proj-visit-btn.beta-btn { background: linear-gradient(135deg, #FF8C42, #FF4D8D); }
+  .proj-visit-btn.coming-btn { background: #2a2a4a; color: #a7a9be; pointer-events: none; opacity: 0.7; box-shadow: none; }
+
+  /* icon background tints */
+  .tint-1 { background: var(--tint-orange); }
+  .tint-2 { background: var(--tint-pink); }
+  .tint-3 { background: var(--tint-jade); }
+
+  /* Side ad panels for showcase section — hidden, replaced by top pill strip */
+  #showcase { position: relative; }
+  .showcase-side-ads {
+    display: none !important;
+  }
+
+  /* ===== AD SLOTS ===== */
+  .ad-section { background: var(--tint-pink); }
+  .ad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .ad-slot {
+    background: var(--cream);
+    border: 3px dashed var(--ink);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .ad-slot .ad-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--ink-soft);
+    background: var(--cream-2);
+    padding: 4px 10px;
+    border-radius: 999px;
+    position: relative;
+    top: -4px;
+  }
+  .ad-slot .icon { font-size: 1.8rem; }
+  .ad-slot p { font-size: 0.88rem; color: var(--ink-soft); font-weight: 600; max-width: 220px; }
+  .ad-slot.featured { border-style: solid; background: var(--ink); color: var(--cream); }
+  .ad-slot.featured p { color: #C9C2D6; }
+  .ad-slot.featured .ad-label { background: #2A2436; color: var(--marigold); }
+
+  /* ===== AD SECTION ===== */
+  .ad-section {
+    padding: 80px 6%;
+    background: linear-gradient(135deg, #0D0B14 0%, #1A0D2E 40%, #0D1A2E 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .ad-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255,77,141,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 50%, rgba(255,140,66,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .ad-section .section-head h2 { color: #fff; }
+  .ad-section .section-head p { color: #a7a9be; }
+  .ad-section .section-tag { background: rgba(255,140,66,0.15); color: var(--marigold); }
+
+  .ad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── GLOWING AD SLOT CARDS ── */
+  .ad-slot {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1.5px dashed rgba(255,140,66,0.5);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--cream);
+  }
+  .ad-slot::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,140,66,0.0), rgba(255,77,141,0.0));
+    transition: background 0.25s ease;
+    border-radius: 20px;
+  }
+  .ad-slot:hover {
+    border-color: var(--gulal);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(255,77,141,0.25), 0 0 0 1px rgba(255,77,141,0.3);
+  }
+  .ad-slot:hover::before {
+    background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,77,141,0.08));
+  }
+  .ad-slot .ad-icon {
+    font-size: 2.4rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  .ad-slot .ad-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--marigold);
+    background: rgba(255,140,66,0.12);
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .ad-slot .ad-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+  .ad-slot .ad-desc {
+    font-size: 0.72rem;
+    color: #a7a9be;
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 200px;
+  }
+  .ad-slot .ad-cta {
+    margin-top: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--gulal);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  /* Placeholder empty slot */
+  .ad-slot.placeholder {
+    border-color: rgba(255,255,255,0.12);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .ad-slot.placeholder .ad-icon { font-size: 1.8rem; opacity: 0.4; }
+  .ad-slot.placeholder .ad-title { color: #6B6384; font-size: 0.8rem; }
+
+  /* Featured wide slot */
+  .ad-slot.featured {
+    grid-column: span 2;
+    flex-direction: row;
+    gap: 20px;
+    text-align: left;
+    border-style: solid;
+    border-color: rgba(255,140,66,0.6);
+    background: linear-gradient(135deg, rgba(255,140,66,0.08), rgba(255,77,141,0.06));
+  }
+  .ad-slot.featured .ad-icon { font-size: 3rem; flex-shrink: 0; }
+  .ad-slot.featured .ad-title { font-size: 1.2rem; }
+  @media (max-width: 640px) { .ad-slot.featured { grid-column: span 1; flex-direction: column; text-align: center; } }
+
+  /* ── SPARKLE AD STRIP (the floating pill bar) ── */
+  .sparkle-ad-strip {
+    position: relative;
+    padding: 44px 6%;
+    background: linear-gradient(135deg, #1A0030 0%, #2D0050 25%, #003060 60%, #1A0030 100%);
+    overflow: hidden;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid #FF4D8D;
+    border-bottom: 3px solid #FF8C42;
+    box-shadow: 0 0 60px rgba(255,77,141,0.3) inset, 0 0 40px rgba(255,140,66,0.2) inset;
+  }
+  /* animated glow sweep */
+  .sparkle-ad-strip::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,77,141,0.25) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 50%, rgba(255,140,66,0.2) 0%, transparent 55%);
+    animation: strip-pulse 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .sparkle-ad-strip::after {
+    content: '✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦  ✧  ✦';
+    position: absolute; bottom: 6px; left: 0; right: 0;
+    text-align: center; font-size: 0.55rem;
+    color: rgba(255,140,66,0.5); letter-spacing: 8px; pointer-events: none;
+  }
+  @keyframes strip-pulse {
+    0%,100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  .strip-label {
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .sparkle-ad-patch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #FF6B00, #FF1493);
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: 13px 28px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    animation: patch-float 3s ease-in-out infinite;
+    white-space: nowrap;
+    box-shadow: 0 0 18px rgba(255,77,141,0.6), 0 4px 16px rgba(0,0,0,0.4);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  }
+  .sparkle-ad-patch:nth-child(2) { background: linear-gradient(135deg, #7B00FF, #FF1493); animation-delay: 0.4s; }
+  .sparkle-ad-patch:nth-child(3) { background: linear-gradient(135deg, #00BFFF, #7B00FF); animation-delay: 0.8s; }
+  .sparkle-ad-patch:nth-child(4) { background: linear-gradient(135deg, #FF6B00, #FFD700); animation-delay: 1.2s; }
+  .sparkle-ad-patch:nth-child(5) { background: linear-gradient(135deg, #00C853, #00BFFF); animation-delay: 1.6s; }
+  .sparkle-ad-patch:nth-child(6) { background: linear-gradient(135deg, #FF1493, #FF6B00); animation-delay: 2.0s; }
+  .sparkle-ad-patch:nth-child(7) { background: linear-gradient(135deg, #FFD700, #FF6B00); animation-delay: 2.4s; }
+  .sparkle-ad-patch:nth-child(8) { background: linear-gradient(135deg, #7B00FF, #00BFFF); animation-delay: 2.8s; }
+  @keyframes patch-float {
+    0%,100% { transform: translateY(0px); filter: brightness(1); }
+    50% { transform: translateY(-7px); filter: brightness(1.25); box-shadow: 0 10px 30px rgba(255,77,141,0.7), 0 0 20px rgba(255,215,0,0.3); }
+  }
+  .sparkle-ad-patch:hover {
+    transform: translateY(-8px) scale(1.1);
+    filter: brightness(1.3);
+    box-shadow: 0 12px 40px rgba(255,77,141,0.8), 0 0 30px rgba(255,215,0,0.4);
+    border-color: #FFD700;
+  }
+  .sparkle-ad-patch .patch-spark {
+    font-size: 1.2rem;
+    animation: sparkle-spin 2s ease-in-out infinite;
+  }
+  .sparkle-ad-patch.empty {
+    border-style: dashed;
+    opacity: 0.35;
+    pointer-events: none;
+    font-size: 0.65rem;
+    color: #6B6384;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* ===== SIDE SPARKLE AD PANELS → now top horizontal strip ===== */
+  .hero {
+    overflow: hidden;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Hero ad pills: hidden (moved to section-ad-strip) */
+  .hero-side-ads {
+    display: none !important;
+  }
+
+  .side-ad-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: linear-gradient(135deg, #FF6B00, #FF1493);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    padding: 10px 18px 10px 8px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    pointer-events: all;
+    box-shadow: 0 0 18px rgba(255,77,141,0.55), 0 4px 14px rgba(0,0,0,0.35);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    animation: side-float 4s ease-in-out infinite;
+  }
+  /* Each pill gets a distinct vivid gradient */
+  .side-ad-pill:nth-child(2) { background: linear-gradient(135deg, #7B00FF, #FF1493); animation-delay: 0.7s; }
+  .side-ad-pill:nth-child(3) { background: linear-gradient(135deg, #00BFFF, #7B00FF); animation-delay: 1.4s; }
+  .side-ad-pill:nth-child(4) { background: linear-gradient(135deg, #FF6B00, #FFD700); animation-delay: 2.1s; }
+  .side-ad-pill:nth-child(5) { background: linear-gradient(135deg, #00C853, #00BFFF); }
+  .side-ad-pill:nth-child(6) { background: linear-gradient(135deg, #FF1493, #FF6B00); animation-delay: 0.5s; }
+  .side-ad-pill:nth-child(7) { background: linear-gradient(135deg, #FFD700, #FF6B00); animation-delay: 1.0s; }
+  .side-ad-pill:nth-child(8) { background: linear-gradient(135deg, #7B00FF, #00BFFF); animation-delay: 1.5s; }
+  @keyframes side-float {
+    0%,100% { transform: translateY(0px); filter: brightness(1); }
+    50%      { transform: translateY(-7px); filter: brightness(1.2); box-shadow: 0 10px 28px rgba(255,77,141,0.7); }
+  }
+  .side-ad-pill:hover {
+    transform: translateY(-5px) scale(1.08);
+    filter: brightness(1.3);
+    box-shadow: 0 12px 36px rgba(255,77,141,0.8), 0 0 24px rgba(255,215,0,0.3);
+    border-color: #FFD700;
+  }
+  .side-ad-pill .pill-icon {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+  .side-ad-pill .pill-text { line-height: 1.2; }
+  .side-ad-pill .pill-text strong { display: block; font-size: 0.8rem; color: #fff; }
+  .side-ad-pill .pill-text span { font-size: 0.62rem; opacity: 0.85; font-weight: 600; color: #FFE8A0; }
+
+  /* Reels section side ad panels — hidden, replaced by top pill strip */
+  .reels-section {
+    position: relative;
+  }
+  .reels-side-ads {
+    display: none !important;
+  }
+
+  /* dark variant — same vivid colours, slightly brighter glow on dark bg */
+  .side-ad-pill.dark {
+    border-color: rgba(255,255,255,0.5);
+    filter: brightness(1.1);
+    box-shadow: 0 0 22px rgba(255,77,141,0.7), 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .side-ad-pill.dark:hover {
+    filter: brightness(1.4);
+    box-shadow: 0 12px 40px rgba(255,77,141,0.9), 0 0 30px rgba(255,215,0,0.4);
+    border-color: #FFD700;
+  }
+
+  @media (max-width: 1100px) {
+    .hero-side-ads, .reels-side-ads { display: none; }
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 6% 36px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+  }
+  .footer-brand .logo { color: var(--cream); }
+  .footer-brand p {
+    color: #9D94B0;
+    font-size: 0.9rem;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+  .footer-links {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .footer-col h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--marigold);
+    margin-bottom: 12px;
+  }
+  .footer-col a, .footer-col span {
+    display: block;
+    font-size: 0.88rem;
+    color: #C9C2D6;
+    margin-bottom: 8px;
+  }
+  .footer-col a:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid #3A3349;
+    padding-top: 24px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: #7A7190;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-bottom .sign-off {
+    color: var(--cream);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 640px) {
+    .section { padding: 56px 6%; }
+    .hero { padding: 56px 6% 40px; }
+  }
+
+  /* ===== APP CARD TOP: TEXT LEGIBILITY OVER DARK MOCKUP BACKGROUNDS ===== */
+  /* These must be last to win over all base rules */
+  .proj-card-top h3 {
+    color: #fff !important;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,1);
+  }
+  .proj-card-top .domain {
+    color: rgba(255,255,255,0.8) !important;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-tagline {
+    color: #fff !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-id {
+    color: rgba(255,255,255,0.65) !important;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+  }
+  .proj-card-top .proj-icon {
+    border-color: rgba(255,255,255,0.4) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.6) !important;
+  }
+  .proj-card-top .proj-top-visit {
+    backdrop-filter: blur(4px);
+  }
+
+  /* ===== SECTION APP AD PILL STRIP (replaces floating side ads) ===== */
+  .section-ad-strip {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 14px 5% 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;          /* SINGLE LINE — never wrap */
+    margin-bottom: 0;
+    justify-content: flex-start;
+    /* hide scrollbar but keep scroll behaviour */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+  }
+  .section-ad-strip::-webkit-scrollbar { display: none; }
+  /* dark variant for dark backgrounds (reels section) */
+  .section-ad-strip.dark .side-ad-pill {
+    border-color: rgba(255,255,255,0.5);
+    filter: brightness(1.1);
+    box-shadow: 0 0 22px rgba(255,77,141,0.7), 0 4px 16px rgba(0,0,0,0.5);
+  }
+
+  /* ===== APP CARD: COMPACT TOP MOCKUP, ~45% SHORTER ===== */
+  .proj-card {
+    max-height: none;
+    overflow: visible;
+    overflow-y: visible;
+  }
+  .proj-card-top {
+    min-height: 114px; /* was 143px → further 20% reduction */
+    padding-top: 0;
+    padding-bottom: 0;
+    background: #0d0d1a !important; /* kill the white bleed — dark fallback behind all mockups */
+  }
+  .app-bg-mockup {
+    position: relative;
+    width: 100%;
+    min-height: 88px; /* was 110px → further 20% reduction */
+    overflow: hidden;
+  }
+  .app-bg-mockup::after { display: none !important; }
+
+  .proj-card-top .proj-id,
+  .proj-card-top .proj-icon,
+  .proj-card-top h3,
+  .proj-card-top .domain,
+  .proj-card-top .proj-tagline,
+  .proj-card-top .proj-top-visit {
+    position: relative;
+    z-index: 2;
+    display: block;
+  }
+  .proj-card-top-meta {
+    position: relative;
+    z-index: 2;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+    padding: 5px 10px 6px; /* was 7px 12px 8px → further 20% reduction */
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: -4px;
+  }
+  .mockup-madaix,
+  .mockup-livesetup,
+  .mockup-dhantron,
+  .mockup-aiversecampus,
+  .mockup-airunly,
+  .mockup-tuftub,
+  .mockup-jurissetu,
+  .mockup-boardsol,
+  .mockup-fingoal,
+  .mockup-bitopine,
+  .mockup-efundly {
+    width: 100%;
+    min-height: 88px; /* was 110px → further 20% reduction */
+    filter: brightness(1.15) saturate(1.2);
+  }
+  /* Placeholder mockup for dynamic cards without a real mockup image */
+  .mockup-placeholder {
+    width: 100%;
+    min-height: 88px;
+    background: linear-gradient(135deg, #0d0d2b 0%, #1a0a2e 40%, #0a1a2e 70%, #0d1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .mockup-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(130,60,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(0,180,148,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 60% 80%, rgba(255,140,66,0.10) 0%, transparent 50%);
+  }
+
+  /* ===== MOCKUP IDENTITY OVERLAY — icon+name strip at bottom of any mockup ===== */
+  .mockup-id-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 5px 8px 6px;
+    background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 70%, transparent 100%);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .mockup-id-overlay .mid-icon { font-size: 1.5rem; line-height: 1; }
+  .mockup-id-overlay .mid-name {
+    font-size: 0.68rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+  }
+  .mockup-id-overlay .mid-badge {
+    font-size: 0.38rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.4px;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  /* Ensure parent mockup divs are position:relative so overlay can anchor */
+  .mockup-madaix, .mockup-tuftub, .mockup-airunly, .mockup-bitopine,
+  .mockup-jurissetu, .mockup-boardsol, .mockup-efundly, .mockup-livesetup,
+  .mockup-dhantron, .mockup-fingoal { position: relative; overflow: hidden; }
+
+  /* ===== GOLD TEXT: Replace all hazy white on dark backgrounds ===== */
+  .ticker span { color: var(--gold) !important; }
+  .ticker span.pink { color: var(--gold) !important; }
+  .ticker span.marigold-c { color: var(--gold-soft) !important; }
+  .ticker span.jade-c { color: var(--gold-dim) !important; }
+
+  .reels-section .section-head h2 { color: var(--gold) !important; }
+  .reels-section .section-head p { color: var(--gold-soft) !important; }
+  .reel-card .embed-slot { color: var(--gold-soft) !important; }
+  .reel-card .embed-slot small { color: var(--gold-soft) !important; }
+  .reel-card .reel-caption { color: var(--gold) !important; }
+
+  .proj-card-body .proj-block p,
+  .proj-block p { color: var(--gold) !important; }
+  .proj-block .who-tags span { color: var(--gold) !important; }
+
+  .proj-card-top h3,
+  .proj-card-top-meta h3 { color: var(--gold) !important; text-shadow: 0 1px 10px rgba(0,0,0,0.9) !important; }
+  .proj-card-top .domain,
+  .proj-card-top-meta .domain { color: var(--gold-soft) !important; }
+  .proj-card-top .proj-tagline,
+  .proj-card-top-meta .proj-tagline { color: var(--gold) !important; }
+  .proj-card-top .proj-id,
+  .proj-card-top-meta .proj-id { color: var(--gold-dim) !important; }
+
+  .proj-top-visit { color: var(--gold) !important; background: rgba(0,0,0,0.75) !important; border: 1px solid rgba(255,215,0,0.5) !important; }
+  .proj-visit-btn { color: #fff !important; }
+  .beta-flag { color: var(--gold) !important; }
+
+  .ad-section .section-head h2 { color: var(--gold) !important; }
+  .ad-slot.featured { color: var(--gold) !important; }
+  .ad-slot.featured p { color: var(--gold-soft) !important; }
+  .ad-title { color: var(--gold) !important; }
+  .ad-desc { color: var(--gold-soft) !important; }
+
+  .footer-brand .logo { color: var(--gold) !important; }
+  .footer-col a { color: var(--gold-soft) !important; }
+  .footer-col a:hover { color: var(--gold) !important; }
+  .footer-col h4 { color: var(--gold) !important; }
+  .footer-bottom { color: var(--gold-soft) !important; }
+  .sign-off { color: var(--gold) !important; }
+
+  .side-ad-pill .pill-text strong { color: var(--gold) !important; }
+  .side-ad-pill .pill-text span { color: var(--gold-soft) !important; }
+  .sparkle-ad-patch { color: var(--gold) !important; }
+
+</style>
+
+</head>
+<body>
+
+<!-- ===== MARQUEE TICKER ===== -->
+<div class="ticker-wrap" role="presentation" aria-hidden="true">
+  <div class="ticker">
+    <span class="pink">✨ wow kya baat hai</span>
+    <span class="marigold-c">👀 bhai yeh dekh</span>
+    <span class="jade-c">🔥 yeh toh mast hai</span>
+    <span class="pink">🤯 itna useful tha yeh?!</span>
+    <span class="marigold-c">😭 why did nobody tell me this sooner</span>
+    <span class="jade-c">💡 saving this forever</span>
+    <span class="pink">✨ wow kya baat hai</span>
+    <span class="marigold-c">👀 bhai yeh dekh</span>
+    <span class="jade-c">🔥 yeh toh mast hai</span>
+    <span class="pink">🤯 itna useful tha yeh?!</span>
+    <span class="marigold-c">😭 why did nobody tell me this sooner</span>
+    <span class="jade-c">💡 saving this forever</span>
+  </div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="logo">kyabat<span class="dot">.</span>hai</div>
+  <div class="nav-links">
+    <a href="#reels">Reels &amp; Finds</a>
+    <a href="#showcase">Time Savers</a>
+    <a href="#ads">Promote</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <span class="sticker s1" aria-hidden="true">🔥</span>
+  <span class="sticker s2" aria-hidden="true">👀</span>
+  <span class="sticker s3" aria-hidden="true">✨</span>
+  <span class="sticker s4" aria-hidden="true">💡</span>
+
+  <!-- LEFT SIDE AD PILLS -->
+  <div class="hero-side-ads left" id="heroAdsLeft">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚡</div>
+      <div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
+
+  <!-- RIGHT SIDE AD PILLS -->
+  <div class="hero-side-ads right" id="heroAdsRight">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎓</div>
+      <div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
+
+  <div class="hero-inner">
+    <!-- APP AD PILL STRIP inside hero — full viewport width -->
+    <div class="section-ad-strip-wrap" style="margin-bottom:18px;">
+      <div class="section-ad-strip" style="justify-content:center;">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+      </div>
+    </div>
+    <div class="hero-eyebrow"><span class="blink"></span> Smart hacks something worth your time</div>
+
+    <h1>Internet ka sabse <span class="highlight">bawaal</span> stuff, <br> AI Tools & Apps <span class="highlight2"> life hacks</span> for all.</h1>
+
+    <p class="sub">Useful finds, new techs, "wow kya baat hai." daily hacks, useful platforms, AI Tools, Learning, Business ideas.</p>
+
+    <div class="hero-ctas">
+      <a href="#reels" class="btn btn-primary">wow kya baat hai 👇</a>
+      <a href="#showcase" class="btn btn-secondary">life hacks and full entertainment</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== REELS / STORIES SECTION ===== -->
+<section class="section reels-section" id="reels">
+
+  <!-- LEFT SIDE ADS (dark variant) -->
+  <div class="reels-side-ads left">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
+
+  <!-- RIGHT SIDE ADS (dark variant) -->
+  <div class="reels-side-ads right">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <!-- APP AD PILL STRIP — full-width, above the heading -->
+    <div class="section-ad-strip-wrap">
+      <div class="section-ad-strip dark">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+      </div>
+    </div>
+    <span class="section-tag jade" style="background:#2A2436; color:var(--jade);">Daily Wow</span>
+    <h2>Stuff you won't stop seeing and make you say it loud kya bat hai</h2>
+    <p>Reels, clips, weird tech demos, and life-hack-y things — the actual "kya baat hai" content. Swipe through.</p>
+  </div>
+
+  <div class="reels-scroll" id="reelsScroll">
+    <!-- 
+      ============================================================
+      EMBED SLOTS — paste your real links here.
+      Each .reel-card has an .embed-slot div. To add a real video:
+      
+      For YouTube:
+        <div class="embed-slot">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" 
+                  title="caption" allowfullscreen></iframe>
+        </div>
+
+      For Instagram Reels, use their official embed <blockquote> 
+      script (Instagram requires their embed.js to render it) — 
+      or simplest: link out with a thumbnail + "Watch on Instagram" button,
+      since Instagram embeds need their JS SDK loaded (see bottom of page).
+      ============================================================
+    -->
+
+    <div class="reel-card">
+      <div class="embed-slot" style="padding:0; position:relative;">
+        <a href="https://youtube.com/shorts/Mi4rJNDVhHU"
+           target="_blank" rel="noopener"
+           style="display:block; width:100%; height:100%;">
+    
+          <img src="World-Leaders.jpg"
+               alt="The CEO of Alphabet"
+               style="width:100%; height:100%; object-fit:cover; display:block;">
+    
+          <div style="position:absolute; top:50%; left:50%;
+                      transform:translate(-50%,-50%);
+                      width:60px; height:60px;
+                      background:rgba(255,255,255,0.9);
+                      border-radius:50%;
+                      display:flex; align-items:center; justify-content:center;
+                      font-size:1.4rem;">
+            ▶
+          </div>
+    
+          <div style="position:absolute; bottom:10px; left:10px;
+                      background:rgba(0,0,0,0.6); color:#fff;
+                      font-size:0.72rem; font-weight:700;
+                      padding:4px 10px; border-radius:999px;">
+            ▶ Watch on YouTube
+          </div>
+    
+        </a>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        The CEO of Alphabet — World Leaders.
+      </div>
+    </div>
+    <div class="reel-card">
+      <div class="embed-slot" style="padding:0; position:relative;">
+        <a href="https://www.instagram.com/reel/DZslzqdhk_v/" 
+           target="_blank" rel="noopener"
+           style="display:block; width:100%; height:100%;">
+
+          <img src="reel-thumb.jpg" 
+               alt="Very emotional video"
+               style="width:100%; height:100%; object-fit:cover; display:block;">
+
+          <div style="position:absolute; top:50%; left:50%;
+                      transform:translate(-50%,-50%);
+                      width:60px; height:60px;
+                      background:rgba(255,255,255,0.9);
+                      border-radius:50%;
+                      display:flex; align-items:center; justify-content:center;
+                      font-size:1.4rem;">
+            ▶
+          </div>
+
+          <div style="position:absolute; bottom:10px; left:10px;
+                      background:rgba(0,0,0,0.6); color:#fff;
+                      font-size:0.72rem; font-weight:700;
+                      padding:4px 10px; border-radius:999px;">
+            📱 Watch on Instagram
+          </div>
+
+        </a>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Instagram</span>
+        Very emotional video.
+      </div>
+    </div>
+    <div class="reel-card">
+      <div class="embed-slot" style="padding:0; position:relative;">
+    
+        <!-- Video plays on your site -->
+        <video
+          controls
+          playsinline
+          poster="success-story-thumb.jpg"
+          style="width:100%; height:100%; object-fit:cover; display:block;">
+          <source src="success-story.mp4" type="video/mp4">
+        </video>
+    
+        <!-- YouTube link badge at bottom -->
+        <a href="https://www.youtube.com/shorts/pe_uPrYPCVI"
+           target="_blank" rel="noopener"
+           style="position:absolute; bottom:10px; left:10px;
+                  background:rgba(0,0,0,0.6); color:#fff;
+                  font-size:0.72rem; font-weight:700;
+                  padding:4px 10px; border-radius:999px;
+                  text-decoration:none;">
+          ▶ Watch on YouTube
+        </a>
+    
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        Add your caption here.
+      </div>
+    </div>
+    <div class="reel-card wide">
+      <div class="embed-slot" data-slot="story-1">
+        <span class="icon">📰</span>
+        <small>Paste an article link / story embed here<br>(slot: story-1)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Story</span>
+        A longer find — news, article, deep-dive.
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-4">
+        <span class="icon">🎬</span>
+        <small>Paste YouTube/Reel embed here<br>(slot: reel-4)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">YouTube</span>
+        Add your caption here.
+      </div>
+    </div>
+
+    <div class="reel-card">
+      <div class="embed-slot" data-slot="reel-5">
+        <span class="icon">📱</span>
+        <small>Paste Instagram Reel link here<br>(slot: reel-5)</small>
+      </div>
+      <div class="reel-caption">
+        <span class="src-tag">Instagram</span>
+        Add your caption here.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECT SHOWCASE ===== -->
+<section class="section" id="showcase">
+
+  <!-- LEFT SIDE ADS -->
+  <div class="showcase-side-ads left">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚡</div>
+      <div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
+
+  <!-- RIGHT SIDE ADS -->
+  <div class="showcase-side-ads right">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎓</div>
+      <div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <!-- APP AD PILL STRIP — full-width, above the heading -->
+    <div class="section-ad-strip-wrap">
+      <div class="section-ad-strip">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+      </div>
+    </div>
+    <span class="section-tag">My Universe</span>
+    <h2>Apps, platforms and smart hacks AI Apps</h2>
+    <p>Not just memes — but all life hacks things. AI tools, fintech, legal tech. Here's the full lineup, what each one solves, and who it's for.</p>
+  </div>
+
+  <div class="showcase-grid">
+
+    <!-- MADAIX -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-madaix">
+            <div class="mx-title">MADAIX</div>
+            <div class="mx-sub">AI Ad Campaigns Platform</div>
+            <div class="mx-lock">🔒 Private Beta — Access Required</div>
+            <div class="mx-input">Enter access password</div>
+            <div class="mx-btn">Enter MADAIX →</div>
+            <div class="mx-copy">© 2026 MADAIX · Private Beta</div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🎯</div><div class="mid-name">MADAIX</div><div class="mid-badge">AI Ad Campaigns Platform</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 01</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🎯</div>
+            <div>
+              <h3 style="margin-bottom:2px;">MADAIX</h3>
+              <div class="domain">madaix.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Run Meta ad campaigns by just describing what you want.</p>
+          <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-top-visit beta">Request Access →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <span class="beta-flag"><span class="blink"></span>Private Beta</span>
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Running ad campaigns on Meta means juggling targeting, copy, budgets, and creative testing — most small brands either overpay an agency or do it badly themselves.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Type a plain-English brief like "₹30K retargeting campaign for cart abandoners, 25–40, home decor" — AI builds the audience, writes ad copy, and publishes straight to Meta. It keeps learning from what you approve or reject.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Agencies</span><span>D2C brands</span><span>Solo marketers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-visit-btn beta-btn">Request Access →</a>
+      </div>
+    </article>
+
+    <!-- AIVERSECAMPUS -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-aiversecampus">
+            <div class="av-icon">🎓</div>
+            <div class="av-title">AIverse Campus</div>
+            <div class="av-badge">Learn AI · Prompting · Agents</div>
+            <div class="av-pills">
+              <div class="av-pill">Prompt Engineering</div>
+              <div class="av-pill">Agentic AI</div>
+              <div class="av-pill">Workflows</div>
+              <div class="av-pill">Real Projects</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 02</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🎓</div>
+            <div>
+              <h3 style="margin-bottom:2px;">AIverse Campus</h3>
+              <div class="domain">www.aiversecampus.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Stop using AI the wrong way — learn how it's actually meant to be used.</p>
+          <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most people use AI tools like a search bar and walk away unimpressed, when the real value comes from learning prompting, agentic workflows, and how to apply AI to actual work.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A learning hub for AI and agentic AI skills — built for people who want to go from "I tried ChatGPT once" to actually using AI professionally.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Students</span><span>Professionals</span><span>Career switchers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- TUFTUB -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-tuftub">
+            <div class="tt-q">"I need to create a short explainer video for my product…"</div>
+            <div style="font-size:0.3rem;color:#555;padding:2px 0;">✦ Best match for your task:</div>
+            <div class="tt-result">
+              <div class="tt-icon">🎬</div>
+              <div>
+                <div class="tt-name">Pictory AI</div>
+                <div class="tt-desc">Script-to-video in minutes</div>
+              </div>
+            </div>
+            <div class="tt-result" style="opacity:0.6;">
+              <div class="tt-icon">🖼️</div>
+              <div>
+                <div class="tt-name">Synthesia</div>
+                <div class="tt-desc">AI avatar presenter</div>
+              </div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🧰</div><div class="mid-name">Tuftub</div><div class="mid-badge">The right AI tool for every task</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 03</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">🧰</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Tuftub</h3>
+              <div class="domain">tuftub.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">The right AI tool for every task — picked for you, automatically.</p>
+          <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>There are hundreds of AI tools now, and figuring out which one actually fits your task is its own research project.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Describe your task, and it routes you to the AI tool actually built for it — instead of you guessing between a dozen tabs.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Anyone overwhelmed by AI tool choice</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- AIRUNLY -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-airunly">
+            <div class="ar-label">🤖 Agent Task</div>
+            <div class="ar-task">Research top 5 SaaS pricing models and summarise key takeaways.</div>
+            <div class="ar-steps">
+              <div class="ar-step done"><div class="dot"></div>Search web sources</div>
+              <div class="ar-step done"><div class="dot"></div>Extract pricing data</div>
+              <div class="ar-step active"><div class="dot"></div>Summarising findings…</div>
+              <div class="ar-step"><div class="dot"></div>Prepare report</div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🤖</div><div class="mid-name">Airunly</div><div class="mid-badge">Tell it what to do. Watch AI do the rest.</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 05</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">🤖</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Airunly</h3>
+              <div class="domain">www.airunly.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Tell it what to do. Watch AI do the rest.</p>
+          <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most "AI tools" still need you to babysit every step — copy this output, paste it there, repeat. That's not automation, that's just typing with extra steps.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>An agentic AI tool built to take a task description and actually carry it out end-to-end, instead of just generating a draft and handing the rest back to you.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Busy operators</span><span>Solo founders</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- EAIIN -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-bitopine" style="background:linear-gradient(150deg,#0d1a0d,#1a2e1a);position:relative;overflow:hidden;">
+            <div class="bp-logo" style="color:#4ade80;">E<span style="color:#86efac;">aiin</span></div>
+            <div style="font-size:0.3rem;color:#888;letter-spacing:1px;">Domain Intelligence Platform</div>
+            <div class="bp-tags">
+              <div class="bp-tag" style="color:#4ade80;border-color:rgba(74,222,128,0.25);">Domain Search</div>
+              <div class="bp-tag" style="color:#4ade80;border-color:rgba(74,222,128,0.25);">Brand Names</div>
+              <div class="bp-tag" style="color:#4ade80;border-color:rgba(74,222,128,0.25);">Valuation</div>
+            </div>
+            <div class="mockup-id-overlay"><div class="mid-icon">🌐</div><div class="mid-name">Eaiin</div><div class="mid-badge">Domain Intelligence Platform</div></div>
+          </div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 06</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">🌐</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Eaiin</h3>
+              <div class="domain">eaiin.store</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Your domain is your most powerful asset — own it properly.</p>
+          <a href="https://eaiin.store" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>A brand's domain is often an afterthought, picked in a rush — when actually it's one of the most valuable, permanent assets a business owns.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A domain-focused platform helping people understand, acquire, and make the most of strong domain names for their brand.</p>
+          <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:6px; font-style:italic;">(best-guess description — confirming exact details soon)</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Brand owners</span><span>Founders</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://eaiin.store" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- BITOPINE -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-bitopine">
+            <div class="bp-logo">BIT<span>O</span>PINE</div>
+            <div style="font-size:0.3rem;color:#888;letter-spacing:1px;">Digital Excellence, Delivered.</div>
+            <div class="bp-tags">
+              <div class="bp-tag">Web Apps</div>
+              <div class="bp-tag">Landing Pages</div>
+              <div class="bp-tag">SaaS Builds</div>
+              <div class="bp-tag">UI/UX</div>
+            </div>
+            <div class="mockup-id-overlay"><div class="mid-icon">💻</div><div class="mid-name">Bitopine</div><div class="mid-badge">Digital Excellence, Delivered</div></div>
+          </div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 07</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">💻</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Bitopine</h3>
+              <div class="domain">bitopine.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Digital excellence, delivered to you.</p>
+          <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Businesses needing web and digital work often bounce between freelancers with inconsistent quality and big agencies that overcharge for simple builds.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A digital services brand — websites, web apps, and digital builds delivered with a consistent, professional standard.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Small businesses</span><span>Founders needing a site built fast</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- JURISSETU -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-jurissetu">
+            <div class="js-badge">⚖️ Legal Q&amp;A · AI-Powered</div>
+            <div class="js-q">"Can my landlord increase rent mid-tenancy without notice?"</div>
+            <div class="js-ans">Under the Rent Control Act, landlords generally cannot increase rent during a fixed lease period without mutual consent. You have the right to…</div>
+            <div class="js-badge" style="margin-top:4px;">📄 Not legal advice · Consult a lawyer</div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">⚖️</div><div class="mid-name">Jurissetu</div><div class="mid-badge">Legal Q&A · AI-Powered</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 08</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">⚖️</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Jurissetu</h3>
+              <div class="domain">jurissetu.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Your legal questions, answered with authority.</p>
+          <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Basic legal questions often mean an expensive consultation just to get a starting point, which stops a lot of people from even asking.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>An AI-powered legal Q&amp;A platform that gives clear, grounded answers to common legal questions, so you walk into any real consultation already informed.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Individuals</span><span>Small business owners</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- BOARDSOL -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-boardsol">
+            <div class="bs-header">🗂️ Board Meetings · Q3 2026</div>
+            <div class="bs-row"><span>Annual Report Review</span><span class="bs-status approved">Approved</span></div>
+            <div class="bs-row"><span>Budget Allocation FY27</span><span class="bs-status approved">Approved</span></div>
+            <div class="bs-row"><span>New Director Appointment</span><span class="bs-status pending">Pending</span></div>
+            <div class="bs-row"><span>Compliance Audit Report</span><span class="bs-status pending">Pending</span></div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">🗂️</div><div class="mid-name">BoardSol</div><div class="mid-badge">Board Management · Modern India</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 09</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">🗂️</div>
+            <div>
+              <h3 style="margin-bottom:2px;">BoardSol</h3>
+              <div class="domain">boardsol.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Secure board management for modern India.</p>
+          <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Board meetings still run on email threads and shared folders for documents that are often confidential and compliance-sensitive.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A board management platform — meeting scheduling, secure document sharing, minutes, and approvals — built around how Indian companies actually run governance.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Company boards</span><span>Compliance teams</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- EFUNDLY -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-efundly">
+            <div class="ef-search">🔍 "startup seed funding under ₹50L…"</div>
+            <div style="font-size:0.3rem;color:#555;padding:2px 0;">✦ Top matches:</div>
+            <div class="ef-result">
+              <div class="ef-dot"></div>
+              <div class="ef-name">Startup India Seed Fund</div>
+              <div class="ef-amt">₹20L</div>
+            </div>
+            <div class="ef-result">
+              <div class="ef-dot"></div>
+              <div class="ef-name">SIDBI Micro Finance</div>
+              <div class="ef-amt">₹50L</div>
+            </div>
+            <div class="ef-result" style="opacity:0.6;">
+              <div class="ef-dot"></div>
+              <div class="ef-name">Angel Network India</div>
+              <div class="ef-amt">₹1Cr+</div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">✅</div><div class="mid-name">Efundly</div><div class="mid-badge">Find the right funding, fast</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 11</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">✅</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Efundly</h3>
+              <div class="domain">efundly.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Funding and finance, made simple to access.</p>
+          <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Finding the right funding option — whether for a business or a personal need — usually means wading through confusing eligibility criteria across multiple lenders.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A funding-focused platform designed to simplify how individuals and small businesses find and access financial support.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Small businesses</span><span>Individuals seeking funding</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- LIVE-SETUP -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-livesetup">
+            <div class="ls-left">
+              <div class="ls-logo">live-setup</div>
+              <div class="ls-desc">Automate your BankNifty options trading via TradingView signals — executed live in your own Shoonya broker account.</div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">⚡</div>
+                <div class="ls-feat-text"><strong>Fully Automated</strong><span>Signals from TradingView execute instantly via Shoonya API.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">🔒</div>
+                <div class="ls-feat-text"><strong>Your Own Account</strong><span>Trades execute in your own Shoonya broker account.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">🎁</div>
+                <div class="ls-feat-text"><strong>15-Day Free Trial</strong><span>Register now and get 15 days of live trading access.</span></div>
+              </div>
+              <div class="ls-feature">
+                <div class="ls-feat-icon">📊</div>
+                <div class="ls-feat-text"><strong>Live P&amp;L Tracking</strong><span>Daily and monthly performance reports on every trade.</span></div>
+              </div>
+            </div>
+            <div class="ls-right">
+              <div class="ls-tabs">
+                <div class="ls-tab active">Sign In</div>
+                <div class="ls-tab">Register Free</div>
+              </div>
+              <div class="ls-field-label">Email Address</div>
+              <div class="ls-input">you@example.com</div>
+              <div class="ls-field-label" style="margin-top:3px;">Password</div>
+              <div class="ls-input">••••••••</div>
+              <div class="ls-signin-btn">Sign In →</div>
+              <div class="ls-register">New here? <span>Register for free 15-day trial</span></div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">⚡</div><div class="mid-name">Live Setup</div><div class="mid-badge">Algo Trading · Multi-Broker</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 12</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-3" style="margin-bottom:0;">⚡</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Live Setup</h3>
+              <div class="domain">live-setup.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">One TradingView signal, fired out to every connected trader's account.</p>
+          <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Traders following the same strategy usually have to manually copy signals into their own broker accounts — slow, error-prone, and impossible to scale past a handful of people.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A multi-user algo trading platform: a TradingView webhook fires once, and the engine pushes it out to every subscribed user's account automatically, with per-user licensing and controls.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Strategy creators</span><span>Algo traders</span><span>Trading communities</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- DHANTRON -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-dhantron">
+            <div class="dh-pill">BankNifty Options · Automated · SEBI Compliant</div>
+            <div class="dh-h">Trade Like a<br><span>Market Maker.</span><br>Without the Desk.</div>
+            <div class="dh-log">
+              <div class="dh-row"><span class="ts">09:15:01</span> <span class="ok">[OK]</span> Session started</div>
+              <div class="dh-row"><span class="ts">09:15:32</span> <span class="rng">[RANGE]</span> Collecting 20/20</div>
+              <div class="dh-row"><span class="ts">09:16:04</span> <span class="ok">[BIAS]</span> CE · BNF 57,420</div>
+              <div class="dh-row"><span class="ts">09:16:05</span> <span class="sel">[SELL]</span> 57500 CE · qty 30</div>
+              <div class="dh-row"><span class="ts">09:16:05</span> <span class="buy">[BUY]</span> 57800 CE · qty 30</div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">📈</div><div class="mid-name">Dhantron</div><div class="mid-badge">Automated Options Trading</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 13</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">📈</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Dhantron</h3>
+              <div class="domain">dhantron.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Trade like a market maker — without sitting at a trading desk all day.</p>
+          <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Market-maker-style strategies (spreads, hedges, premium decay plays) are powerful but need constant monitoring most retail traders simply don't have time for.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>Automates the kind of disciplined, spread-based options trading that desks run professionally — entries, hedges, and exits handled systematically, so you're not glued to a screen.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Options traders</span><span>Busy professionals</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- FINGOALINVESTO -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-fingoal">
+            <div class="fg-goal">
+              <div class="fg-label"><span>🏠 Own a House</span><span style="color:#4ade80">68%</span></div>
+              <div class="fg-bar"><div class="fg-fill" style="width:68%"></div></div>
+            </div>
+            <div class="fg-goal">
+              <div class="fg-label"><span>✈️ Europe Trip</span><span style="color:#4ade80">42%</span></div>
+              <div class="fg-bar"><div class="fg-fill" style="width:42%"></div></div>
+            </div>
+            <div class="fg-goal">
+              <div class="fg-label"><span>🛡️ Emergency Fund</span><span style="color:#facc15">91%</span></div>
+              <div class="fg-bar"><div class="fg-fill" style="width:91%;background:linear-gradient(90deg,#facc15,#4ade80)"></div></div>
+            </div>
+          
+            <div class="mockup-id-overlay"><div class="mid-icon">💰</div><div class="mid-name">FinGoalInvesto</div><div class="mid-badge">Your money goals, mapped & tracked</div></div></div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 14</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-1" style="margin-bottom:0;">💰</div>
+            <div>
+              <h3 style="margin-bottom:2px;">FinGoalInvesto</h3>
+              <div class="domain">fingoalinvesto.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Put a name and a number on your money goals — then actually hit them.</p>
+          <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Most people save and invest without a clear goal attached, which makes it easy to dip into funds or lose motivation halfway.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A goal-based investing tool that helps you map savings and investments to specific life goals — a house, a trip, an emergency fund — and tracks progress toward each.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>First-time investors</span><span>Goal-based savers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- DRAPYFY -->
+    <article class="proj-card">
+      <div class="proj-card-top" style="padding:0;">
+        <div class="app-bg-mockup">
+          <div class="mockup-aiversecampus" style="background:linear-gradient(150deg,#1a0d1a,#2e1a2e);">
+            <div class="av-icon">🧵</div>
+            <div class="av-title" style="color:#f0abfc;">Drapyfy</div>
+            <div class="av-badge" style="background:linear-gradient(90deg,#c026d3,#9333ea);">Fashion · Style · Drapes</div>
+            <div class="av-pills">
+              <div class="av-pill">Ethnic Wear</div>
+              <div class="av-pill">Saree Drapes</div>
+              <div class="av-pill">Modern Fusion</div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card-top-meta">
+          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 15</span>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <div class="proj-icon tint-2" style="margin-bottom:0;">🧵</div>
+            <div>
+              <h3 style="margin-bottom:2px;">Drapyfy</h3>
+              <div class="domain">drapyfy.com</div>
+            </div>
+          </div>
+          <p class="proj-tagline">Fashion and style, draped the way you actually want it.</p>
+          <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
+        </div>
+      </div>
+      <div class="proj-card-body">
+        <div class="proj-block">
+          <span class="label">The problem</span>
+          <p>Finding fashion or styling that matches a specific look or occasion usually means scrolling endlessly across scattered sources.</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">What it does</span>
+          <p>A fashion and styling-focused platform — built around discovering and curating drapes, outfits, and style choices.</p>
+          <p style="font-size:0.78rem; color:var(--ink-soft); margin-top:6px; font-style:italic;">(best-guess description — confirming exact details soon)</p>
+        </div>
+        <div class="proj-block">
+          <span class="label">Who it's for</span>
+          <div class="who-tags"><span>Fashion-conscious shoppers</span></div>
+        </div>
+      </div>
+      <div class="proj-card-cta">
+        <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
+      </div>
+    </article>
+
+    <!-- ── Dynamic app cards injected from admin ── -->
+  </div>
+</section>
+<section class="section ad-section" id="ads">
+  <div class="section-head">
+    <span class="section-tag pink" style="background:var(--cream);">Sponsored Corner</span>
+    <h2>Ads I'm running (made with MADAIX AI ad tool)</h2>
+    <p>These slots are powered by MADAIX — Meta AI ad platform. Currently placeholders, ready to go live once campaigns are published.</p>
+  </div>
+
+  <div class="ad-grid">
+    <div class="ad-slot featured">
+      <span class="ad-label">Ad Slot 01 — Featured</span>
+      <span class="icon">🎯</span>
+      <p>Your biggest promo goes here — generated and managed via MADAIX.</p>
+    </div>
+    <div class="ad-slot">
+      <span class="ad-label">Ad Slot 02</span>
+      <span class="icon">📢</span>
+      <p>Smaller promo / cross-link to one of your other projects.</p>
+    </div>
+    <div class="ad-slot">
+      <span class="ad-label">Ad Slot 03</span>
+      <span class="icon">🪧</span>
+      <p>Reserved for a rotating banner — swap creatives anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPARKLE FLOATING AD STRIP ===== -->
+<div class="sparkle-ad-strip" id="sparkleAdStrip">
+  <div class="strip-label">✦ Explore More Awesome Sites ✦</div>
+  <a href="https://madaix.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-1">
+    <span class="patch-spark">🎯</span> <span>MADAIX — AI Ad Campaigns</span>
+  </a>
+  <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-2">
+    <span class="patch-spark">⚡</span> <span>Live Setup — Algo Trading</span>
+  </a>
+  <a href="https://tuftub.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-3">
+    <span class="patch-spark">🧰</span> <span>Tuftub — Find the Right AI Tool</span>
+  </a>
+  <a href="https://jurissetu.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-4">
+    <span class="patch-spark">⚖️</span> <span>Jurissetu — Legal Q&amp;A AI</span>
+  </a>
+  <a href="https://boardsol.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-5">
+    <span class="patch-spark">🗂️</span> <span>BoardSol — Board Management</span>
+  </a>
+  <a href="https://efundly.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-6">
+    <span class="patch-spark">✅</span> <span>Efundly — Find Funding Fast</span>
+  </a>
+  <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-7">
+    <span class="patch-spark">🎓</span> <span>AIverse Campus — Learn AI</span>
+  </a>
+  <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-8">
+    <span class="patch-spark">📈</span> <span>Dhantron — Options Trading</span>
+  </a>
+</div>
+
+<!-- ===== AD / PROMOTE SECTION ===== -->
+<section class="section ad-section" id="ads">
+  <div class="section-head">
+    <span class="section-tag">✦ Promote</span>
+    <h2>Advertise Here — Reach the Right People</h2>
+    <p>Place your brand, product, or website right in front of curious, tech-savvy visitors. Add slots from your admin panel.</p>
+  </div>
+
+  <div class="ad-grid" id="adGrid">
+
+    <a href="https://kyabathai.com" class="ad-slot featured" id="ad-feat-1">
+      <div class="ad-icon">✦</div>
+      <div>
+        <div class="ad-label">Featured Sponsor</div>
+        <div class="ad-title">Your Brand Here — Premium Spot</div>
+        <div class="ad-desc">This premium wide slot is yours. Add your site link, icon, title and description from the admin panel.</div>
+        <div class="ad-cta">Get this spot →</div>
+      </div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-1">
+      <div class="ad-icon">🚀</div>
+      <div class="ad-label">Ad Slot 1</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Short description of your product or service — editable from /admin panel.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-2">
+      <div class="ad-icon">💡</div>
+      <div class="ad-label">Ad Slot 2</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Add your link and description from the kyabathai.com/admin panel in seconds.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot" id="ad-slot-3">
+      <div class="ad-icon">⚡</div>
+      <div class="ad-label">Ad Slot 3</div>
+      <div class="ad-title">Your Site Title</div>
+      <div class="ad-desc">Update this slot any time using the Promote tab in your admin dashboard.</div>
+      <div class="ad-cta">Visit Now →</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-4">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-5">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+    <a href="#" class="ad-slot placeholder" id="ad-slot-6">
+      <div class="ad-icon">＋</div>
+      <div class="ad-title">Empty slot — add from admin</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo">kyabat<span class="dot" style="color:var(--gulal);">.</span>hai</div>
+      <p>A internet finds "wow kya baat hai" — plus a tour useful apps, platform, and tools life made easy.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#reels">Reels &amp; Finds</a>
+        <a href="#showcase">WOW Apps</a>
+        <a href="#ads">Promote</a>
+      </div>
+      <div class="footer-col">
+        <h4>Useful Sites</h4>
+        <a href="https://madaix.com" target="_blank" rel="noopener">Madaix</a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener">Live Setup</a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener">Dhantron</a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener">AIverse Campus</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="sign-off">Life made easy, entertaining and enjoy scrolling and a little too much chai. ☕</p>
+    <p>© <span id="year"></span> Kya Baat Hai. All the wow, none of the spam.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Pause ticker on hover/focus for accessibility / readability
+  const tickerWrap = document.querySelector('.ticker-wrap');
+  const ticker = document.querySelector('.ticker');
+  if (tickerWrap && ticker) {
+    tickerWrap.addEventListener('mouseenter', () => ticker.style.animationPlayState = 'paused');
+    tickerWrap.addEventListener('mouseleave', () => ticker.style.animationPlayState = 'running');
+  }
+</script>
+<script async src="//www.instagram.com/embed.js"></script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SUPABASE AUTO-UPDATE FIX
+     Lets you change reel content from kyabathai.com/admin without
+     editing HTML. If a slot has no saved content (or keys not set
+     yet), the original card below stays exactly as-is.
+     ══════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async () => {
+  // ── PASTE YOUR KEYS HERE (same ones you put in admin.html) ──
+  const SUPABASE_URL      = 'https://lnbwqctcdwthpggrxukp.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxuYndxY3RjZHd0aHBnZ3J4dWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwNTQ4ODgsImV4cCI6MjA5NzYzMDg4OH0.JX7gTfcCsDrDFFr7HzYrJUuXnZAzXygnXY0MaH-Khds';
+
+  // Bail out quietly if keys not configured yet -> static cards stay.
+  if (SUPABASE_URL.indexOf('YOUR_') === 0 || !window.supabase) return;
+
+  let c;
+  try {
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await sb
+      .from('kyabathai_content').select('content').eq('id', 'main').single();
+    if (error || !data) return;
+    c = data.content || {};
+  } catch (e) { return; }
+
+  // ── Slot -> card mapping (matches your current card order) ──
+  //   card 0  YouTube short      -> r1
+  //   card 1  Instagram reel     -> r2
+  //   card 2  your own .mp4      -> r4 (admin "Own Video")
+  //   card 3  Story / article    -> story
+  //   card 4  empty YouTube slot -> r3
+  //   card 5  empty Instagram    -> r5
+  const MAP = [
+    { fn: 'yt',    key: 'r1' },
+    { fn: 'ig',    key: 'r2' },
+    { fn: 'own',   key: 'r4' },
+    { fn: 'story', key: 'story' },
+    { fn: 'yt',    key: 'r3' },
+    { fn: 'ig',    key: 'r5' },
+  ];
+
+  const cards = document.querySelectorAll('#reelsScroll .reel-card');
+
+  function setCaption(card, tag, text) {
+    const cap = card.querySelector('.reel-caption');
+    if (cap) cap.innerHTML = '<span class="src-tag">' + tag + '</span> ' + (text || '');
+  }
+  function prep(slot) { slot.style.padding = '0'; slot.style.position = 'relative'; }
+
+  function getYTId(url) {
+    // Extracts YouTube video ID from shorts, youtu.be, or regular URLs
+    const m = url.match(/(?:shorts\/|youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{11})/);
+    return m ? m[1] : null;
+  }
+
+  function renderYT(card, slot, d) {
+    if (!d || !d.url || d.url.trim() === '') return;
+    prep(slot);
+    // Auto-get YouTube thumbnail if no manual one provided
+    const ytId = getYTId(d.url);
+    const autoThumb = ytId ? 'https://i.ytimg.com/vi/' + ytId + '/hqdefault.jpg' : '';
+    const thumbSrc = d.thumb ? d.thumb : autoThumb;
+    const thumb = thumbSrc
+      ? '<img src="' + thumbSrc + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
+      : '';
+    slot.innerHTML =
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;background:#1a1625;">' +
+        thumb +
+        '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">&#9654;</div>' +
+        '<div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;">&#9654; Watch on YouTube</div>' +
+      '</a>';
+    setCaption(card, 'YouTube', d.caption);
+  }
+
+  function renderIG(card, slot, d) {
+    if (!d || !d.url || d.url.trim() === '') return;
+    prep(slot);
+    // Manual thumb if provided, otherwise Instagram gradient placeholder
+    const thumb = d.thumb
+      ? '<img src="' + d.thumb + '" alt="' + (d.caption || '') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display=\'none\'">'
+      : '<div style="width:100%;height:100%;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;font-size:3rem;">📸</div>';
+    slot.innerHTML =
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:block;width:100%;height:100%;position:relative;background:#1A1625;">' +
+        thumb +
+        '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">&#9654;</div>' +
+        '<div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;">&#128241; Watch on Instagram</div>' +
+      '</a>';
+    setCaption(card, 'Instagram', d.caption);
+  }
+
+  function renderOwn(card, slot, d) {
+    if (!d || !d.video || d.video.trim() === '') return;
+    prep(slot);
+    const link = d.ytlink
+      ? '<a href="' + d.ytlink + '" target="_blank" rel="noopener" style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;border-radius:999px;text-decoration:none;">&#9654; Watch on YouTube</a>'
+      : '';
+    slot.innerHTML =
+      '<video controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;">' +
+        '<source src="' + d.video + '" type="video/mp4"></video>' + link;
+    setCaption(card, 'YouTube', d.caption);
+  }
+
+  function renderStory(card, slot, d) {
+    if (!d || !d.url || d.url.trim() === '') return;
+    slot.innerHTML =
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:100%;height:100%;padding:1.5rem;text-decoration:none;color:inherit;">' +
+        '<span style="font-size:0.75rem;font-weight:700;text-transform:uppercase;color:#FF8C42;letter-spacing:0.5px;margin-bottom:0.5rem;">&#128240; ' + (d.source || 'Article') + '</span>' +
+        '<h3 style="font-size:1.1rem;font-weight:800;color:#FFF9F2;line-height:1.35;margin-bottom:0.5rem;">' + (d.title || '') + '</h3>' +
+        '<p style="font-size:0.85rem;color:#a7a9be;line-height:1.5;">' + (d.desc || '') + '</p>' +
+        '<span style="margin-top:1rem;font-size:0.8rem;color:#FF8C42;font-weight:700;">Read More &#8594;</span>' +
+      '</a>';
+    setCaption(card, d.source || 'Story', d.title);
+  }
+
+  function renderDoc(card, slot, d) {
+    if (!d || !d.url || d.url.trim() === '') return;
+    prep(slot);
+    const ext = (d.url.split('.').pop() || '').toLowerCase().slice(0,4);
+    const icon = ext === 'pdf' ? '📕' : (ext === 'doc' || ext === 'docx') ? '📘' : '📄';
+    slot.innerHTML =
+      '<a href="' + d.url + '" target="_blank" rel="noopener" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#2a2a4a,#1a1625);text-decoration:none;color:inherit;gap:0.6rem;">' +
+        '<span style="font-size:2.6rem;">' + icon + '</span>' +
+        '<span style="font-size:0.75rem;font-weight:700;color:#FF8C42;background:rgba(0,0,0,0.4);padding:4px 12px;border-radius:999px;">' + (d.label || 'View Document') + '</span>' +
+      '</a>';
+    setCaption(card, d.source || 'Document', d.caption);
+  }
+
+  MAP.forEach((m, i) => {
+    const card = cards[i];
+    if (!card) return;
+    const slot = card.querySelector('.embed-slot');
+    if (!slot) return;
+    const d = c[m.key];
+    // Only update if there's a real URL/video to show
+    const hasContent = d && (d.url?.trim() || d.video?.trim());
+    if (!hasContent) return;
+    if (m.fn === 'yt')    renderYT(card, slot, d);
+    if (m.fn === 'ig')    renderIG(card, slot, d);
+    if (m.fn === 'own')   renderOwn(card, slot, d);
+    if (m.fn === 'story') renderStory(card, slot, d);
+  });
+
+  // ── Render extra dynamic slots at the START ──
+  if (c.extraSlots && Array.isArray(c.extraSlots)) {
+    const scroll = document.getElementById('reelsScroll');
+    const firstCard = scroll.querySelector('.reel-card');
+    // Reverse so the last added slot stays at position 1
+    [...c.extraSlots].reverse().forEach(slotId => {
+      const d = c[slotId];
+      const hasContent = d && (d.url?.trim() || d.video?.trim());
+      if (!hasContent) return;
+
+      const newCard = document.createElement('div');
+      newCard.className = 'reel-card';
+      newCard.innerHTML = '<div class="embed-slot" style="padding:0;position:relative;"></div><div class="reel-caption"></div>';
+      scroll.insertBefore(newCard, firstCard);
+
+      const newSlot = newCard.querySelector('.embed-slot');
+      if (d.type === 'instagram')      renderIG(newCard, newSlot, d);
+      else if (d.type === 'ownvideo')  renderOwn(newCard, newSlot, d);
+      else if (d.type === 'article')   renderStory(newCard, newSlot, d);
+      else if (d.type === 'document')  renderDoc(newCard, newSlot, d);
+      else renderYT(newCard, newSlot, d);
+    });
+  }
+
+  // ── SPARKLE AD PATCHES from admin ──
+  if (c.sparkleAds && Array.isArray(c.sparkleAds)) {
+    const strip = document.getElementById('sparkleAdStrip');
+    // Update existing static patches with admin data
+    c.sparkleAds.forEach((ad, i) => {
+      const el = document.getElementById('spad-' + (i + 1));
+      if (!ad || !ad.url) return;
+      if (el) {
+        el.href = ad.url;
+        el.innerHTML = '<span class="patch-spark">' + (ad.icon || '✦') + '</span> <span>' + (ad.label || ad.url) + '</span>';
+        el.classList.remove('empty');
+      } else if (strip && i < 12) {
+        // Add extra patches beyond the 6 static ones
+        const newPatch = document.createElement('a');
+        newPatch.href = ad.url;
+        newPatch.target = '_blank';
+        newPatch.rel = 'noopener';
+        newPatch.className = 'sparkle-ad-patch';
+        newPatch.id = 'spad-' + (i + 1);
+        newPatch.innerHTML = '<span class="patch-spark">' + (ad.icon || '✦') + '</span> <span>' + (ad.label || ad.url) + '</span>';
+        strip.appendChild(newPatch);
+      }
+    });
+  }
+
+  // ── AD SLOTS from admin ──
+  if (c.adSlots && Array.isArray(c.adSlots)) {
+    c.adSlots.forEach((ad, i) => {
+      if (!ad || !ad.url) return;
+      const el = i === 0
+        ? document.getElementById('ad-feat-1')
+        : document.getElementById('ad-slot-' + i);
+      if (!el) return;
+      el.href = ad.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      const icon = el.querySelector('.ad-icon');
+      const title = el.querySelector('.ad-title');
+      const desc = el.querySelector('.ad-desc');
+      const label = el.querySelector('.ad-label');
+      if (icon && ad.icon) icon.textContent = ad.icon;
+      if (title && ad.title) title.textContent = ad.title;
+      if (desc && ad.desc) desc.textContent = ad.desc;
+      if (label && ad.label) label.textContent = ad.label;
+      el.classList.remove('placeholder');
+    });
+  }
+
+  // ── AD SLOTS from admin ──
+  if (c.adSlots && Array.isArray(c.adSlots)) {
+    c.adSlots.forEach((ad, i) => {
+      if (!ad || !ad.url) return;
+      const el = i === 0
+        ? document.getElementById('ad-feat-1')
+        : document.getElementById('ad-slot-' + i);
+      if (!el) return;
+      el.href = ad.url;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      const icon = el.querySelector('.ad-icon');
+      const title = el.querySelector('.ad-title');
+      const desc = el.querySelector('.ad-desc');
+      const label = el.querySelector('.ad-label');
+      if (icon && ad.icon) icon.textContent = ad.icon;
+      if (title && ad.title) title.textContent = ad.title;
+      if (desc && ad.desc) desc.textContent = ad.desc;
+      if (label && ad.label) label.textContent = ad.label;
+      el.classList.remove('placeholder');
+    });
+  }
+
+  // ── SIDE AD PILLS from admin (hero + reels) ──
+  if (c.sideAds && Array.isArray(c.sideAds)) {
+    const containers = [
+      document.getElementById('heroAdsLeft'),
+      document.getElementById('heroAdsRight'),
+    ];
+    // Split sideAds: first half → left, second half → right
+    const half = Math.ceil(c.sideAds.length / 2);
+    [c.sideAds.slice(0, half), c.sideAds.slice(half)].forEach((group, ci) => {
+      const container = containers[ci];
+      if (!container) return;
+      const existing = container.querySelectorAll('.side-ad-pill');
+      group.forEach((ad, i) => {
+        if (!ad || !ad.url) return;
+        const el = existing[i];
+        if (!el) return;
+        el.href = ad.url;
+        const iconEl = el.querySelector('.pill-icon');
+        const nameEl = el.querySelector('.pill-text strong');
+        const subEl  = el.querySelector('.pill-text span');
+        if (iconEl && ad.icon) iconEl.textContent = ad.icon;
+        if (nameEl && ad.name) nameEl.textContent = ad.name;
+        if (subEl  && ad.sub)  subEl.textContent  = ad.sub;
+      });
+    });
+  }
+
+  // ── DYNAMIC APP CARDS from admin ──
+  // Cards are inserted at specific grid positions: 1st dynamic → slot 4, 2nd dynamic → slot 10
+  // Static cards are numbered 01-03, 05-09, 11-15 (slots 4 and 10 reserved for dynamic)
+  if (c.apps && c.apps.extraApps && Array.isArray(c.apps.extraApps)) {
+    const grid = document.querySelector('#showcase .showcase-grid');
+    const tints = ['tint-1','tint-2','tint-3'];
+
+    // Slot positions (1-based) to insert each dynamic card, and their display numbers
+    const insertSlots = [
+      { slot: 4,  num: '04', tint: 'tint-1' },  // Promnify → position 4
+      { slot: 10, num: '10', tint: 'tint-3' },  // Aggrivo  → position 10
+    ];
+
+    function buildCard(a, num, tint) {
+      const statusMap = {
+        live:   { cls: '',           label: 'Visit Site →' },
+        beta:   { cls: ' beta-btn',  label: 'Request Access →' },
+        coming: { cls: ' coming-btn',label: 'Coming Soon' },
+      };
+      const st = statusMap[a.status] || statusMap.live;
+
+      const whoTags = (a.whofor || '').split(',').map(t => t.trim()).filter(Boolean)
+        .map(t => `<span>${t}</span>`).join('');
+      const bodyBlocks = [
+        a.problem    ? `<div class="proj-block"><span class="label">The problem</span><p>${a.problem}</p></div>` : '',
+        a.whatitdoes ? `<div class="proj-block"><span class="label">What it does</span><p>${a.whatitdoes}</p></div>` : '',
+        whoTags      ? `<div class="proj-block"><span class="label">Who it's for</span><div class="who-tags">${whoTags}</div></div>` : '',
+      ].join('');
+
+      const badgeColor = tint==='tint-1' ? 'e8702a,#ff8c42' : tint==='tint-2' ? 'c026d3,#9333ea' : '00b894,#0891b2';
+      const article = document.createElement('article');
+      article.className = 'proj-card';
+      article.innerHTML = `
+        <div class="proj-card-top" style="padding:0;">
+          <div class="app-bg-mockup">
+            <div class="mockup-placeholder mockup-aiversecampus" style="background:linear-gradient(150deg,#0d0d2b,#1a0a2e 40%,#0a1a2e 70%,#0d1a1a 100%);">
+              <div class="av-icon">${a.icon || '🚀'}</div>
+              <div class="av-title">${a.name}</div>
+              ${a.tagline ? `<div class="av-badge" style="background:linear-gradient(90deg,#${badgeColor};">${a.tagline}</div>` : ''}
+              ${a.domain ? `<div class="av-pill" style="margin-top:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:3px 7px;font-size:0.4rem;color:#ccc;">${a.domain}</div>` : ''}
+            </div>
+          </div>
+          <div class="proj-card-top-meta">
+            <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${num}</span>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <div class="proj-icon ${tint}" style="margin-bottom:0;">${a.icon || '🚀'}</div>
+              <div>
+                <h3 style="margin-bottom:2px;">${a.name}</h3>
+                <div class="domain">${a.domain || ''}</div>
+              </div>
+            </div>
+            <p class="proj-tagline">${a.tagline || ''}</p>
+            ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-top-visit${a.status === 'beta' ? ' beta' : ''}">${a.status === 'beta' ? 'Request Access →' : 'Visit Site →'}</a>` : ''}
+          </div>
+        </div>
+        <div class="proj-card-body">
+          ${a.status === 'beta' ? '<span class="beta-flag"><span class="blink"></span>Private Beta</span>' : ''}
+          ${a.status === 'coming' ? '<span class="beta-flag" style="background:#2a2a4a;color:#a7a9be;"><span class="blink" style="background:#a7a9be;"></span>Coming Soon</span>' : ''}
+          ${bodyBlocks}
+        </div>
+        <div class="proj-card-cta">
+          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-visit-btn${st.cls}">${st.label}</a>` : `<span class="proj-visit-btn coming-btn">Coming Soon</span>`}
+        </div>
+      `;
+      return article;
+    }
+
+    // Insert each dynamic app at its designated slot
+    c.apps.extraApps.forEach((appId, i) => {
+      const a = c.apps[appId];
+      if (!a || !a.name || a.visible === false) return;
+      const slotInfo = insertSlots[i];
+      if (!slotInfo) return; // no more reserved slots
+
+      const article = buildCard(a, slotInfo.num, slotInfo.tint);
+
+      // Insert at slot position (1-based): get current cards after prior insertions
+      const currentCards = grid.querySelectorAll('.proj-card');
+      const insertBefore = currentCards[slotInfo.slot - 1]; // 0-based index = slot - 1
+      if (insertBefore) {
+        grid.insertBefore(article, insertBefore);
+      } else {
+        grid.appendChild(article);
+      }
+    });
+  }
+  // ── RESET reels scroll to far left on every page load ──
+  // Use setTimeout to ensure dynamic cards are fully injected before resetting
+  setTimeout(function() {
+    var rs = document.getElementById('reelsScroll');
+    if (rs) {
+      rs.style.direction = 'ltr';
+      rs.scrollLeft = 0;
+      rs.scrollTo({ left: 0, behavior: 'instant' });
+    }
+  }, 0);
+  window.addEventListener('load', function() {
+    var rs = document.getElementById('reelsScroll');
+    if (rs) {
+      rs.scrollLeft = 0;
+      rs.scrollTo({ left: 0, behavior: 'instant' });
+    }
+  });
+
+  // ── MAKE ENTIRE APP CARD CLICKABLE ──
+  // Each .proj-card click opens the card's primary URL (from the CTA button)
+  document.querySelectorAll('#showcase .proj-card').forEach(function(card) {
+    // Get the primary URL from the CTA visit button
+    var ctaLink = card.querySelector('.proj-card-cta a');
+    if (!ctaLink || !ctaLink.href) return;
+    var url = ctaLink.href;
+    // Style card as pointer
+    card.style.cursor = 'pointer';
+    card.style.position = 'relative';
+    // Add click handler — but allow inner <a> clicks to work normally without double-firing
+    card.addEventListener('click', function(e) {
+      // If the click is on an existing <a> tag, let it handle itself
+      if (e.target.closest('a')) return;
+      window.open(url, '_blank', 'noopener');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
