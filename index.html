@@ -2316,49 +2316,6 @@
       </div>
     </article>
 
-    <!-- PROMNIFY -->
-    <article class="proj-card">
-      <div class="proj-card-top" style="padding:0;">
-        <div class="app-bg-mockup">
-          <div class="mockup-placeholder mockup-aiversecampus" style="background:linear-gradient(150deg,#0d0b2b,#1a0a3e 40%,#120a2e 70%,#0a0a2b 100%);">
-            <div class="av-icon">✨</div>
-            <div class="av-title">Promnify</div>
-            <div class="av-badge" style="background:linear-gradient(90deg,#7c3aed,#4f46e5);">Stop Writing Prompts. Design Loops.</div>
-            <div class="av-pill" style="margin-top:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:3px 7px;font-size:0.4rem;color:#ccc;">promnify.com</div>
-          </div>
-        </div>
-        <div class="proj-card-top-meta">
-          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 04</span>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-            <div class="proj-icon tint-1" style="margin-bottom:0;">✨</div>
-            <div>
-              <h3 style="margin-bottom:2px;">Promnify</h3>
-              <div class="domain">promnify.com</div>
-            </div>
-          </div>
-          <p class="proj-tagline">Stop Writing Prompts. Design Loops. The future of AI work — Loop Engineering.</p>
-          <a href="https://promnify.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
-        </div>
-      </div>
-      <div class="proj-card-body">
-        <div class="proj-block">
-          <span class="label">The problem</span>
-          <p>Prompt writing can be hard, repetitive, and time-consuming — especially for agentic AI workflows.</p>
-        </div>
-        <div class="proj-block">
-          <span class="label">What it does</span>
-          <p>Automatically generates and designs prompt loops with the help of AI — so you engineer workflows, not just one-off prompts.</p>
-        </div>
-        <div class="proj-block">
-          <span class="label">Who it's for</span>
-          <div class="who-tags"><span>Software devs</span><span>AI builders</span></div>
-        </div>
-      </div>
-      <div class="proj-card-cta">
-        <a href="https://promnify.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
-      </div>
-    </article>
-
     <!-- AIRUNLY -->
     <article class="proj-card">
       <div class="proj-card-top" style="padding:0;">
@@ -2589,41 +2546,6 @@
       </div>
       <div class="proj-card-cta">
         <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
-      </div>
-    </article>
-
-    <!-- AGGRIVO -->
-    <article class="proj-card">
-      <div class="proj-card-top" style="padding:0;">
-        <div class="app-bg-mockup">
-          <div class="mockup-placeholder mockup-aiversecampus" style="background:linear-gradient(150deg,#0a1a0d,#0d2b1a 40%,#0a2218 70%,#061a10 100%);">
-            <div class="av-icon">⚡</div>
-            <div class="av-title">Aggrivo</div>
-            <div class="av-badge" style="background:linear-gradient(90deg,#059669,#0891b2);">Aggregate. Grow. Win.</div>
-            <div class="av-pill" style="margin-top:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:3px 7px;font-size:0.4rem;color:#ccc;">aggrivo.com</div>
-          </div>
-        </div>
-        <div class="proj-card-top-meta">
-          <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ 10</span>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-            <div class="proj-icon tint-3" style="margin-bottom:0;">⚡</div>
-            <div>
-              <h3 style="margin-bottom:2px;">Aggrivo</h3>
-              <div class="domain">aggrivo.com</div>
-            </div>
-          </div>
-          <p class="proj-tagline">Aggregate. Grow. Win.</p>
-          <a href="https://aggrivo.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
-        </div>
-      </div>
-      <div class="proj-card-body">
-        <div class="proj-block">
-          <span class="label">Who it's for</span>
-          <div class="who-tags"><span>Whoever needs it</span></div>
-        </div>
-      </div>
-      <div class="proj-card-cta">
-        <a href="https://aggrivo.com" target="_blank" rel="noopener" class="proj-visit-btn">Visit Site →</a>
       </div>
     </article>
 
@@ -3332,49 +3254,49 @@
   }
 
   // ── DYNAMIC APP CARDS from admin ──
+  // Cards are inserted at specific grid positions: 1st dynamic → slot 4, 2nd dynamic → slot 10
+  // Static cards are numbered 01-03, 05-09, 11-15 (slots 4 and 10 reserved for dynamic)
   if (c.apps && c.apps.extraApps && Array.isArray(c.apps.extraApps)) {
     const grid = document.querySelector('#showcase .showcase-grid');
     const tints = ['tint-1','tint-2','tint-3'];
-    const staticCount = document.querySelectorAll('#showcase .proj-card').length;
 
-    c.apps.extraApps.forEach((appId, i) => {
-      const a = c.apps[appId];
-      if (!a || !a.name || a.visible === false) return;
+    // Slot positions (1-based) to insert each dynamic card, and their display numbers
+    const insertSlots = [
+      { slot: 4,  num: '04', tint: 'tint-1' },  // Promnify → position 4
+      { slot: 10, num: '10', tint: 'tint-3' },  // Aggrivo  → position 10
+    ];
 
-      const num = staticCount + i + 1;
-      const tint = tints[i % tints.length];
-
+    function buildCard(a, num, tint) {
       const statusMap = {
-        live:   { cls: '',          label: 'Visit Site →' },
-        beta:   { cls: ' beta-btn', label: 'Request Access →' },
-        coming: { cls: ' coming-btn', label: 'Coming Soon' },
+        live:   { cls: '',           label: 'Visit Site →' },
+        beta:   { cls: ' beta-btn',  label: 'Request Access →' },
+        coming: { cls: ' coming-btn',label: 'Coming Soon' },
       };
       const st = statusMap[a.status] || statusMap.live;
 
-      const article = document.createElement('article');
-      article.className = 'proj-card';
-
       const whoTags = (a.whofor || '').split(',').map(t => t.trim()).filter(Boolean)
         .map(t => `<span>${t}</span>`).join('');
-
       const bodyBlocks = [
         a.problem    ? `<div class="proj-block"><span class="label">The problem</span><p>${a.problem}</p></div>` : '',
         a.whatitdoes ? `<div class="proj-block"><span class="label">What it does</span><p>${a.whatitdoes}</p></div>` : '',
         whoTags      ? `<div class="proj-block"><span class="label">Who it's for</span><div class="who-tags">${whoTags}</div></div>` : '',
       ].join('');
 
+      const badgeColor = tint==='tint-1' ? 'e8702a,#ff8c42' : tint==='tint-2' ? 'c026d3,#9333ea' : '00b894,#0891b2';
+      const article = document.createElement('article');
+      article.className = 'proj-card';
       article.innerHTML = `
         <div class="proj-card-top" style="padding:0;">
           <div class="app-bg-mockup">
             <div class="mockup-placeholder mockup-aiversecampus" style="background:linear-gradient(150deg,#0d0d2b,#1a0a2e 40%,#0a1a2e 70%,#0d1a1a 100%);">
               <div class="av-icon">${a.icon || '🚀'}</div>
               <div class="av-title">${a.name}</div>
-              ${a.tagline ? `<div class="av-badge" style="background:linear-gradient(90deg,#${tint==='tint-1'?'e8702a,#ff8c42':tint==='tint-2'?'c026d3,#9333ea':'00b894,#0891b2'});">${a.tagline}</div>` : ''}
+              ${a.tagline ? `<div class="av-badge" style="background:linear-gradient(90deg,#${badgeColor};">${a.tagline}</div>` : ''}
               ${a.domain ? `<div class="av-pill" style="margin-top:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:3px 7px;font-size:0.4rem;color:#ccc;">${a.domain}</div>` : ''}
             </div>
           </div>
           <div class="proj-card-top-meta">
-            <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${String(num).padStart(2,'0')}</span>
+            <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${num}</span>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
               <div class="proj-icon ${tint}" style="margin-bottom:0;">${a.icon || '🚀'}</div>
               <div>
@@ -3395,7 +3317,26 @@
           ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-visit-btn${st.cls}">${st.label}</a>` : `<span class="proj-visit-btn coming-btn">Coming Soon</span>`}
         </div>
       `;
-      grid.appendChild(article);
+      return article;
+    }
+
+    // Insert each dynamic app at its designated slot
+    c.apps.extraApps.forEach((appId, i) => {
+      const a = c.apps[appId];
+      if (!a || !a.name || a.visible === false) return;
+      const slotInfo = insertSlots[i];
+      if (!slotInfo) return; // no more reserved slots
+
+      const article = buildCard(a, slotInfo.num, slotInfo.tint);
+
+      // Insert at slot position (1-based): get current cards after prior insertions
+      const currentCards = grid.querySelectorAll('.proj-card');
+      const insertBefore = currentCards[slotInfo.slot - 1]; // 0-based index = slot - 1
+      if (insertBefore) {
+        grid.insertBefore(article, insertBefore);
+      } else {
+        grid.appendChild(article);
+      }
     });
   }
   // ── RESET reels scroll to far left on every page load ──
