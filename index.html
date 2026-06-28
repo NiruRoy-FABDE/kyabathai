@@ -3240,7 +3240,14 @@
 
       article.innerHTML = `
         <div class="proj-card-top" style="padding:0;">
-          <div class="app-bg-mockup"><div class="mockup-placeholder"></div></div>
+          <div class="app-bg-mockup">
+            <div class="mockup-placeholder mockup-aiversecampus" style="background:linear-gradient(150deg,#0d0d2b,#1a0a2e 40%,#0a1a2e 70%,#0d1a1a 100%);">
+              <div class="av-icon">${a.icon || '🚀'}</div>
+              <div class="av-title">${a.name}</div>
+              ${a.tagline ? `<div class="av-badge" style="background:linear-gradient(90deg,#${tint==='tint-1'?'e8702a,#ff8c42':tint==='tint-2'?'c026d3,#9333ea':'00b894,#0891b2'});">${a.tagline}</div>` : ''}
+              ${a.domain ? `<div class="av-pill" style="margin-top:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:3px 7px;font-size:0.4rem;color:#ccc;">${a.domain}</div>` : ''}
+            </div>
+          </div>
           <div class="proj-card-top-meta">
             <span class="proj-id" style="position:static;display:inline-block;margin-bottom:4px;">№ ${String(num).padStart(2,'0')}</span>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
