@@ -325,19 +325,19 @@
 
   /* ===== PROJECT SHOWCASE ===== */
   .showcase-grid {
-    columns: 3;
-    column-gap: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
     max-width: 1280px;
     margin: 0 auto;
+    align-items: start;
   }
   .showcase-grid .proj-card {
-    break-inside: avoid;
-    margin-bottom: 28px;
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
-  @media (max-width: 900px) { .showcase-grid { columns: 2; } }
-  @media (max-width: 560px) { .showcase-grid { columns: 1; } }
-
+  @media (max-width: 900px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .showcase-grid { grid-template-columns: 1fr; } }
   .proj-card {
     background: var(--cream);
     border: 3px solid var(--ink);
