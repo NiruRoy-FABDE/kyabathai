@@ -29,6 +29,10 @@
     --card-shadow: 0 4px 0 rgba(26,22,37,0.9);
     --radius: 18px;
     --serif-stamp: Georgia, 'Times New Roman', serif;
+    /* Deep gold for all white text on dark backgrounds */
+    --gold: #FFD700;
+    --gold-soft: #FFCA28;
+    --gold-dim: #FFB300;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -405,6 +409,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     /* removed max-height and overflow-y so card shows fully */
     position: relative;
+    cursor: pointer;
   }
   /* Vivid top colour bar per card — rotates via nth-child */
   .proj-card::before {
@@ -1680,7 +1685,55 @@
     min-height: 88px; /* was 110px → further 20% reduction */
     filter: brightness(1.15) saturate(1.2);
   }
-  /* section-ad-strip is always single-line nowrap scroll */</style>
+
+  /* ===== GOLD TEXT: Replace all hazy white on dark backgrounds ===== */
+  .ticker span { color: var(--gold) !important; }
+  .ticker span.pink { color: var(--gold) !important; }
+  .ticker span.marigold-c { color: var(--gold-soft) !important; }
+  .ticker span.jade-c { color: var(--gold-dim) !important; }
+
+  .reels-section .section-head h2 { color: var(--gold) !important; }
+  .reels-section .section-head p { color: var(--gold-soft) !important; }
+  .reel-card .embed-slot { color: var(--gold-soft) !important; }
+  .reel-card .embed-slot small { color: var(--gold-soft) !important; }
+  .reel-card .reel-caption { color: var(--gold) !important; }
+
+  .proj-card-body .proj-block p,
+  .proj-block p { color: var(--gold) !important; }
+  .proj-block .who-tags span { color: var(--gold) !important; }
+
+  .proj-card-top h3,
+  .proj-card-top-meta h3 { color: var(--gold) !important; text-shadow: 0 1px 10px rgba(0,0,0,0.9) !important; }
+  .proj-card-top .domain,
+  .proj-card-top-meta .domain { color: var(--gold-soft) !important; }
+  .proj-card-top .proj-tagline,
+  .proj-card-top-meta .proj-tagline { color: var(--gold) !important; }
+  .proj-card-top .proj-id,
+  .proj-card-top-meta .proj-id { color: var(--gold-dim) !important; }
+
+  .proj-top-visit { color: var(--gold) !important; background: rgba(0,0,0,0.75) !important; border: 1px solid rgba(255,215,0,0.5) !important; }
+  .proj-visit-btn { color: #fff !important; }
+  .beta-flag { color: var(--gold) !important; }
+
+  .ad-section .section-head h2 { color: var(--gold) !important; }
+  .ad-slot.featured { color: var(--gold) !important; }
+  .ad-slot.featured p { color: var(--gold-soft) !important; }
+  .ad-title { color: var(--gold) !important; }
+  .ad-desc { color: var(--gold-soft) !important; }
+
+  .footer-brand .logo { color: var(--gold) !important; }
+  .footer-col a { color: var(--gold-soft) !important; }
+  .footer-col a:hover { color: var(--gold) !important; }
+  .footer-col h4 { color: var(--gold) !important; }
+  .footer-bottom { color: var(--gold-soft) !important; }
+  .sign-off { color: var(--gold) !important; }
+
+  .side-ad-pill .pill-text strong { color: var(--gold) !important; }
+  .side-ad-pill .pill-text span { color: var(--gold-soft) !important; }
+  .sparkle-ad-patch { color: var(--gold) !important; }
+
+</style>
+
 </head>
 <body>
 
@@ -3189,6 +3242,24 @@
       rs.scrollLeft = 0;
       rs.scrollTo({ left: 0, behavior: 'instant' });
     }
+  });
+
+  // ── MAKE ENTIRE APP CARD CLICKABLE ──
+  // Each .proj-card click opens the card's primary URL (from the CTA button)
+  document.querySelectorAll('#showcase .proj-card').forEach(function(card) {
+    // Get the primary URL from the CTA visit button
+    var ctaLink = card.querySelector('.proj-card-cta a');
+    if (!ctaLink || !ctaLink.href) return;
+    var url = ctaLink.href;
+    // Style card as pointer
+    card.style.cursor = 'pointer';
+    card.style.position = 'relative';
+    // Add click handler — but allow inner <a> clicks to work normally without double-firing
+    card.addEventListener('click', function(e) {
+      // If the click is on an existing <a> tag, let it handle itself
+      if (e.target.closest('a')) return;
+      window.open(url, '_blank', 'noopener');
+    });
   });
 })();
 </script>
