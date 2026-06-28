@@ -1,0 +1,24 @@
+# ============================================================================
+#  netlify.toml (repo root) — builds the React frontend that lives in /frontend.
+#  In Netlify, also set an env var: VITE_API_BASE = your Render backend URL.
+# ============================================================================
+[build]
+  base = "frontend"
+  command = "npm install && npm run build"
+  publish = "dist"          # relative to base → frontend/dist
+
+# SPA: serve index.html for every route so hash routing + deep links work.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers (your original hardening, kept and extended).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"

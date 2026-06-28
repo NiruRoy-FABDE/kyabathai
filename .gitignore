@@ -1,0 +1,9 @@
+# deps & build
+node_modules/
+dist/
+__pycache__/
+*.pyc
+# secrets — never commit these
+.env
+frontend/.env
+backend/.env
