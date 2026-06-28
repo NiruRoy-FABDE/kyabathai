@@ -250,6 +250,16 @@
     max-width: 640px;
     margin: 0 auto 48px;
   }
+
+  /* pill strip breaks OUT of section-head max-width — full viewport width */
+  .section-ad-strip-wrap {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
   .section-tag {
     display: inline-block;
     background: var(--tint-orange);
@@ -1594,17 +1604,18 @@
   /* ===== SECTION APP AD PILL STRIP (replaces floating side ads) ===== */
   .section-ad-strip {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     overflow-x: auto;
-    padding: 14px 6% 16px;
+    padding: 14px 5% 16px;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     flex-wrap: nowrap;          /* SINGLE LINE — never wrap */
-    margin-bottom: 28px;
+    margin-bottom: 0;
     justify-content: flex-start;
     /* hide scrollbar but keep scroll behaviour */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    width: 100%;
   }
   .section-ad-strip::-webkit-scrollbar { display: none; }
   /* dark variant for dark backgrounds (reels section) */
@@ -1752,16 +1763,18 @@
   </div>
 
   <div class="hero-inner">
-    <!-- APP AD PILL STRIP inside hero -->
-    <div class="section-ad-strip" style="margin-bottom:18px;justify-content:center;padding-left:0;padding-right:0;">
-      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
-      <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
-      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Right AI Tool</span></div></a>
-      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
-      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
-      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
-      <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
-      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    <!-- APP AD PILL STRIP inside hero — full viewport width -->
+    <div class="section-ad-strip-wrap" style="margin-bottom:18px;">
+      <div class="section-ad-strip" style="justify-content:center;">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+      </div>
     </div>
     <div class="hero-eyebrow"><span class="blink"></span> Smart hacks something worth your time</div>
 
@@ -1812,14 +1825,18 @@
   </div>
 
   <div class="section-head">
-    <!-- APP AD PILL STRIP — above the heading -->
-    <div class="section-ad-strip dark">
-      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
-      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
-      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
-      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
-      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
-      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    <!-- APP AD PILL STRIP — full-width, above the heading -->
+    <div class="section-ad-strip-wrap">
+      <div class="section-ad-strip dark">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill dark"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+      </div>
     </div>
     <span class="section-tag jade" style="background:#2A2436; color:var(--jade);">Daily Wow</span>
     <h2>Stuff you won't stop seeing and make you say it loud kya bat hai</h2>
@@ -2021,16 +2038,18 @@
   </div>
 
   <div class="section-head">
-    <!-- APP AD PILL STRIP — above the heading -->
-    <div class="section-ad-strip">
-      <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
-      <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
-      <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
-      <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
-      <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
-      <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
-      <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
-      <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+    <!-- APP AD PILL STRIP — full-width, above the heading -->
+    <div class="section-ad-strip-wrap">
+      <div class="section-ad-strip">
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎯</div><div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div></a>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚡</div><div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div></a>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🧰</div><div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div></a>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">⚖️</div><div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div></a>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🗂️</div><div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div></a>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">✅</div><div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div></a>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">🎓</div><div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div></a>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill"><div class="pill-icon">📈</div><div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div></a>
+      </div>
     </div>
     <span class="section-tag">My Universe</span>
     <h2>Apps, platforms and smart hacks AI Apps</h2>
