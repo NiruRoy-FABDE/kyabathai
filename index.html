@@ -76,7 +76,7 @@
   }
   .ticker span {
     padding: 0 28px;
-    font-size: 0.95rem;
+    font-size: 0.57rem;
     font-weight: 600;
     letter-spacing: 0.3px;
     display: inline-flex;
@@ -131,10 +131,28 @@
     padding: 70px 6% 50px;
     position: relative;
     text-align: center;
+    overflow: hidden;
     background:
-      radial-gradient(circle at 15% 20%, var(--tint-pink) 0%, transparent 38%),
-      radial-gradient(circle at 85% 15%, var(--tint-orange) 0%, transparent 42%),
-      var(--cream);
+      radial-gradient(ellipse at 10% 0%, #FFB3D9 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 0%, #FFD4A0 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 100%, #C8F5E8 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 60%, #E8D5FF 0%, transparent 40%),
+      linear-gradient(135deg, #FFF0F8 0%, #FFF9F2 50%, #F0FFF8 100%);
+  }
+  /* Sparkle decorations in hero */
+  .hero::before {
+    content: '✦';
+    position: absolute; top: 12%; left: 18%; font-size: 1.1rem;
+    color: #FF4D8D; opacity: 0.5; animation: sparkle-spin 4s ease-in-out infinite;
+  }
+  .hero::after {
+    content: '✦';
+    position: absolute; bottom: 18%; right: 20%; font-size: 0.8rem;
+    color: #FF8C42; opacity: 0.5; animation: sparkle-spin 3s ease-in-out infinite reverse;
+  }
+  @keyframes sparkle-spin {
+    0%,100% { transform: scale(1) rotate(0deg); opacity: 0.4; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 0.9; }
   }
   .hero-eyebrow {
     display: inline-flex;
@@ -142,9 +160,9 @@
     gap: 8px;
     background: var(--ink);
     color: var(--cream);
-    padding: 7px 16px;
+    padding: 5px 13px;
     border-radius: 999px;
-    font-size: 0.78rem;
+    font-size: 0.47rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -160,7 +178,7 @@
 
   .hero h1 {
     font-family: var(--serif-stamp);
-    font-size: clamp(2.4rem, 7vw, 4.6rem);
+    font-size: clamp(1.44rem, 4.2vw, 2.76rem);
     line-height: 1.05;
     font-weight: 700;
     letter-spacing: -1px;
@@ -177,7 +195,7 @@
   .hero p.sub {
     max-width: 580px;
     margin: 0 auto 36px;
-    font-size: 1.15rem;
+    font-size: 0.69rem;
     color: var(--ink-soft);
     font-weight: 500;
   }
@@ -192,10 +210,10 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 15px 28px;
+    padding: 9px 17px;
     border-radius: 14px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.6rem;
     border: 3px solid var(--ink);
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -238,7 +256,7 @@
     color: var(--marigold-deep);
     padding: 6px 14px;
     border-radius: 999px;
-    font-size: 0.78rem;
+    font-size: 0.47rem;
     font-weight: 800;
     letter-spacing: 0.6px;
     text-transform: uppercase;
@@ -248,14 +266,14 @@
   .section-tag.jade { background: var(--tint-jade); color: var(--jade-deep); }
   .section-head h2 {
     font-family: var(--serif-stamp);
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(1.08rem, 2.4vw, 1.56rem);
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 14px;
   }
   .section-head p {
     color: var(--ink-soft);
-    font-size: 1.05rem;
+    font-size: 0.63rem;
     font-weight: 500;
   }
 
@@ -398,6 +416,23 @@
     margin-top: 10px;
   }
 
+  .proj-top-visit {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    padding: 6px 14px;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .proj-top-visit:hover { background: var(--gulal); }
+  .proj-top-visit.beta { background: var(--marigold-deep); }
+
   .proj-card-body { padding: 12px 18px; flex: 1; }
   .proj-block { margin-bottom: 10px; }
   .proj-block:last-child { margin-bottom: 0; }
@@ -511,6 +546,74 @@
   .ad-slot.featured { border-style: solid; background: var(--ink); color: var(--cream); }
   .ad-slot.featured p { color: #C9C2D6; }
   .ad-slot.featured .ad-label { background: #2A2436; color: var(--marigold); }
+
+  /* ===== FLOATING SPARKLE AD PATCHES ===== */
+  .sparkle-ad-strip {
+    position: relative;
+    padding: 20px 6%;
+    background: linear-gradient(135deg, #1A1625 0%, #2A1635 50%, #1A2535 100%);
+    overflow: hidden;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .sparkle-ad-strip::before {
+    content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';
+    position: absolute; top: 6px; left: 0; right: 0;
+    text-align: center; font-size: 0.5rem; color: rgba(255,140,66,0.4);
+    letter-spacing: 6px; pointer-events: none;
+  }
+  .sparkle-ad-strip::after {
+    content: '✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦';
+    position: absolute; bottom: 6px; left: 0; right: 0;
+    text-align: center; font-size: 0.5rem; color: rgba(255,77,141,0.4);
+    letter-spacing: 6px; pointer-events: none;
+  }
+  .sparkle-ad-patch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(255,140,66,0.12), rgba(255,77,141,0.12));
+    border: 1.5px solid rgba(255,140,66,0.35);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--cream);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+    animation: patch-float 3s ease-in-out infinite;
+  }
+  .sparkle-ad-patch:nth-child(2) { animation-delay: 0.5s; }
+  .sparkle-ad-patch:nth-child(3) { animation-delay: 1s; }
+  .sparkle-ad-patch:nth-child(4) { animation-delay: 1.5s; }
+  .sparkle-ad-patch:nth-child(5) { animation-delay: 2s; }
+  .sparkle-ad-patch:nth-child(6) { animation-delay: 2.5s; }
+  @keyframes patch-float {
+    0%,100% { transform: translateY(0); box-shadow: 0 0 8px rgba(255,140,66,0.2); }
+    50% { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(255,77,141,0.35); }
+  }
+  .sparkle-ad-patch:hover {
+    background: linear-gradient(135deg, rgba(255,140,66,0.3), rgba(255,77,141,0.3));
+    border-color: var(--gulal);
+    transform: translateY(-4px) scale(1.04);
+    color: #fff;
+  }
+  .sparkle-ad-patch .patch-spark {
+    font-size: 0.9rem;
+    animation: sparkle-spin 2s ease-in-out infinite;
+  }
+  .sparkle-ad-patch.empty {
+    border-style: dashed;
+    opacity: 0.45;
+    pointer-events: none;
+    font-size: 0.65rem;
+    color: #9D94B0;
+  }
 
   /* ===== FOOTER ===== */
   footer {
@@ -800,6 +903,7 @@
         <h3>MADAIX</h3>
         <div class="domain">madaix.com</div>
         <p class="proj-tagline">Run Meta ad campaigns by just describing what you want.</p>
+        <a href="https://madaix.com" target="_blank" rel="noopener" class="proj-top-visit beta">Request Access →</a>
       </div>
       <div class="proj-card-body">
         <span class="beta-flag"><span class="blink"></span>Private Beta</span>
@@ -829,6 +933,7 @@
         <h3>Live Setup</h3>
         <div class="domain">live-setup.com</div>
         <p class="proj-tagline">One TradingView signal, fired out to every connected trader's account.</p>
+        <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -857,6 +962,7 @@
         <h3>Dhantron</h3>
         <div class="domain">dhantron.com</div>
         <p class="proj-tagline">Trade like a market maker — without sitting at a trading desk all day.</p>
+        <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -885,6 +991,7 @@
         <h3>AIverse Campus</h3>
         <div class="domain">www.aiversecampus.com</div>
         <p class="proj-tagline">Stop using AI the wrong way — learn how it's actually meant to be used.</p>
+        <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -913,6 +1020,7 @@
         <h3>Airunly</h3>
         <div class="domain">www.airunly.com</div>
         <p class="proj-tagline">Tell it what to do. Watch AI do the rest.</p>
+        <a href="https://www.airunly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -941,6 +1049,7 @@
         <h3>Tuftub</h3>
         <div class="domain">tuftub.com</div>
         <p class="proj-tagline">The right AI tool for every task — picked for you, automatically.</p>
+        <a href="https://tuftub.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -969,6 +1078,7 @@
         <h3>Jurissetu</h3>
         <div class="domain">jurissetu.com</div>
         <p class="proj-tagline">Your legal questions, answered with authority.</p>
+        <a href="https://jurissetu.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -997,6 +1107,7 @@
         <h3>BoardSol</h3>
         <div class="domain">boardsol.com</div>
         <p class="proj-tagline">Secure board management for modern India.</p>
+        <a href="https://boardsol.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1025,6 +1136,7 @@
         <h3>FinGoalInvesto</h3>
         <div class="domain">fingoalinvesto.com</div>
         <p class="proj-tagline">Put a name and a number on your money goals — then actually hit them.</p>
+        <a href="https://fingoalinvesto.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1053,6 +1165,7 @@
         <h3>Bitopine</h3>
         <div class="domain">bitopine.com</div>
         <p class="proj-tagline">Digital excellence, delivered to you.</p>
+        <a href="https://bitopine.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1081,6 +1194,7 @@
         <h3>Efundly</h3>
         <div class="domain">efundly.com</div>
         <p class="proj-tagline">Funding and finance, made simple to access.</p>
+        <a href="https://efundly.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1109,6 +1223,7 @@
         <h3>Eaiin</h3>
         <div class="domain">eaiin.store</div>
         <p class="proj-tagline">Your domain is your most powerful asset — own it properly.</p>
+        <a href="https://eaiin.store" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1138,6 +1253,7 @@
         <h3>Drapyfy</h3>
         <div class="domain">drapyfy.com</div>
         <p class="proj-tagline">Fashion and style, draped the way you actually want it.</p>
+        <a href="https://drapyfy.com" target="_blank" rel="noopener" class="proj-top-visit">Visit Site →</a>
       </div>
       <div class="proj-card-body">
         <div class="proj-block">
@@ -1187,6 +1303,29 @@
     </div>
   </div>
 </section>
+
+<!-- ===== SPARKLE AD STRIP ===== -->
+<div class="sparkle-ad-strip" id="sparkleAdStrip">
+  <!-- Static placeholders — replaced by admin-saved ads via Supabase -->
+  <a href="https://madaix.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-1">
+    <span class="patch-spark">✦</span> <span>MADAIX — AI Ad Campaigns</span>
+  </a>
+  <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-2">
+    <span class="patch-spark">⚡</span> <span>Live Setup — Algo Trading</span>
+  </a>
+  <a href="https://tuftub.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-3">
+    <span class="patch-spark">🧰</span> <span>Tuftub — Find the Right AI Tool</span>
+  </a>
+  <a href="https://jurissetu.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-4">
+    <span class="patch-spark">⚖️</span> <span>Jurissetu — Legal Q&amp;A AI</span>
+  </a>
+  <a href="https://boardsol.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-5">
+    <span class="patch-spark">🗂️</span> <span>BoardSol — Board Management</span>
+  </a>
+  <a href="https://efundly.com" target="_blank" rel="noopener" class="sparkle-ad-patch" id="spad-6">
+    <span class="patch-spark">✅</span> <span>Efundly — Find Funding Fast</span>
+  </a>
+</div>
 
 <!-- ===== FOOTER ===== -->
 <footer>
@@ -1396,6 +1535,31 @@
     });
   }
 
+  // ── SPARKLE AD PATCHES from admin ──
+  if (c.sparkleAds && Array.isArray(c.sparkleAds)) {
+    const strip = document.getElementById('sparkleAdStrip');
+    // Update existing static patches with admin data
+    c.sparkleAds.forEach((ad, i) => {
+      const el = document.getElementById('spad-' + (i + 1));
+      if (!ad || !ad.url) return;
+      if (el) {
+        el.href = ad.url;
+        el.innerHTML = '<span class="patch-spark">' + (ad.icon || '✦') + '</span> <span>' + (ad.label || ad.url) + '</span>';
+        el.classList.remove('empty');
+      } else if (strip && i < 12) {
+        // Add extra patches beyond the 6 static ones
+        const newPatch = document.createElement('a');
+        newPatch.href = ad.url;
+        newPatch.target = '_blank';
+        newPatch.rel = 'noopener';
+        newPatch.className = 'sparkle-ad-patch';
+        newPatch.id = 'spad-' + (i + 1);
+        newPatch.innerHTML = '<span class="patch-spark">' + (ad.icon || '✦') + '</span> <span>' + (ad.label || ad.url) + '</span>';
+        strip.appendChild(newPatch);
+      }
+    });
+  }
+
   // ── DYNAMIC APP CARDS from admin ──
   if (c.apps && c.apps.extraApps && Array.isArray(c.apps.extraApps)) {
     const grid = document.querySelector('#showcase .showcase-grid');
@@ -1435,6 +1599,7 @@
           <h3>${a.name}</h3>
           <div class="domain">${a.domain || ''}</div>
           <p class="proj-tagline">${a.tagline || ''}</p>
+          ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener" class="proj-top-visit${a.status === 'beta' ? ' beta' : ''}">${a.status === 'beta' ? 'Request Access →' : 'Visit Site →'}</a>` : ''}
         </div>
         <div class="proj-card-body">
           ${a.status === 'beta' ? '<span class="beta-flag"><span class="blink"></span>Private Beta</span>' : ''}
