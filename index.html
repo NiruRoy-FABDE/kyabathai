@@ -342,6 +342,31 @@
   .reel-card.wide .embed-slot { aspect-ratio: 16/10; }
 
   /* ===== PROJECT SHOWCASE ===== */
+  /* Vibrant showcase section background */
+  #showcase {
+    background:
+      radial-gradient(ellipse at 5% 20%, rgba(255,77,141,0.18) 0%, transparent 40%),
+      radial-gradient(ellipse at 95% 10%, rgba(255,140,66,0.18) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 80%, rgba(123,0,255,0.12) 0%, transparent 45%),
+      radial-gradient(ellipse at 20% 70%, rgba(0,191,255,0.10) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 60%, rgba(0,200,83,0.08) 0%, transparent 35%),
+      linear-gradient(160deg, #FFF0FA 0%, #FFF9F2 35%, #F0F0FF 65%, #F0FFF8 100%);
+    position: relative;
+  }
+  /* sparkle corner accents */
+  #showcase::before {
+    content: '✦';
+    position: absolute; top: 40px; left: 40px;
+    font-size: 2rem; color: #FF4D8D; opacity: 0.35;
+    animation: sparkle-spin 5s ease-in-out infinite;
+  }
+  #showcase::after {
+    content: '✦';
+    position: absolute; top: 40px; right: 40px;
+    font-size: 1.5rem; color: #FF8C42; opacity: 0.35;
+    animation: sparkle-spin 4s ease-in-out infinite reverse;
+  }
+
   .showcase-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -356,27 +381,41 @@
   }
   @media (max-width: 900px) { .showcase-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .showcase-grid { grid-template-columns: 1fr; } }
+
   .proj-card {
-    background: var(--cream);
+    background: #ffffff;
     border: 3px solid var(--ink);
     border-radius: var(--radius);
-    box-shadow: var(--card-shadow);
+    box-shadow: 5px 5px 0 rgba(26,22,37,0.9);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     max-height: 550px;
     overflow-y: auto;
+    position: relative;
   }
+  /* Vivid top colour bar per card — rotates via nth-child */
+  .proj-card::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background: linear-gradient(90deg, #FF4D8D, #FF8C42);
+    flex-shrink: 0;
+  }
+  .proj-card:nth-child(3n+2)::before { background: linear-gradient(90deg, #7B00FF, #00BFFF); }
+  .proj-card:nth-child(3n+3)::before { background: linear-gradient(90deg, #00C853, #00BFFF); }
+
   .proj-card:hover {
-    transform: translate(-2px, -4px) rotate(-0.4deg);
-    box-shadow: 7px 8px 0 rgba(26,22,37,0.9);
+    transform: translate(-3px, -6px) rotate(-0.4deg);
+    box-shadow: 8px 10px 0 rgba(26,22,37,0.9);
   }
 
   .proj-card-top {
     padding: 16px 18px 12px;
     border-bottom: 3px dashed var(--ink);
     position: relative;
+    background: linear-gradient(145deg, #fffcff 0%, #fff9f2 100%);
   }
   .proj-id {
     position: absolute;
@@ -402,6 +441,7 @@
     font-size: 1.4rem;
     font-weight: 700;
     margin-bottom: 6px;
+    color: var(--ink);
   }
   .proj-card-top .domain {
     font-family: 'Courier New', monospace;
@@ -411,10 +451,13 @@
   }
   .proj-tagline {
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--gulal);
     margin-top: 10px;
   }
+  /* alternate tagline colours per card */
+  .proj-card:nth-child(3n+2) .proj-tagline { color: #7B00FF; }
+  .proj-card:nth-child(3n+3) .proj-tagline { color: #00876A; }
 
   .proj-top-visit {
     display: inline-flex;
@@ -433,7 +476,11 @@
   .proj-top-visit:hover { background: var(--gulal); }
   .proj-top-visit.beta { background: var(--marigold-deep); }
 
-  .proj-card-body { padding: 12px 18px; flex: 1; }
+  .proj-card-body {
+    padding: 12px 18px;
+    flex: 1;
+    background: #fdfcff;
+  }
   .proj-block { margin-bottom: 10px; }
   .proj-block:last-child { margin-bottom: 0; }
   .proj-block .label {
@@ -441,24 +488,38 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--ink-soft);
+    color: #FF4D8D;
     margin-bottom: 5px;
     display: block;
   }
+  .proj-card:nth-child(3n+2) .proj-block .label { color: #7B00FF; }
+  .proj-card:nth-child(3n+3) .proj-block .label { color: #00876A; }
   .proj-block p {
     font-size: 0.78rem;
     color: var(--ink);
+    font-weight: 500;
   }
   .proj-block .who-tags {
     display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px;
   }
   .proj-block .who-tags span {
-    background: var(--tint-orange);
+    background: linear-gradient(135deg, rgba(255,77,141,0.12), rgba(255,140,66,0.12));
     color: var(--marigold-deep);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 10px;
     border-radius: 999px;
+    border: 1px solid rgba(255,140,66,0.3);
+  }
+  .proj-card:nth-child(3n+2) .proj-block .who-tags span {
+    background: linear-gradient(135deg, rgba(123,0,255,0.1), rgba(0,191,255,0.1));
+    color: #7B00FF;
+    border-color: rgba(123,0,255,0.25);
+  }
+  .proj-card:nth-child(3n+3) .proj-block .who-tags span {
+    background: linear-gradient(135deg, rgba(0,200,83,0.1), rgba(0,191,255,0.1));
+    color: #00876A;
+    border-color: rgba(0,200,83,0.25);
   }
 
   .beta-flag {
@@ -480,6 +541,7 @@
   .proj-card-cta {
     padding: 18px 22px;
     border-top: 3px dashed var(--ink);
+    background: #fff;
   }
   .proj-visit-btn {
     display: flex;
@@ -488,24 +550,46 @@
     gap: 8px;
     width: 100%;
     padding: 13px;
-    background: var(--ink);
-    color: var(--cream);
+    background: linear-gradient(135deg, #FF4D8D, #FF8C42);
+    color: #fff;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 0.92rem;
     border: none;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255,77,141,0.35);
   }
-  .proj-visit-btn:hover { background: var(--gulal); }
-  .proj-visit-btn.beta-btn { background: var(--marigold-deep); }
-  .proj-visit-btn.beta-btn:hover { background: var(--ink); }
-  .proj-visit-btn.coming-btn { background: #2a2a4a; color: #a7a9be; pointer-events: none; opacity: 0.7; }
+  .proj-visit-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,77,141,0.5);
+  }
+  .proj-card:nth-child(3n+2) .proj-visit-btn { background: linear-gradient(135deg, #7B00FF, #00BFFF); box-shadow: 0 4px 14px rgba(123,0,255,0.35); }
+  .proj-card:nth-child(3n+3) .proj-visit-btn { background: linear-gradient(135deg, #00C853, #00BFFF); box-shadow: 0 4px 14px rgba(0,200,83,0.3); }
+  .proj-visit-btn.beta-btn { background: linear-gradient(135deg, #FF8C42, #FF4D8D); }
+  .proj-visit-btn.coming-btn { background: #2a2a4a; color: #a7a9be; pointer-events: none; opacity: 0.7; box-shadow: none; }
 
-  /* icon background tints rotate per card for variety, set inline via class */
+  /* icon background tints */
   .tint-1 { background: var(--tint-orange); }
   .tint-2 { background: var(--tint-pink); }
   .tint-3 { background: var(--tint-jade); }
+
+  /* Side ad panels for showcase section */
+  #showcase { position: relative; }
+  .showcase-side-ads {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 5;
+  }
+  .showcase-side-ads.left  { left: 0.5%; align-items: flex-start; }
+  .showcase-side-ads.right { right: 0.5%; align-items: flex-end; }
+  @media (max-width: 1300px) { .showcase-side-ads { display: none; } }
 
   /* ===== AD SLOTS ===== */
   .ad-section { background: var(--tint-pink); }
@@ -1215,6 +1299,47 @@
 
 <!-- ===== PROJECT SHOWCASE ===== -->
 <section class="section" id="showcase">
+
+  <!-- LEFT SIDE ADS -->
+  <div class="showcase-side-ads left">
+    <a href="https://madaix.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎯</div>
+      <div class="pill-text"><strong>MADAIX</strong><span>AI Ad Campaigns</span></div>
+    </a>
+    <a href="https://www.live-setup.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚡</div>
+      <div class="pill-text"><strong>Live Setup</strong><span>Algo Trading</span></div>
+    </a>
+    <a href="https://tuftub.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🧰</div>
+      <div class="pill-text"><strong>Tuftub</strong><span>Find the Right AI Tool</span></div>
+    </a>
+    <a href="https://jurissetu.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">⚖️</div>
+      <div class="pill-text"><strong>Jurissetu</strong><span>Legal Q&amp;A AI</span></div>
+    </a>
+  </div>
+
+  <!-- RIGHT SIDE ADS -->
+  <div class="showcase-side-ads right">
+    <a href="https://boardsol.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🗂️</div>
+      <div class="pill-text"><strong>BoardSol</strong><span>Board Management</span></div>
+    </a>
+    <a href="https://efundly.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">✅</div>
+      <div class="pill-text"><strong>Efundly</strong><span>Find Funding Fast</span></div>
+    </a>
+    <a href="https://www.aiversecampus.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">🎓</div>
+      <div class="pill-text"><strong>AIverse Campus</strong><span>Learn AI</span></div>
+    </a>
+    <a href="https://www.dhantron.com" target="_blank" rel="noopener" class="side-ad-pill">
+      <div class="pill-icon">📈</div>
+      <div class="pill-text"><strong>Dhantron</strong><span>Options Trading</span></div>
+    </a>
+  </div>
+
   <div class="section-head">
     <span class="section-tag">My Universe</span>
     <h2>Apps, platforms and smart hacks AI Apps</h2>
