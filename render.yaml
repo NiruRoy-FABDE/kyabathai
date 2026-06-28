@@ -1,18 +1,4 @@
-# ============================================================================
-#  render.yaml — Render.com blueprint for the kyabathai Python backend.
-#
-#  How to use:
-#   1. Push this repo to GitHub.
-#   2. Go to https://render.com → New → Blueprint → pick this repo.
-#   3. Render reads this file, creates BOTH services below, and asks you to
-#      fill in the environment variables (the ones marked sync:false).
-#   4. Paste the same values into both services where they overlap.
-#
-#  Free tier note: the web service sleeps after ~15 min idle and wakes on the
-#  next request (a few seconds cold start). Fine for a content site.
-# ============================================================================
 services:
-  # ---- 1) The API the React site calls -------------------------------------
   - type: web
     name: kyabathai-api
     runtime: python
@@ -32,42 +18,5 @@ services:
         sync: false
       - key: NEWSAPI_KEY
         sync: false
-      - key: GNEWS_KEY
-        sync: false
       - key: INGEST_SECRET
         sync: false
-      - key: CORS_ORIGINS
-        value: https://kyabathai.com,https://www.kyabathai.com
-      - key: REGION_CODE
-        value: IN
-      - key: NEWS_COUNTRY
-        value: in
-      - key: ENABLE_INPROCESS_SCHEDULER
-        value: "false"
-
-  # ---- 2) The scheduled job that pulls viral content every 3 hours ----------
-  - type: cron
-    name: kyabathai-ingest
-    runtime: python
-    plan: free
-    rootDir: backend
-    schedule: "0 */3 * * *"           # every 3 hours, on the hour (UTC)
-    buildCommand: pip install -r requirements.txt
-    startCommand: python ingest.py
-    envVars:
-      - key: DATABASE_URL
-        sync: false
-      - key: ANTHROPIC_API_KEY
-        sync: false
-      - key: CLAUDE_MODEL
-        value: claude-sonnet-4-6
-      - key: YOUTUBE_API_KEY
-        sync: false
-      - key: NEWSAPI_KEY
-        sync: false
-      - key: GNEWS_KEY
-        sync: false
-      - key: REGION_CODE
-        value: IN
-      - key: NEWS_COUNTRY
-        value: in
