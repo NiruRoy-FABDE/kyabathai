@@ -13,8 +13,9 @@ import os
 from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Header, HTTPException, Query
+from fastapi import FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 load_dotenv()
@@ -66,6 +67,22 @@ async def security_headers(request, call_next):
     resp.headers["X-Frame-Options"] = "DENY"
     resp.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     return resp
+
+
+# ---- global safety net -----------------------------------------------------
+# A plain 500 error in FastAPI is returned by an OUTER layer that sits outside
+# the CORS middleware, so the error response has NO Access-Control-Allow-Origin
+# header. The browser then reports it as a CORS failure / "Failed to fetch" and
+# hides the real error. This handler catches ANY unexpected error, returns it as
+# clean JSON, and attaches the CORS header itself — so the browser can always
+# read the real message instead of a dead "Failed to fetch".
+@app.exception_handler(Exception)
+async def all_errors(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"ok": False, "error": f"{type(exc).__name__}: {exc}"},
+        headers={"Access-Control-Allow-Origin": "*"},
+    )
 
 
 @app.get("/api/health")
@@ -123,7 +140,16 @@ def explain(body: ExplainBody):
 def trigger_ingest(x_ingest_secret: str | None = Header(None)):
     if not INGEST_SECRET or x_ingest_secret != INGEST_SECRET:
         raise HTTPException(401, "Unauthorized")
-    return ingest.run()
+    try:
+        return ingest.run()
+    except Exception as e:
+        # Return the real reason as clean JSON (with CORS headers via the app),
+        # so the admin panel shows what's wrong instead of "Failed to fetch".
+        return JSONResponse(
+            status_code=200,
+            content={"ok": False, "error": f"{type(e).__name__}: {e}"},
+            headers={"Access-Control-Allow-Origin": "*"},
+        )
 
 
 # ── Manual blocks (admin panel) ──────────────────────────────────────────────
