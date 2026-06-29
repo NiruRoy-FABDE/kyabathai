@@ -24,7 +24,8 @@ import db          # noqa: E402
 import ingest      # noqa: E402
 
 INGEST_SECRET = os.environ.get("INGEST_SECRET", "")
-CORS_ORIGINS = [o.strip() for o in os.environ.get("CORS_ORIGINS", "").split(",") if o.strip()]
+# Allow all origins so admin panel and frontend always work without CORS errors
+CORS_ORIGINS = ["*"]
 ENABLE_INPROCESS_SCHEDULER = os.environ.get("ENABLE_INPROCESS_SCHEDULER", "false").lower() == "true"
 
 _scheduler = None
@@ -51,8 +52,8 @@ app = FastAPI(title="kyabathai API", version="2.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ORIGINS or ["*"],
-    allow_methods=["GET", "POST"],
+    allow_origins=["*"],
+    allow_methods=["GET", "POST", "DELETE"],
     allow_headers=["*"],
 )
 
