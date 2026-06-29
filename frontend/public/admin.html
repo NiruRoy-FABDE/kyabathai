@@ -160,12 +160,14 @@
 
 <script>
 // ── Config ──────────────────────────────────────────────────────────────────
-function getApi()    { return localStorage.getItem('kb_api')    || ''; }
-function getSecret() { return localStorage.getItem('kb_secret') || ''; }
+// Hardcoded — no need to enter in Settings
+const HARDCODED_API    = 'https://kyabathai-api.onrender.com';
+const HARDCODED_SECRET = 'kyabathai2026supersecretkey123';
+
+function getApi()    { return HARDCODED_API; }
+function getSecret() { return HARDCODED_SECRET; }
 
 function saveSettings() {
-  localStorage.setItem('kb_api',    document.getElementById('cfg-api').value.trim().replace(/\/$/,''));
-  localStorage.setItem('kb_secret', document.getElementById('cfg-secret').value.trim());
   const ok = document.getElementById('settings-ok');
   ok.style.display = 'inline';
   setTimeout(() => ok.style.display = 'none', 2000);
@@ -173,8 +175,7 @@ function saveSettings() {
 
 window.addEventListener('load', () => {
   document.getElementById('cfg-api').value    = getApi();
-  document.getElementById('cfg-secret').value = getSecret();
-  if (!getApi()) switchTab('settings', document.querySelector('.tab:last-child'));
+  document.getElementById('cfg-secret').value = '••••••••••••••••••••••••••••••';
 });
 
 // ── Tabs ────────────────────────────────────────────────────────────────────
