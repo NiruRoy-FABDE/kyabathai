@@ -92,16 +92,31 @@ def fetch_youtube() -> list[dict]:
 #  News  (NewsAPI preferred; GNews fallback)
 # ---------------------------------------------------------------------------
 def fetch_news() -> list[dict]:
+    # GNews first: NewsAPI's /top-headlines?country=in reliably returns zero
+    # articles (a known NewsAPI regional-coverage gap), so GNews is the more
+    # dependable default for India. NewsAPI is kept as a fallback via the
+    # /everything endpoint (which works fine, unlike /top-headlines).
+    if GNEWS_KEY:
+        items = _fetch_gnews()
+        if items:
+            return items
     if NEWSAPI_KEY:
         return _fetch_newsapi()
-    if GNEWS_KEY:
-        return _fetch_gnews()
     return []
 
 
 def _fetch_newsapi() -> list[dict]:
-    url = "https://newsapi.org/v2/top-headlines"
-    params = {"country": NEWS_COUNTRY, "pageSize": str(NEWS_COUNT), "apiKey": NEWSAPI_KEY}
+    # /v2/top-headlines?country=in returns zero results for India on NewsAPI's
+    # free tier (a known regional-coverage gap), so we query /v2/everything by
+    # keyword instead, which works reliably regardless of country.
+    url = "https://newsapi.org/v2/everything"
+    params = {
+        "q": os.environ.get("NEWS_QUERY", "India"),
+        "language": "en",
+        "sortBy": "publishedAt",
+        "pageSize": str(NEWS_COUNT),
+        "apiKey": NEWSAPI_KEY,
+    }
     items = []
     try:
         r = httpx.get(url, params=params, timeout=30)
