@@ -23,7 +23,13 @@ if _DATABASE_URL:
         min_size=1,
         max_size=5,
         open=False,
-        kwargs={"row_factory": dict_row},
+        # prepare_threshold=None disables server-side prepared statements.
+        # Required when DATABASE_URL points at Supabase's Transaction Pooler
+        # (pgbouncer transaction mode) — pgbouncer recycles the underlying
+        # server connection between unrelated client sessions, so a cached
+        # prepared statement from one session can collide with another,
+        # producing "DuplicatePreparedStatement: prepared statement ... already exists".
+        kwargs={"row_factory": dict_row, "prepare_threshold": None},
     )
 
 
