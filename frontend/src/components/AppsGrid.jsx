@@ -3,6 +3,7 @@
 // the same grid, same size, same look. Nothing about the existing static
 // cards is touched; this only adds more <article class="proj-card"> items.
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { fetchBlocks, isConfigured } from "../lib/api.js";
 
 const GRADIENTS = [
@@ -92,6 +93,14 @@ function AppCard({ block, index }) {
 
 export default function AppsGrid() {
   const [apps, setApps] = useState([]);
+  const [slot, setSlot] = useState(null);
+
+  // find the real placeholder div that lives INSIDE the static showcase-grid
+  // markup (rendered via dangerouslySetInnerHTML), so our cards get portaled
+  // into the actual grid box instead of rendering as a sibling outside it.
+  useEffect(() => {
+    setSlot(document.getElementById("apps-grid-slot"));
+  }, []);
 
   useEffect(() => {
     if (!isConfigured()) return;
@@ -100,11 +109,12 @@ export default function AppsGrid() {
       .catch(() => {});
   }, []);
 
-  if (apps.length === 0) return null;
+  if (apps.length === 0 || !slot) return null;
 
-  return (
+  return createPortal(
     <>
       {apps.map((b, i) => <AppCard key={b.id} block={b} index={i} />)}
-    </>
+    </>,
+    slot
   );
 }
