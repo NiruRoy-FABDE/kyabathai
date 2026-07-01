@@ -8,11 +8,6 @@ import Archive from "./components/Archive.jsx";
 import AppsGrid from "./components/AppsGrid.jsx";
 import { topHtml, showcaseHtml, footerHtml } from "./lib/staticHtml.js";
 
-const APPS_MARKER = "<!-- ── Dynamic app cards injected from admin ── -->";
-const [showcaseTopHtml, showcaseBottomHtml] = showcaseHtml.includes(APPS_MARKER)
-  ? showcaseHtml.split(APPS_MARKER)
-  : [showcaseHtml, ""];
-
 function useHashRoute() {
   const [route, setRoute] = useState(window.location.hash.replace(/^#/, "") || "/");
   useEffect(() => {
@@ -62,9 +57,8 @@ export default function App() {
     <>
       <StaticSection html={topHtml} />
       <LiveFeed />
-      <StaticSection html={showcaseTopHtml} />
+      <StaticSection html={showcaseHtml} />
       <AppsGrid />
-      <StaticSection html={showcaseBottomHtml} />
       <StaticSection html={footerHtml} />
     </>
   );
