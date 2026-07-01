@@ -2021,3 +2021,33 @@
   letter-spacing: 0.3px; color: var(--marigold);
   margin-top: auto; flex-shrink: 0;
 }
+
+/* ── Inline video modal — plays YouTube videos on-site instead of a new tab ── */
+.video-modal-backdrop {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(10, 8, 16, 0.88);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.15s ease;
+}
+.video-modal-box {
+  position: relative;
+  width: 100%; max-width: 900px;
+}
+.video-modal-frame {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  background: #000; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+.video-modal-frame iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+.video-modal-close {
+  position: absolute; top: -42px; right: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25);
+  color: #fff; font-size: 1rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.video-modal-close:hover { background: var(--marigold); border-color: var(--marigold); color: var(--ink); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
