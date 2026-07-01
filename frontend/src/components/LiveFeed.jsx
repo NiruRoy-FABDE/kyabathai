@@ -155,13 +155,15 @@ export default function LiveFeed() {
         )}
 
         {error && <div className="feed-empty"><p>{error}</p></div>}
+      </div>
 
-        {isConfigured() && items.length > 0 && !done && (
+      {isConfigured() && items.length > 0 && !done && (
+        <div className="feed-loadmore-wrap">
           <button className="feed-loadmore" onClick={() => load(false)} disabled={loading}>
             {loading ? <span className="spin" /> : "Load more ↓"}
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
