@@ -164,6 +164,7 @@ class BlockBody(BaseModel):
     source_label: str | None = None
     sort_order: int = 0
     visible: bool = True
+    extra: dict | None = None
 
 
 @app.get("/api/blocks")

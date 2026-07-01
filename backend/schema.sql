@@ -74,6 +74,10 @@ create table if not exists manual_blocks (
   created_at   timestamptz not null default now()
 );
 
+-- extra holds app-card-only fields (domain, tagline, status, problem,
+-- what_it_does, who_for) as JSON, so other block types are untouched.
+alter table manual_blocks add column if not exists extra jsonb;
+
 create index if not exists manual_blocks_visible_idx on manual_blocks (visible, sort_order);
 
 alter table manual_blocks enable row level security;

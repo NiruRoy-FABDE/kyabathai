@@ -10,6 +10,7 @@ from contextlib import contextmanager
 from typing import Any, Optional
 
 from psycopg.rows import dict_row
+from psycopg.types.json import Jsonb
 from psycopg_pool import ConnectionPool
 
 _DATABASE_URL = os.environ.get("DATABASE_URL", "")
@@ -181,7 +182,7 @@ def fetch_blocks() -> list[dict]:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute("""
                 SELECT id, block_type, title, url, thumbnail, caption,
-                       description, source_label, sort_order, visible, created_at
+                       description, source_label, sort_order, visible, created_at, extra
                 FROM manual_blocks
                 WHERE visible = true
                 ORDER BY sort_order ASC, created_at DESC
@@ -191,14 +192,16 @@ def fetch_blocks() -> list[dict]:
 
 
 def insert_block(data: dict) -> str:
+    data = dict(data)
+    data["extra"] = Jsonb(data["extra"]) if data.get("extra") else None
     with get_conn() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute("""
                 INSERT INTO manual_blocks
-                  (block_type, title, url, thumbnail, caption, description, source_label, sort_order, visible)
+                  (block_type, title, url, thumbnail, caption, description, source_label, sort_order, visible, extra)
                 VALUES
                   (%(block_type)s, %(title)s, %(url)s, %(thumbnail)s, %(caption)s,
-                   %(description)s, %(source_label)s, %(sort_order)s, %(visible)s)
+                   %(description)s, %(source_label)s, %(sort_order)s, %(visible)s, %(extra)s)
                 RETURNING id
             """, data)
             row = cur.fetchone()
