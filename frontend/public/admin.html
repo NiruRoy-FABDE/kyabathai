@@ -31,29 +31,18 @@
     text-align: center;
   }
   .login-box .logo { font-size: 1.6rem; font-weight: 800; margin-bottom: 0.3rem; }
+  .login-box .logo span { color: #ff8c42; }
   .login-box p { color: #a7a9be; font-size: 0.9rem; margin-bottom: 2rem; }
   .login-box input {
-    width: 100%;
-    padding: 0.85rem 1rem;
-    background: #0f0e17;
-    border: 1px solid #2a2a4a;
-    border-radius: 10px;
-    color: #fffffe;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    outline: none;
+    width: 100%; padding: 0.85rem 1rem;
+    background: #0f0e17; border: 1px solid #2a2a4a; border-radius: 10px;
+    color: #fffffe; font-size: 1rem; margin-bottom: 1rem; outline: none;
   }
   .login-box input:focus { border-color: #ff8c42; }
   .btn-login {
-    width: 100%;
-    padding: 0.85rem;
-    background: #ff8c42;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
+    width: 100%; padding: 0.85rem;
+    background: #ff8c42; color: #fff; border: none; border-radius: 10px;
+    font-size: 1rem; font-weight: 700; cursor: pointer;
   }
   .btn-login:hover { background: #e8702a; }
   .error-msg { color: #ff4d8d; font-size: 0.85rem; margin-top: 0.75rem; }
@@ -62,106 +51,136 @@
   #admin-panel { display: none; }
 
   .top-bar {
-    background: #1a1a2e;
-    border-bottom: 1px solid #2a2a4a;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    background: #1a1a2e; border-bottom: 1px solid #2a2a4a;
+    padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
   }
   .top-bar .logo { font-size: 1.2rem; font-weight: 800; }
   .top-bar .logo span { color: #ff8c42; }
   .btn-logout {
-    background: transparent;
-    border: 1px solid #2a2a4a;
-    color: #a7a9be;
-    padding: 0.4rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.85rem;
+    background: transparent; border: 1px solid #2a2a4a; color: #a7a9be;
+    padding: 0.4rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
   }
   .btn-logout:hover { border-color: #ff4d8d; color: #ff4d8d; }
 
-  .tabs { display:flex; gap:0; border-bottom:1px solid #2a2a4a; padding:0 2rem; background:#15152a; overflow-x:auto; }
-  .tab { padding:0.9rem 1.2rem; font-size:0.85rem; font-weight:700; cursor:pointer; border-bottom:3px solid transparent; color:#a7a9be; white-space:nowrap; }
-  .tab:hover { color:#fffffe; }
-  .tab.active { color:#ff8c42; border-color:#ff8c42; }
+  .admin-body { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
 
-  .admin-body {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
+  /* ── SAVE BAR ── */
+  .save-bar {
+    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px;
+    padding: 1rem 1.5rem; display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
   }
-  .panel { display:none; }
-  .panel.active { display:block; }
-
-  .card {
-    background: #1a1a2e;
-    border: 1px solid #2a2a4a;
-    border-radius: 14px;
-    padding: 1.6rem;
-    margin-bottom: 1.5rem;
+  .save-bar p { color: #a7a9be; font-size: 0.9rem; }
+  .save-status { font-size: 0.85rem; color: #00b894; margin-top: 2px; }
+  .btn-save {
+    background: #00b894; color: #fff; border: none; border-radius: 10px;
+    padding: 0.7rem 2rem; font-size: 1rem; font-weight: 700; cursor: pointer;
   }
-  .card h3 { font-size:1.05rem; color:#fffffe; margin-bottom:1.2rem; display:flex; align-items:center; gap:8px; }
-  .card h3 .accent { color: #ff8c42; }
+  .btn-save:hover { background: #00876a; }
+  .btn-save:disabled { background: #2a2a4a; cursor: not-allowed; }
 
-  label { display:block; font-size:0.72rem; color:#a7a9be; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; margin-top:14px; }
-  label:first-of-type { margin-top:0; }
-  label .opt { color:#5c5d72; text-transform:none; font-weight:500; letter-spacing:0; }
-
-  input, textarea, select {
-    width:100%; background:#0f0e17; border:1px solid #2a2a4a; border-radius:10px;
-    padding:0.75rem 0.9rem; color:#fffffe; font-size:0.88rem; font-family:inherit; outline:none;
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 0.5rem 1.2rem; border-radius: 999px; border: 1px solid #2a2a4a;
+    background: transparent; color: #a7a9be; cursor: pointer; font-size: 0.85rem;
+    font-weight: 600; transition: all 0.2s;
   }
-  input:focus, textarea:focus, select:focus { border-color:#ff8c42; }
-  textarea { resize:vertical; min-height:80px; }
-  select { cursor:pointer; }
+  .tab.active { background: #ff8c42; border-color: #ff8c42; color: #fff; }
 
-  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-  @media (max-width:560px) { .row2 { grid-template-columns:1fr; } }
+  .section-panel { display: none; }
+  .section-panel.active { display: block; }
 
-  .checkbox-row { display:flex; align-items:center; gap:8px; margin-top:14px; }
-  .checkbox-row input { width:auto; }
-  .checkbox-row label { margin:0; text-transform:none; font-size:0.85rem; color:#fffffe; font-weight:500; }
+  .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.2rem; color: #ff8c42; }
 
-  .btn {
-    display:inline-flex; align-items:center; gap:6px; padding:0.75rem 1.4rem; border-radius:10px;
-    font-weight:700; font-size:0.85rem; border:none; cursor:pointer;
+  /* ── CONTENT CARDS ── */
+  .content-card {
+    background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 14px;
+    padding: 1.25rem 1.5rem; margin-bottom: 1rem;
   }
-  .btn-primary { background:#ff8c42; color:#fff; }
-  .btn-primary:hover { background:#e8702a; }
-  .btn-danger { background:#3a1a26; color:#ff4d8d; border:1px solid rgba(255,77,141,0.3); }
-  .btn-danger:hover { background:#4a2030; }
-  .btn-sm { padding:0.45rem 0.9rem; font-size:0.75rem; }
-  .mt { margin-top:1.2rem; }
+  .content-card .card-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;
+  }
+  .slot-label {
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; color: #a7a9be; background: #0f0e17;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .type-badge { font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .type-youtube { background: #ff000022; color: #ff4444; }
+  .type-instagram { background: #ff4d8d22; color: #ff4d8d; }
+  .type-app { background: #ff8c4222; color: #ff8c42; }
 
-  .status { padding:0.7rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600; margin-top:0.8rem; display:none; }
-  .status.ok { background:rgba(0,184,148,0.15); color:#00b894; border:1px solid rgba(0,184,148,0.3); display:block; }
-  .status.err { background:rgba(255,77,141,0.12); color:#ff4d8d; border:1px solid rgba(255,77,141,0.3); display:block; }
+  .field-row { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+  .field-row label { font-size: 0.78rem; color: #a7a9be; font-weight: 600; }
+  .field-row input, .field-row textarea, .field-row select {
+    background: #0f0e17; border: 1px solid #2a2a4a; border-radius: 8px;
+    color: #fffffe; padding: 0.65rem 0.9rem; font-size: 0.9rem;
+    outline: none; width: 100%; transition: border-color 0.2s; font-family: inherit;
+  }
+  .field-row input:focus, .field-row textarea:focus { border-color: #ff8c42; }
+  .field-row textarea { resize: vertical; min-height: 70px; }
+  .field-row select { cursor: pointer; }
 
-  .block-list { margin-top: 0.5rem; }
+  /* ── ADD SLOT BUTTON ── */
+  .btn-add-slot {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    width: 100%; padding: 0.9rem; background: transparent;
+    border: 2px dashed #ff8c42; border-radius: 14px; color: #ff8c42;
+    font-size: 1rem; font-weight: 700; cursor: pointer; margin-bottom: 1rem; transition: all 0.2s;
+  }
+  .btn-add-slot:hover { background: #ff8c4211; }
+
+  .btn-delete-slot {
+    background: transparent; border: 1px solid #ff4d8d44; color: #ff4d8d;
+    border-radius: 8px; padding: 3px 10px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+  }
+  .btn-delete-slot:hover { background: #ff4d8d22; }
+
+  /* ── MODE TOGGLE ── */
+  .mode-toggle { display:flex; gap:0.4rem; margin-top:0.3rem; }
+  .mode-btn {
+    flex:1; padding:0.45rem 0.6rem; font-size:0.78rem; font-weight:600;
+    border-radius:8px; border:1px solid #2a2a4a; background:#0f0e17;
+    color:#a7a9be; cursor:pointer; transition:all .15s;
+  }
+  .mode-btn.active { background:#6c63ff22; border-color:#6c63ff; color:#6c63ff; }
+  .mode-hint { font-size:0.74rem; color:#6c6c84; margin-top:0.35rem; }
+
+  /* ── EXTRA TABS (Ingest / Manage) ── */
+  .extra-tabs { display:flex; gap:0.5rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .extra-tab {
+    padding:0.5rem 1.2rem; border-radius:999px; border:1px solid #2a2a4a;
+    background:transparent; color:#a7a9be; cursor:pointer; font-size:0.85rem; font-weight:600;
+  }
+  .extra-tab.active { background:#6c63ff; border-color:#6c63ff; color:#fff; }
+
+  .status-msg {
+    padding:0.7rem 1rem; border-radius:8px; font-size:0.85rem; font-weight:600;
+    margin-top:0.8rem; display:none;
+  }
+  .status-msg.ok { background:rgba(0,184,148,0.15); color:#00b894; border:1px solid rgba(0,184,148,0.3); display:block; }
+  .status-msg.err { background:rgba(255,77,141,0.12); color:#ff4d8d; border:1px solid rgba(255,77,141,0.3); display:block; }
+
   .block-item {
-    background:#0f0e17; border:1px solid #2a2a4a; border-radius:10px; padding:14px 16px;
-    margin-bottom:10px; display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    background:#0f0e17; border:1px solid #2a2a4a; border-radius:10px;
+    padding:14px 16px; margin-bottom:10px; display:flex;
+    justify-content:space-between; align-items:flex-start; gap:12px;
   }
   .block-item .bi-info { flex:1; min-width:0; }
-  .block-item .bi-type { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.6px; color:#ff8c42; margin-bottom:4px; }
+  .block-item .bi-type { font-size:0.65rem; font-weight:800; text-transform:uppercase; color:#ff8c42; margin-bottom:4px; }
   .block-item .bi-title { font-size:0.9rem; font-weight:700; color:#fffffe; margin-bottom:2px; }
   .block-item .bi-url { font-size:0.72rem; color:#5c5d72; word-break:break-all; }
-  .type-badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:0.65rem; font-weight:800; text-transform:uppercase; }
-  .type-youtube { background:rgba(255,0,0,0.15); color:#f87171; }
-  .type-instagram { background:rgba(168,85,247,0.15); color:#c084fc; }
-  .type-news { background:rgba(255,140,66,0.15); color:#ff8c42; }
-  .type-document { background:rgba(0,184,148,0.15); color:#00b894; }
-  .type-app { background:rgba(255,215,0,0.12); color:#ffd700; }
+  .btn-del { background:#3a1a26; color:#ff4d8d; border:1px solid rgba(255,77,141,0.3); border-radius:8px; padding:5px 12px; font-size:0.75rem; cursor:pointer; font-weight:700; }
+  .btn-del:hover { background:#4a2030; }
+
   .empty { text-align:center; color:#5c5d72; padding:40px; font-size:0.9rem; }
-  .hint { font-size:0.74rem; color:#5c5d72; margin-top:4px; }
 
-  .api-cfg p.note { font-size:0.8rem; color:#a7a9be; margin-bottom:14px; }
-  .saved-ok { color:#00b894; font-size:0.75rem; margin-left:10px; display:none; }
-
-  .app-section-label { font-size:0.78rem; font-weight:800; color:#ff8c42; text-transform:uppercase; letter-spacing:0.5px; margin:1.4rem 0 0.6rem; padding-top:1rem; border-top:1px dashed #2a2a4a; }
-  .app-section-label:first-of-type { border-top:none; padding-top:0; margin-top:0.4rem; }
+  @media (max-width:600px) {
+    .admin-body { padding:1rem; }
+    .top-bar { padding:1rem; }
+    .save-bar { flex-direction:column; }
+  }
 </style>
 </head>
 <body>
@@ -169,149 +188,78 @@
 <!-- ===== LOGIN SCREEN ===== -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="logo">kyabat.hai</div>
-    <p>Admin Panel — enter password to continue</p>
+    <div class="logo">kyabat<span>.</span>hai</div>
+    <p>Admin Panel — only you can see this</p>
     <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password"
            onkeydown="if(event.key==='Enter')login()">
-    <button class="btn-login" onclick="login()">Unlock →</button>
-    <div class="error-msg" id="login-err"></div>
+    <button class="btn-login" onclick="login()">Login →</button>
+    <p class="error-msg" id="login-error"></p>
   </div>
 </div>
 
 <!-- ===== ADMIN PANEL ===== -->
 <div id="admin-panel">
   <div class="top-bar">
-    <div class="logo">kyabat<span>.</span>hai admin</div>
-    <button class="btn-logout" onclick="logout()">Log out</button>
-  </div>
-
-  <div class="tabs">
-    <div class="tab active" data-tab="add" onclick="switchTab('add',this)">➕ Add Block</div>
-    <div class="tab" data-tab="manage" onclick="switchTab('manage',this)">📋 Manage Blocks</div>
-    <div class="tab" data-tab="ingest" onclick="switchTab('ingest',this)">🔄 Trigger Ingest</div>
-    <div class="tab" data-tab="settings" onclick="switchTab('settings',this)">⚙️ Settings</div>
+    <div class="logo">kyabat<span>.</span>hai — <span style="color:#a7a9be;font-weight:400;font-size:0.9rem;">Admin</span></div>
+    <button class="btn-logout" onclick="logout()">Logout</button>
   </div>
 
   <div class="admin-body">
 
-    <!-- ===== ADD BLOCK ===== -->
-    <div id="tab-add" class="panel active">
-      <div class="card">
-        <h3><span class="accent">➕</span> Add New Content Block</h3>
+    <!-- SAVE BAR -->
+    <div class="save-bar">
+      <div>
+        <p>✏️ Make your changes below, then click <strong>Save & Publish</strong></p>
+        <p class="save-status" id="save-status"></p>
+      </div>
+      <button class="btn-save" id="save-btn" onclick="saveAll()">💾 Save & Publish</button>
+    </div>
 
-        <label>Block Type</label>
-        <select id="b-type" onchange="onTypeChange()">
-          <option value="app">🚀 App / Site Card</option>
-          <option value="youtube">▶ YouTube Video</option>
-          <option value="instagram">📸 Instagram Reel/Post</option>
-          <option value="news">📰 News Article</option>
-          <option value="document">📄 PDF / Document</option>
-        </select>
+    <!-- MAIN TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="switchMainTab('reels',this)">🎬 Reels & Videos</button>
+      <button class="tab" onclick="switchMainTab('apps',this)">🚀 App Cards</button>
+      <button class="tab" onclick="switchMainTab('extra',this)">⚙️ More</button>
+    </div>
 
-        <!-- Shared fields -->
-        <label>Title <span class="opt">(required)</span></label>
-        <input type="text" id="b-title" placeholder="e.g. Promnify — AI Prompt Loops">
+    <!-- ══ REELS TAB ══ -->
+    <div class="section-panel active" id="tab-reels">
+      <p class="section-title">Reels, Videos & Articles</p>
+      <button class="btn-add-slot" onclick="addSlot()">➕ Add New Slot</button>
+      <div id="slots-container"></div>
+    </div>
 
-        <label>URL <span class="opt">(required)</span></label>
-        <input type="text" id="b-url" placeholder="https://...">
-        <div class="hint" id="b-url-hint"></div>
+    <!-- ══ APPS TAB ══ -->
+    <div class="section-panel" id="tab-apps">
+      <p class="section-title">App Cards — Update links and descriptions</p>
+      <button class="btn-add-slot" onclick="addAppCard()">➕ Add New App Card</button>
+      <div id="apps-container"></div>
+    </div>
 
-        <!-- App-only fields -->
-        <div id="app-fields">
-          <div class="app-section-label">App card details</div>
-          <div class="row2">
-            <div>
-              <label>Domain <span class="opt">(shown next to name)</span></label>
-              <input type="text" id="a-domain" placeholder="promnify.com">
-            </div>
-            <div>
-              <label>Status</label>
-              <select id="a-status">
-                <option value="live">Live — Visit Site</option>
-                <option value="beta">Private Beta — Request Access</option>
-              </select>
-            </div>
+    <!-- ══ EXTRA TAB (Manage Blocks + Ingest) ══ -->
+    <div class="section-panel" id="tab-extra">
+      <div class="extra-tabs">
+        <button class="extra-tab active" onclick="switchExtraTab('manage',this)">📋 Manage All Blocks</button>
+        <button class="extra-tab" onclick="switchExtraTab('ingest',this)">🔄 Trigger Ingest</button>
+      </div>
+
+      <div id="extra-manage" class="extra-panel">
+        <div class="content-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <span style="font-weight:700;font-size:0.95rem;">All Saved Blocks</span>
+            <button class="tab" style="background:#1a1a2e;" onclick="loadBlocks()">🔄 Refresh</button>
           </div>
-          <label>Tagline <span class="opt">(shown in red on site)</span></label>
-          <input type="text" id="a-tagline" placeholder="Stop writing prompts, design loops instead.">
-          <label>Icon emoji <span class="opt">(optional)</span></label>
-          <input type="text" id="a-icon" placeholder="🚀">
-
-          <div class="app-section-label">Body sections (shown in the card middle)</div>
-          <label>The Problem <span class="opt">(what pain it solves)</span></label>
-          <textarea id="a-problem" placeholder="Prompt writing is repetitive and hard to scale..."></textarea>
-          <label>What It Does <span class="opt">(the solution)</span></label>
-          <textarea id="a-what" placeholder="Lets you design reusable prompt loops..."></textarea>
-          <label>Who It's For <span class="opt">(comma-separated tags)</span></label>
-          <input type="text" id="a-whofor" placeholder="Software devs, Agencies, Solo founders">
-        </div>
-
-        <!-- Reels/video-only fields -->
-        <div id="media-fields">
-          <label>Thumbnail URL <span class="opt">(optional — auto for YouTube)</span></label>
-          <input type="text" id="b-thumbnail" placeholder="https://... or leave blank">
-          <div class="row2">
-            <div>
-              <label>Caption / Short Description</label>
-              <input type="text" id="b-caption" placeholder="One-line caption">
-            </div>
-            <div>
-              <label>Source Label <span class="opt">(optional)</span></label>
-              <input type="text" id="b-source" placeholder="e.g. YouTube, Times of India">
-            </div>
-          </div>
-          <label>Long Description <span class="opt">(optional)</span></label>
-          <textarea id="b-desc" placeholder="More details about this block"></textarea>
-        </div>
-
-        <label>Sort Order <span class="opt">(lower = shown first)</span></label>
-        <input type="number" id="b-order" value="0" min="0">
-
-        <div class="checkbox-row">
-          <input type="checkbox" id="b-visible" checked>
-          <label for="b-visible">Visible on site</label>
-        </div>
-
-        <div class="mt">
-          <button class="btn btn-primary" onclick="addBlock()">➕ Add Block</button>
-        </div>
-        <div class="status" id="add-status"></div>
-      </div>
-    </div>
-
-    <!-- ===== MANAGE ===== -->
-    <div id="tab-manage" class="panel">
-      <div class="card">
-        <h3><span class="accent">📋</span> All Manual Blocks</h3>
-        <button class="btn btn-primary btn-sm" onclick="loadBlocks()">🔄 Refresh</button>
-        <div class="block-list" id="block-list">
-          <div class="empty">Click Refresh to load blocks</div>
+          <div id="block-list"><div class="empty">Click Refresh to load</div></div>
         </div>
       </div>
-    </div>
 
-    <!-- ===== INGEST ===== -->
-    <div id="tab-ingest" class="panel">
-      <div class="card">
-        <h3><span class="accent">🔄</span> Trigger Content Ingest</h3>
-        <p style="font-size:0.85rem;color:#a7a9be;margin-bottom:16px;">This pulls the latest viral YouTube videos and news articles into the feed right now. Normally runs automatically every 3 hours.</p>
-        <button class="btn btn-primary" onclick="triggerIngest()">🔄 Run Ingest Now</button>
-        <div class="status" id="ingest-status"></div>
-      </div>
-    </div>
-
-    <!-- ===== SETTINGS ===== -->
-    <div id="tab-settings" class="panel">
-      <div class="card api-cfg">
-        <h3><span class="accent">🔑</span> API Configuration</h3>
-        <p class="note">Your backend URL and ingest secret. Stored in your browser only.</p>
-        <label>Backend URL</label>
-        <input type="text" id="cfg-api" placeholder="https://kyabathai-api.onrender.com">
-        <label>Ingest Secret</label>
-        <input type="password" id="cfg-secret" placeholder="your INGEST_SECRET value">
-        <div class="mt">
-          <button class="btn btn-primary" onclick="saveSettings()">💾 Save Settings</button>
-          <span class="saved-ok" id="settings-ok">✅ Saved!</span>
+      <div id="extra-ingest" class="extra-panel" style="display:none;">
+        <div class="content-card">
+          <p style="font-size:0.9rem;color:#a7a9be;margin-bottom:1.2rem;">
+            Pulls the latest viral YouTube videos and news articles into the feed right now. Normally runs automatically every 3 hours.
+          </p>
+          <button class="btn-save" onclick="triggerIngest()">🔄 Run Ingest Now</button>
+          <div class="status-msg" id="ingest-status"></div>
         </div>
       </div>
     </div>
@@ -320,225 +268,493 @@
 </div>
 
 <script>
-// ╔═══════════════════════════════════════════════════════════════════════╗
-// ║  ADMIN PASSWORD — change the value below to set your own password.     ║
-const ADMIN_PASSWORD = 'KyaBaat@2026';
-// ╚═══════════════════════════════════════════════════════════════════════╝
+// ╔═══════════════════════════════════════════════════════════════╗
+// ║  Password — change this to set your own                       ║
+const ADMIN_PASSWORD   = 'KyaBaat@2026';
+// ║  Backend config — hardcoded                                   ║
+const API_BASE         = 'https://kyabathai-api.onrender.com';
+const INGEST_SECRET    = 'kyabathai2026supersecretkey123';
+// ╚═══════════════════════════════════════════════════════════════╝
 
+// ── LOGIN ────────────────────────────────────────────────────────
 function login() {
-  const val = document.getElementById('login-pass').value;
-  if (val === ADMIN_PASSWORD) {
-    try { sessionStorage.setItem('kb_admin_ok', '1'); } catch(e) {}
-    showApp();
+  if (document.getElementById('login-pass').value === ADMIN_PASSWORD) {
+    try { sessionStorage.setItem('kb_ok','1'); } catch(e){}
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display  = 'block';
+    init();
   } else {
-    document.getElementById('login-err').textContent = 'Wrong password';
+    document.getElementById('login-error').textContent = 'Wrong password';
     document.getElementById('login-pass').value = '';
   }
 }
 function logout() {
-  try { sessionStorage.removeItem('kb_admin_ok'); } catch(e) {}
-  document.getElementById('admin-panel').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
+  try { sessionStorage.removeItem('kb_ok'); } catch(e){}
+  location.reload();
 }
-function showApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('admin-panel').style.display = 'block';
-}
-(function () {
+(function(){
   let ok = false;
-  try { ok = sessionStorage.getItem('kb_admin_ok') === '1'; } catch(e) {}
-  if (ok) showApp(); else document.getElementById('login-pass').focus();
+  try { ok = sessionStorage.getItem('kb_ok') === '1'; } catch(e){}
+  if (ok) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display  = 'block';
+    init();
+  } else {
+    document.getElementById('login-pass').focus();
+  }
 })();
 
-// ── Config (hardcoded — same backend the old admin used) ───────────────────
-const HARDCODED_API    = 'https://kyabathai-api.onrender.com';
-const HARDCODED_SECRET = 'kyabathai2026supersecretkey123';
-function getApi()    { return HARDCODED_API; }
-function getSecret() { return HARDCODED_SECRET; }
-
-function saveSettings() {
-  const ok = document.getElementById('settings-ok');
-  ok.style.display = 'inline';
-  setTimeout(() => ok.style.display = 'none', 2000);
+// ── INIT ─────────────────────────────────────────────────────────
+async function init() {
+  // Load existing blocks from backend
+  try {
+    const res  = await fetch(API_BASE + '/api/blocks');
+    const data = await res.json();
+    const items = data.items || [];
+    const reels = items.filter(b => b.block_type !== 'app');
+    const apps  = items.filter(b => b.block_type === 'app');
+    reels.forEach(b => addSlot(b));
+    apps.forEach(b  => addAppCard(b));
+  } catch(e) {
+    console.log('Could not load existing blocks:', e.message);
+  }
 }
-window.addEventListener('load', () => {
-  document.getElementById('cfg-api').value    = getApi();
-  document.getElementById('cfg-secret').value = '••••••••••••••••••••••••••••••';
-});
 
-// ── Tabs ─────────────────────────────────────────────────────────────────
-function switchTab(name, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+// ── TABS ─────────────────────────────────────────────────────────
+function switchMainTab(name, el) {
+  document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('tab-' + name).classList.add('active');
+}
+function switchExtraTab(name, el) {
+  document.querySelectorAll('.extra-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.extra-panel').forEach(p => p.style.display = 'none');
+  el.classList.add('active');
+  document.getElementById('extra-' + name).style.display = 'block';
   if (name === 'manage') loadBlocks();
 }
 
-// ── Type-specific field show/hide + hints ───────────────────────────────────
-const URL_HINTS = {
-  app:       'Website URL (e.g. https://myapp.com)',
-  youtube:   'YouTube video URL or Shorts URL (e.g. https://youtube.com/shorts/abc123)',
-  instagram: 'Instagram reel or post URL (e.g. https://www.instagram.com/reel/abc123/)',
-  news:      'Full article URL (e.g. https://timesofindia.com/...)',
-  document:  'PDF/doc URL — can be a Google Drive share link or direct file URL',
-};
-function onTypeChange() {
-  const t = document.getElementById('b-type').value;
-  document.getElementById('b-url-hint').textContent = URL_HINTS[t] || '';
-  document.getElementById('app-fields').style.display   = (t === 'app') ? 'block' : 'none';
-  document.getElementById('media-fields').style.display = (t === 'app') ? 'none'  : 'block';
-}
-onTypeChange();
-
-// ── Status helper ───────────────────────────────────────────────────────────
-function showStatus(id, msg, isErr) {
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.className = 'status ' + (isErr ? 'err' : 'ok');
+// ── MODE TOGGLE (Auto/Custom) ────────────────────────────────────
+const modeState = {};
+function setMode(prefix, field, mode) {
+  modeState[prefix] = modeState[prefix] || {};
+  modeState[prefix][field] = mode;
+  const toggle = document.getElementById(prefix + '-' + field + '-toggle');
+  if (toggle) {
+    toggle.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    const idx = mode === 'auto' ? 0 : 1;
+    if (toggle.querySelectorAll('.mode-btn')[idx])
+      toggle.querySelectorAll('.mode-btn')[idx].classList.add('active');
+  }
+  const input = document.getElementById(prefix + '-' + field);
+  const hint  = document.getElementById(prefix + '-' + field + '-hint');
+  if (input) input.style.display = mode === 'custom' ? 'block' : 'none';
+  if (hint)  hint.style.display  = mode === 'custom' ? 'none'  : 'block';
 }
 
-// ── Add block ────────────────────────────────────────────────────────────────
-async function addBlock() {
-  const api    = getApi();
-  const secret = getSecret();
-  if (!api)    return showStatus('add-status', '⚠️ Set your Backend URL in Settings first.', true);
-  if (!secret) return showStatus('add-status', '⚠️ Set your Ingest Secret in Settings first.', true);
+// ── REELS SLOTS ──────────────────────────────────────────────────
+let slotCounter = 0;
+// Track slots: { domId, backendId }
+const slots = [];
 
-  const type  = document.getElementById('b-type').value;
-  const title = document.getElementById('b-title').value.trim();
-  const url   = document.getElementById('b-url').value.trim();
-  if (!title) return showStatus('add-status', '⚠️ Title is required.', true);
-  if (!url)   return showStatus('add-status', '⚠️ URL is required.', true);
+function addSlot(existing) {
+  slotCounter++;
+  const sid = 'slot_' + slotCounter;
+  const num = slotCounter;
+  const backendId = existing ? existing.id : null;
+  slots.push({ domId: sid, backendId });
 
-  const body = {
-    block_type:   type,
-    title,
-    url,
-    sort_order:   parseInt(document.getElementById('b-order').value) || 0,
-    visible:      document.getElementById('b-visible').checked,
-    thumbnail: null, caption: null, description: null, source_label: null, extra: null,
-  };
+  const type = existing
+    ? (existing.block_type === 'youtube' ? 'youtube' : existing.block_type === 'instagram' ? 'instagram' : existing.block_type === 'news' ? 'article' : existing.block_type)
+    : 'youtube';
 
-  if (type === 'app') {
-    body.caption = document.getElementById('a-tagline').value.trim() || null;
-    body.extra = {
-      domain:       document.getElementById('a-domain').value.trim() || null,
-      tagline:      document.getElementById('a-tagline').value.trim() || null,
-      status:       document.getElementById('a-status').value,
-      icon:         document.getElementById('a-icon').value.trim() || null,
-      problem:      document.getElementById('a-problem').value.trim() || null,
-      what_it_does: document.getElementById('a-what').value.trim() || null,
-      who_for:      document.getElementById('a-whofor').value.trim() || null,
-    };
-  } else {
-    body.thumbnail    = document.getElementById('b-thumbnail').value.trim() || null;
-    body.caption      = document.getElementById('b-caption').value.trim()   || null;
-    body.description  = document.getElementById('b-desc').value.trim()      || null;
-    body.source_label = document.getElementById('b-source').value.trim()    || null;
-  }
-
-  try {
-    const res = await fetch(api + '/api/blocks', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Ingest-Secret': secret },
-      body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || 'Error');
-    showStatus('add-status', '✅ Block added! ID: ' + data.id, false);
-    ['b-title','b-url','b-thumbnail','b-caption','b-source','b-desc',
-     'a-domain','a-tagline','a-icon','a-problem','a-what','a-whofor'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    document.getElementById('b-order').value = '0';
-  } catch(e) {
-    showStatus('add-status', '❌ ' + e.message, true);
-  }
-}
-
-// ── Load blocks ───────────────────────────────────────────────────────────────
-async function loadBlocks() {
-  const api = getApi();
-  if (!api) {
-    document.getElementById('block-list').innerHTML = '<div class="empty">Set your Backend URL in Settings first.</div>';
-    return;
-  }
-  try {
-    const res  = await fetch(api + '/api/blocks');
-    const data = await res.json();
-    renderBlocks(data.items || []);
-  } catch(e) {
-    document.getElementById('block-list').innerHTML = '<div class="empty">❌ Could not load blocks: ' + e.message + '</div>';
-  }
-}
-
-function renderBlocks(items) {
-  const list = document.getElementById('block-list');
-  if (!items.length) {
-    list.innerHTML = '<div class="empty">No blocks yet. Add some from the "Add Block" tab!</div>';
-    return;
-  }
-  const typeIcon = { youtube:'▶', instagram:'📸', news:'📰', document:'📄', app:'🚀' };
-  list.innerHTML = items.map(it => `
-    <div class="block-item">
-      <div class="bi-info">
-        <div class="bi-type">
-          <span class="type-badge type-${it.block_type}">${typeIcon[it.block_type]||'•'} ${it.block_type}</span>
-          &nbsp;Order: ${it.sort_order}
-        </div>
-        <div class="bi-title">${escHtml(it.title)}</div>
-        <div class="bi-url">${escHtml(it.url)}</div>
-        ${it.caption ? `<div style="font-size:0.75rem;color:#a7a9be;margin-top:3px;">${escHtml(it.caption)}</div>` : ''}
+  const div = document.createElement('div');
+  div.className = 'content-card';
+  div.id = 'card-' + sid;
+  div.dataset.backendId = backendId || '';
+  div.innerHTML = `
+    <div class="card-header">
+      <span class="slot-label">Slot ${num}</span>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <select id="${sid}-type" style="background:#0f0e17;border:1px solid #2a2a4a;border-radius:8px;color:#fffffe;padding:3px 8px;font-size:0.75rem;cursor:pointer;">
+          <option value="youtube">YouTube</option>
+          <option value="instagram">Instagram</option>
+          <option value="article">Article / News</option>
+          <option value="document">Document (PDF)</option>
+        </select>
+        <button class="btn-delete-slot" onclick="deleteSlot('${sid}')">✕ Remove</button>
       </div>
-      <button class="btn btn-danger btn-sm" onclick="deleteBlock('${it.id}')">🗑 Delete</button>
     </div>
-  `).join('');
-}
 
-async function deleteBlock(id) {
-  if (!confirm('Delete this block?')) return;
-  const api    = getApi();
-  const secret = getSecret();
-  if (!api || !secret) return alert('Set API URL and secret in Settings first.');
-  try {
-    const res = await fetch(api + '/api/blocks/' + id, {
-      method: 'DELETE',
-      headers: { 'X-Ingest-Secret': secret },
-    });
-    if (!res.ok) throw new Error('Delete failed');
-    loadBlocks();
-  } catch(e) {
-    alert('❌ ' + e.message);
+    <div class="field-row" id="${sid}-urlwrap">
+      <label id="${sid}-urllabel">YouTube Short / Video URL</label>
+      <input type="url" id="${sid}-url" placeholder="https://youtube.com/shorts/...">
+    </div>
+
+    <div class="field-row" id="${sid}-thumbwrap">
+      <label>Thumbnail</label>
+      <div class="mode-toggle" id="${sid}-thumb-toggle">
+        <button type="button" class="mode-btn active" onclick="setMode('${sid}','thumb','auto')">Auto</button>
+        <button type="button" class="mode-btn" onclick="setMode('${sid}','thumb','custom')">Custom</button>
+      </div>
+      <input type="text" id="${sid}-thumb" placeholder="custom-thumb.jpg" style="display:none;margin-top:0.5rem;">
+      <div class="mode-hint" id="${sid}-thumb-hint">YouTube: uses the video's own thumbnail.</div>
+    </div>
+
+    <div class="field-row" id="${sid}-capwrap">
+      <label>Caption</label>
+      <div class="mode-toggle" id="${sid}-caption-toggle">
+        <button type="button" class="mode-btn active" onclick="setMode('${sid}','caption','auto')">Auto (from video title)</button>
+        <button type="button" class="mode-btn" onclick="setMode('${sid}','caption','custom')">Custom</button>
+      </div>
+      <input type="text" id="${sid}-caption" placeholder="Add your caption here" style="display:none;margin-top:0.5rem;">
+      <div class="mode-hint" id="${sid}-caption-hint">Will fetch the video title from YouTube on save.</div>
+    </div>
+
+    <div class="field-row" id="${sid}-titlewrap" style="display:none;">
+      <label>Article Title</label>
+      <input type="text" id="${sid}-title" placeholder="Headline">
+    </div>
+    <div class="field-row" id="${sid}-descwrap" style="display:none;">
+      <label>Short Description</label>
+      <input type="text" id="${sid}-desc" placeholder="1-2 line summary">
+    </div>
+    <div class="field-row" id="${sid}-sourcewrap" style="display:none;">
+      <label>Source name</label>
+      <input type="text" id="${sid}-source" placeholder="e.g. Economic Times">
+    </div>
+  `;
+  document.getElementById('slots-container').appendChild(div);
+
+  modeState[sid] = { thumb: 'auto', caption: 'auto' };
+
+  // Type-change handler
+  const typeEl = document.getElementById(sid + '-type');
+  typeEl.value = type;
+  function updateFieldsForType(t) {
+    const isMedia   = ['youtube','instagram'].includes(t);
+    const isArticle = t === 'article';
+    document.getElementById(sid+'-thumbwrap').style.display   = isMedia ? '' : 'none';
+    document.getElementById(sid+'-capwrap').style.display     = isMedia ? '' : 'none';
+    document.getElementById(sid+'-titlewrap').style.display   = isArticle || t==='document' ? '' : 'none';
+    document.getElementById(sid+'-descwrap').style.display    = isArticle || t==='document' ? '' : 'none';
+    document.getElementById(sid+'-sourcewrap').style.display  = isArticle ? '' : 'none';
+    document.getElementById(sid+'-urllabel').textContent =
+      t==='instagram' ? 'Instagram Reel URL' :
+      t==='article'   ? 'Article / News URL' :
+      t==='document'  ? 'File URL (PDF / DOC)' :
+      'YouTube Short / Video URL';
+  }
+  typeEl.addEventListener('change', () => updateFieldsForType(typeEl.value));
+  updateFieldsForType(type);
+
+  // Pre-fill from backend data
+  if (existing) {
+    if (existing.url) document.getElementById(sid+'-url').value = existing.url;
+    if (existing.thumbnail) {
+      document.getElementById(sid+'-thumb').value = existing.thumbnail;
+      setMode(sid,'thumb','custom');
+    }
+    if (existing.caption) {
+      document.getElementById(sid+'-caption').value = existing.caption;
+      setMode(sid,'caption','custom');
+    }
+    if (existing.title) document.getElementById(sid+'-title').value = existing.title;
+    if (existing.description) document.getElementById(sid+'-desc').value = existing.description;
+    if (existing.source_label) document.getElementById(sid+'-source').value = existing.source_label;
   }
 }
 
-// ── Ingest ───────────────────────────────────────────────────────────────────
-async function triggerIngest() {
-  const api    = getApi();
-  const secret = getSecret();
-  if (!api)    return showStatus('ingest-status', '⚠️ Set Backend URL in Settings.', true);
-  if (!secret) return showStatus('ingest-status', '⚠️ Set Ingest Secret in Settings.', true);
-  showStatus('ingest-status', '⏳ Running ingest… (first run can take up to a minute)', false);
+async function deleteSlot(sid) {
+  const card = document.getElementById('card-' + sid);
+  const backendId = card && card.dataset.backendId;
+  if (backendId) {
+    await fetch(API_BASE + '/api/blocks/' + backendId, {
+      method: 'DELETE',
+      headers: { 'X-Ingest-Secret': INGEST_SECRET }
+    });
+  }
+  card && card.remove();
+  const i = slots.findIndex(s => s.domId === sid);
+  if (i > -1) slots.splice(i, 1);
+}
+
+// ── APP CARDS ────────────────────────────────────────────────────
+let appCounter = 0;
+const apps = [];
+
+function addAppCard(existing) {
+  appCounter++;
+  const aid = 'app_' + appCounter;
+  const backendId = existing ? existing.id : null;
+  apps.push({ domId: aid, backendId });
+
+  const extra = existing && existing.extra ? existing.extra : {};
+  const icon  = existing ? (extra.icon || '🚀') : '🚀';
+  const name  = existing ? existing.title : '';
+  const domain = extra.domain || '';
+  const siteUrl = existing ? existing.url : '';
+  const tagline = extra.tagline || (existing && existing.caption) || '';
+  const status  = extra.status || 'live';
+  const problem = extra.problem || '';
+  const whatDoes = extra.what_it_does || '';
+  const whoFor  = extra.who_for || '';
+
+  const div = document.createElement('div');
+  div.className = 'content-card';
+  div.id = 'card-' + aid;
+  div.dataset.backendId = backendId || '';
+  div.innerHTML = `
+    <div class="card-header">
+      <h4 style="margin:0;display:flex;align-items:center;gap:0.5rem;">
+        <span id="${aid}-icon-display">${icon}</span>
+        <input type="text" id="${aid}-name" value="${escHtml(name)}"
+          placeholder="App name" style="background:transparent;border:none;border-bottom:1px solid #2a2a4a;border-radius:0;padding:4px 6px;font-size:1rem;font-weight:700;color:#fffffe;width:auto;outline:none;">
+      </h4>
+      <button class="btn-delete-slot" onclick="deleteApp('${aid}')">✕ Remove</button>
+    </div>
+
+    <div class="field-row">
+      <label>Domain (shown next to name)</label>
+      <input type="text" id="${aid}-domain" value="${escHtml(domain)}" placeholder="myapp.com">
+    </div>
+    <div class="field-row">
+      <label>Site URL</label>
+      <input type="url" id="${aid}-url" value="${escHtml(siteUrl)}" placeholder="https://myapp.com">
+    </div>
+    <div class="field-row">
+      <label>Tagline (shown in red on site)</label>
+      <input type="text" id="${aid}-tagline" value="${escHtml(tagline)}" placeholder="One-line killer hook.">
+    </div>
+    <div class="field-row">
+      <label>Status</label>
+      <select id="${aid}-status">
+        <option value="live" ${status==='live'?'selected':''}>Live — Visit Site</option>
+        <option value="beta" ${status==='beta'?'selected':''}>Private Beta — Request Access</option>
+      </select>
+    </div>
+    <div class="field-row">
+      <label>Icon emoji (optional)</label>
+      <input type="text" id="${aid}-icon" value="${escHtml(icon)}" placeholder="🚀"
+        oninput="document.getElementById('${aid}-icon-display').textContent=this.value||'🚀'">
+    </div>
+    <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#ff8c42;margin:1rem 0 0.5rem;">Body sections (shown in the card middle)</p>
+    <div class="field-row">
+      <label>The Problem (what pain it solves)</label>
+      <textarea id="${aid}-problem" placeholder="Describe the problem this app solves...">${escHtml(problem)}</textarea>
+    </div>
+    <div class="field-row">
+      <label>What It Does (the solution)</label>
+      <textarea id="${aid}-what" placeholder="Describe what the app actually does...">${escHtml(whatDoes)}</textarea>
+    </div>
+    <div class="field-row">
+      <label>Who It's For (comma-separated tags)</label>
+      <input type="text" id="${aid}-whofor" value="${escHtml(whoFor)}" placeholder="Agencies, Solo founders, Developers">
+    </div>
+    <div class="field-row" style="display:flex;align-items:center;gap:0.75rem;flex-direction:row;margin-top:0.25rem;">
+      <input type="checkbox" id="${aid}-visible" ${existing ? (existing.visible ? 'checked' : '') : 'checked'} style="width:18px;height:18px;accent-color:#ff8c42;cursor:pointer;">
+      <label for="${aid}-visible" style="font-size:0.85rem;color:#a7a9be;text-transform:none;">Visible on site</label>
+    </div>
+  `;
+  document.getElementById('apps-container').appendChild(div);
+}
+
+async function deleteApp(aid) {
+  const card = document.getElementById('card-' + aid);
+  const backendId = card && card.dataset.backendId;
+  if (backendId) {
+    await fetch(API_BASE + '/api/blocks/' + backendId, {
+      method: 'DELETE',
+      headers: { 'X-Ingest-Secret': INGEST_SECRET }
+    });
+  }
+  card && card.remove();
+  const i = apps.findIndex(a => a.domId === aid);
+  if (i > -1) apps.splice(i, 1);
+}
+
+// ── SAVE ALL ─────────────────────────────────────────────────────
+async function fetchYTTitle(url) {
   try {
-    const res  = await fetch(api + '/api/ingest', {
-      method: 'POST',
-      headers: { 'X-Ingest-Secret': secret },
+    const res = await fetch('https://www.youtube.com/oembed?url=' + encodeURIComponent(url) + '&format=json');
+    if (!res.ok) return '';
+    return (await res.json()).title || '';
+  } catch(e) { return ''; }
+}
+
+async function saveAll() {
+  const btn = document.getElementById('save-btn');
+  const statusEl = document.getElementById('save-status');
+  btn.disabled = true;
+  btn.textContent = '⏳ Saving...';
+  statusEl.textContent = '';
+
+  let saved = 0, failed = 0;
+
+  // Save reel slots
+  for (const s of slots) {
+    const card = document.getElementById('card-' + s.domId);
+    if (!card) continue;
+    const type = document.getElementById(s.domId + '-type').value;
+    const urlEl = document.getElementById(s.domId + '-url');
+    const url = urlEl ? urlEl.value.trim() : '';
+    if (!url) continue;
+
+    let caption = '';
+    const capEl = document.getElementById(s.domId + '-caption');
+    if (capEl && modeState[s.domId] && modeState[s.domId].caption === 'custom') {
+      caption = capEl.value.trim();
+    } else if (type === 'youtube') {
+      caption = await fetchYTTitle(url);
+    }
+
+    const thumbEl = document.getElementById(s.domId + '-thumb');
+    const thumbnail = (thumbEl && modeState[s.domId] && modeState[s.domId].thumb === 'custom')
+      ? thumbEl.value.trim() : null;
+
+    const titleEl  = document.getElementById(s.domId + '-title');
+    const descEl   = document.getElementById(s.domId + '-desc');
+    const sourceEl = document.getElementById(s.domId + '-source');
+
+    const blockType = type === 'article' ? 'news' : type;
+
+    const body = {
+      block_type:   blockType,
+      title:        (titleEl && titleEl.value.trim()) || caption || url,
+      url,
+      thumbnail,
+      caption:      caption || null,
+      description:  descEl  ? descEl.value.trim()   || null : null,
+      source_label: sourceEl ? sourceEl.value.trim() || null : null,
+      sort_order:   0,
+      visible:      true,
+      extra:        null,
+    };
+
+    try {
+      // If it already has a backend ID, delete old and re-create (simplest approach)
+      if (s.backendId) {
+        await fetch(API_BASE + '/api/blocks/' + s.backendId, {
+          method: 'DELETE', headers: { 'X-Ingest-Secret': INGEST_SECRET }
+        });
+      }
+      const res  = await fetch(API_BASE + '/api/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Ingest-Secret': INGEST_SECRET },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (data.id) { s.backendId = data.id; card.dataset.backendId = data.id; }
+      saved++;
+    } catch(e) { failed++; }
+  }
+
+  // Save app cards
+  for (const a of apps) {
+    const card = document.getElementById('card-' + a.domId);
+    if (!card) continue;
+    const name    = (document.getElementById(a.domId + '-name')    || {}).value || '';
+    const url     = (document.getElementById(a.domId + '-url')     || {}).value || '';
+    const visible = (document.getElementById(a.domId + '-visible') || {}).checked !== false;
+    if (!name && !url) continue;
+
+    const body = {
+      block_type: 'app',
+      title:      name.trim(),
+      url:        url.trim(),
+      caption:    (document.getElementById(a.domId + '-tagline') || {}).value || null,
+      sort_order: 0,
+      visible,
+      extra: {
+        domain:       (document.getElementById(a.domId + '-domain')  || {}).value || null,
+        tagline:      (document.getElementById(a.domId + '-tagline') || {}).value || null,
+        status:       (document.getElementById(a.domId + '-status')  || {}).value || 'live',
+        icon:         (document.getElementById(a.domId + '-icon')    || {}).value || '🚀',
+        problem:      (document.getElementById(a.domId + '-problem') || {}).value || null,
+        what_it_does: (document.getElementById(a.domId + '-what')    || {}).value || null,
+        who_for:      (document.getElementById(a.domId + '-whofor')  || {}).value || null,
+      },
+    };
+
+    try {
+      if (a.backendId) {
+        await fetch(API_BASE + '/api/blocks/' + a.backendId, {
+          method: 'DELETE', headers: { 'X-Ingest-Secret': INGEST_SECRET }
+        });
+      }
+      const res  = await fetch(API_BASE + '/api/blocks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Ingest-Secret': INGEST_SECRET },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (data.id) { a.backendId = data.id; card.dataset.backendId = data.id; }
+      saved++;
+    } catch(e) { failed++; }
+  }
+
+  btn.disabled = false;
+  btn.textContent = '💾 Save & Publish';
+  if (failed === 0) {
+    statusEl.textContent = '✅ Published! ' + saved + ' block(s) saved.';
+  } else {
+    statusEl.textContent = '⚠️ ' + saved + ' saved, ' + failed + ' failed.';
+  }
+}
+
+// ── MANAGE ALL BLOCKS ─────────────────────────────────────────────
+async function loadBlocks() {
+  const list = document.getElementById('block-list');
+  list.innerHTML = '<div class="empty">Loading…</div>';
+  try {
+    const res  = await fetch(API_BASE + '/api/blocks');
+    const data = await res.json();
+    const items = data.items || [];
+    if (!items.length) { list.innerHTML = '<div class="empty">No blocks yet.</div>'; return; }
+    const icons = { youtube:'▶', instagram:'📸', news:'📰', document:'📄', app:'🚀' };
+    list.innerHTML = items.map(it => `
+      <div class="block-item">
+        <div class="bi-info">
+          <div class="bi-type">${icons[it.block_type]||'•'} ${it.block_type} · order ${it.sort_order}</div>
+          <div class="bi-title">${escHtml(it.title)}</div>
+          <div class="bi-url">${escHtml(it.url)}</div>
+        </div>
+        <button class="btn-del" onclick="deleteBlockById('${it.id}',this)">🗑</button>
+      </div>
+    `).join('');
+  } catch(e) {
+    list.innerHTML = '<div class="empty">❌ Could not load: ' + e.message + '</div>';
+  }
+}
+
+async function deleteBlockById(id, btn) {
+  if (!confirm('Delete this block?')) return;
+  btn.disabled = true;
+  await fetch(API_BASE + '/api/blocks/' + id, {
+    method: 'DELETE', headers: { 'X-Ingest-Secret': INGEST_SECRET }
+  });
+  loadBlocks();
+}
+
+// ── INGEST ─────────────────────────────────────────────────────────
+async function triggerIngest() {
+  const el = document.getElementById('ingest-status');
+  el.className = 'status-msg ok'; el.textContent = '⏳ Running… (up to 1 minute)'; el.style.display = 'block';
+  try {
+    const res  = await fetch(API_BASE + '/api/ingest', {
+      method: 'POST', headers: { 'X-Ingest-Secret': INGEST_SECRET }
     });
     const data = await res.json();
-    if (!res.ok)            throw new Error(data.detail || data.error || ('HTTP ' + res.status));
-    if (data.ok === false || data.error) throw new Error(data.error || 'Ingest failed');
-    showStatus('ingest-status',
-      '✅ Ingest done! New items: ' + (data.inserted || 0) +
-      '  (fetched ' + (data.fetched || 0) + ', archived ' + (data.archived || 0) + ')', false);
+    if (data.error) throw new Error(data.error);
+    el.textContent = '✅ Done! ' + (data.inserted||0) + ' new items (fetched ' + (data.fetched||0) + ', archived ' + (data.archived||0) + ')';
   } catch(e) {
-    showStatus('ingest-status', '❌ ' + e.message, true);
+    el.className = 'status-msg err'; el.textContent = '❌ ' + e.message;
   }
 }
 
 function escHtml(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
