@@ -1818,7 +1818,10 @@
 .feed-scroll::-webkit-scrollbar-track { background: #2A2436; }
 
 /* the "Load more" / empty / loading states are full-width blocks, not strip cards */
-.feed-loadmore, .feed-empty, .feed-loading { flex: 0 0 100%; }
+.feed-loadmore, .feed-empty, .feed-loading {
+  flex: 0 0 100%;
+  align-self: center;
+}
 
 .feed-card {
   scroll-snap-align: start;
