@@ -1817,8 +1817,8 @@
 .feed-scroll::-webkit-scrollbar-thumb { background: var(--marigold); border-radius: 999px; }
 .feed-scroll::-webkit-scrollbar-track { background: #2A2436; }
 
-/* the "Load more" / empty / loading states are full-width blocks, not strip cards */
-.feed-loadmore, .feed-empty, .feed-loading {
+/* the empty / loading states are full-width blocks, not strip cards */
+.feed-empty, .feed-loading {
   flex: 0 0 100%;
   align-self: center;
 }
@@ -1897,12 +1897,16 @@
   border-radius: var(--radius); padding: 36px 24px; line-height: 1.6;
 }
 .feed-empty strong { color: var(--gold-soft); }
+.feed-loadmore-wrap {
+  display: flex; justify-content: center; margin: 14px 0 6px;
+}
 .feed-loadmore {
-  display: block; margin: 4px auto 0; background: transparent; border: 2px solid var(--marigold);
-  color: var(--marigold); font-weight: 800; padding: 11px 26px; border-radius: 999px; cursor: pointer;
-  white-space: nowrap;
+  display: inline-block; background: transparent; border: 2px solid var(--marigold);
+  color: var(--marigold); font-weight: 800; font-size: 0.8rem; padding: 8px 20px;
+  border-radius: 999px; cursor: pointer; white-space: nowrap; width: auto;
 }
 .feed-loadmore:hover { background: var(--marigold); color: var(--ink); }
+.feed-loadmore:disabled { opacity: 0.7; cursor: default; }
 
 /* spinner */
 .spin { display:inline-block; width:18px; height:18px; border:3px solid rgba(255,255,255,0.25);
