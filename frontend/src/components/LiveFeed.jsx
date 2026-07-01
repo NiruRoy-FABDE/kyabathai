@@ -2,11 +2,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { fetchFeed, fetchBlocks, isConfigured } from "../lib/api.js";
 import FeedCard from "./FeedCard.jsx";
+import VideoModal, { getYouTubeId } from "./VideoModal.jsx";
 
 const PAGE = 12;
 
 // ── Manual block card component ─────────────────────────────────────────────
 function ManualBlock({ block }) {
+  const [playing, setPlaying] = useState(false);
   const typeIcon = { youtube: "▶", instagram: "📸", news: "📰", document: "📄", app: "🚀" };
   const typeLabel = { youtube: "YouTube", instagram: "Instagram", news: "News", document: "Document", app: "App" };
 
@@ -15,33 +17,47 @@ function ManualBlock({ block }) {
     return m ? `https://i.ytimg.com/vi/${m[1]}/hqdefault.jpg` : null;
   }
 
+  const ytId = block.block_type === "youtube" ? getYouTubeId(block.url) : null;
   const thumb = block.thumbnail || (block.block_type === "youtube" ? getYTThumb(block.url) : null);
   const icon = typeIcon[block.block_type] || "•";
   const label = typeLabel[block.block_type] || block.block_type;
 
   const docIcon = block.url?.endsWith(".pdf") ? "📕" : block.url?.endsWith(".docx") ? "📘" : "📄";
 
+  function onClick(e) {
+    if (ytId) {
+      e.preventDefault();
+      setPlaying(true);
+    }
+    // else: not a recognizable YouTube link (Instagram/News/Doc/App) — open normally in a new tab
+  }
+
   return (
-    <a href={block.url} target="_blank" rel="noopener noreferrer" className="feed-card manual-block">
-      <div className="fc-thumb">
-        {block.block_type === "document" ? (
-          <div className="fc-doc-placeholder">{docIcon}</div>
-        ) : thumb ? (
-          <img src={thumb} alt={block.title} />
-        ) : block.block_type === "instagram" ? (
-          <div className="fc-ig-placeholder">📸</div>
-        ) : (
-          <div className="fc-app-placeholder">{block.block_type === "app" ? "🚀" : "📰"}</div>
-        )}
-        <span className="fc-kind-badge">{icon} {label}</span>
-      </div>
-      <div className="fc-body">
-        <p className="fc-title">{block.title}</p>
-        {block.caption && <p className="fc-desc">{block.caption}</p>}
-        {block.description && !block.caption && <p className="fc-desc">{block.description}</p>}
-        <span className="fc-source">{block.source_label || label}</span>
-      </div>
-    </a>
+    <>
+      <a href={block.url} target="_blank" rel="noopener noreferrer" className="feed-card manual-block" onClick={onClick}>
+        <div className="fc-thumb">
+          {block.block_type === "document" ? (
+            <div className="fc-doc-placeholder">{docIcon}</div>
+          ) : thumb ? (
+            <img src={thumb} alt={block.title} />
+          ) : block.block_type === "instagram" ? (
+            <div className="fc-ig-placeholder">📸</div>
+          ) : (
+            <div className="fc-app-placeholder">{block.block_type === "app" ? "🚀" : "📰"}</div>
+          )}
+          <span className="fc-kind-badge">{icon} {label}</span>
+        </div>
+        <div className="fc-body">
+          <p className="fc-title">{block.title}</p>
+          {block.caption && <p className="fc-desc">{block.caption}</p>}
+          {block.description && !block.caption && <p className="fc-desc">{block.description}</p>}
+          <span className="fc-source">{block.source_label || label}</span>
+        </div>
+      </a>
+      {playing && (
+        <VideoModal videoId={ytId} title={block.title} onClose={() => setPlaying(false)} />
+      )}
+    </>
   );
 }
 

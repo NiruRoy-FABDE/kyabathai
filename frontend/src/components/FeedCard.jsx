@@ -2,13 +2,16 @@
 import { useState } from "react";
 import { explainItem } from "../lib/api.js";
 import { timeAgo } from "../lib/util.js";
+import VideoModal, { getYouTubeId } from "./VideoModal.jsx";
 
 export default function FeedCard({ item }) {
   const [explanation, setExplanation] = useState("");
   const [loading, setLoading] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   const kind = item.kind || "video";
   const badgeLabel = kind === "video" ? "Video" : kind === "news" ? "News" : "Reel";
+  const ytId = kind === "video" ? getYouTubeId(item.url) : null;
 
   async function onExplain() {
     if (explanation || loading) return;
@@ -23,9 +26,23 @@ export default function FeedCard({ item }) {
     }
   }
 
+  function onMediaClick(e) {
+    if (ytId) {
+      e.preventDefault();
+      setPlaying(true);
+    }
+    // else: no recognizable YouTube ID (e.g. news link) — let the <a> open normally in a new tab
+  }
+
   return (
     <article className="feed-card">
-      <a className="feed-card-media" href={item.url} target="_blank" rel="noopener noreferrer">
+      <a
+        className="feed-card-media"
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onMediaClick}
+      >
         <span className={`feed-badge ${kind}`}>{badgeLabel}</span>
         {item.thumbnail ? (
           <img
@@ -53,9 +70,15 @@ export default function FeedCard({ item }) {
         )}
 
         <div className="feed-actions">
-          <a className="feed-btn primary" href={item.url} target="_blank" rel="noopener noreferrer">
-            {kind === "video" ? "Watch →" : "Read →"}
-          </a>
+          {ytId ? (
+            <button className="feed-btn primary" onClick={() => setPlaying(true)}>
+              Watch →
+            </button>
+          ) : (
+            <a className="feed-btn primary" href={item.url} target="_blank" rel="noopener noreferrer">
+              {kind === "video" ? "Watch →" : "Read →"}
+            </a>
+          )}
           <button className="feed-btn ghost" onClick={onExplain} disabled={loading}>
             {loading ? <span className="spin" /> : "✨ Why it's wow"}
           </button>
@@ -63,6 +86,11 @@ export default function FeedCard({ item }) {
 
         {explanation && <div className="feed-explain">{explanation}</div>}
       </div>
+
+      {playing && (
+        <VideoModal videoId={ytId} title={item.title} onClose={() => setPlaying(false)} />
+      )}
     </article>
   );
 }
+
