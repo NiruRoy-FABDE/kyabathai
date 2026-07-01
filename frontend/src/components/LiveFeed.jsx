@@ -55,10 +55,10 @@ export default function LiveFeed() {
   const [done, setDone]         = useState(false);
   const [error, setError]       = useState("");
 
-  // Load manual blocks once
+  // Load manual blocks once (excluding "app" type — those render in the Apps grid instead)
   useEffect(() => {
     if (!isConfigured()) return;
-    fetchBlocks().then(d => setBlocks(d.items || [])).catch(() => {});
+    fetchBlocks().then(d => setBlocks((d.items || []).filter(b => b.block_type !== "app"))).catch(() => {});
   }, []);
 
   const load = useCallback(async (reset) => {
